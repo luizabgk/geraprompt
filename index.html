@@ -319,6 +319,28 @@
           </div>
         </div>
 
+        <div class="row2">
+          <div class="field">
+            <label class="lbl" for="c-lens">Lente</label>
+            <select id="c-lens" data-k="c.lens" data-group="lensc"></select>
+          </div>
+          <div class="field">
+            <label class="lbl" for="c-ap">Abertura</label>
+            <select id="c-ap" data-k="c.ap" data-group="ap"></select>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label class="lbl" for="c-iso">ISO</label>
+            <select id="c-iso" data-k="c.iso" data-group="iso"></select>
+          </div>
+          <div class="field">
+            <label class="lbl" for="c-wb">Balanço de branco</label>
+            <select id="c-wb" data-k="c.wb" data-group="wb"></select>
+          </div>
+        </div>
+
         <div class="field">
           <label class="lbl">Detalhes</label>
           <div class="chips" id="c-flags"></div>
@@ -391,7 +413,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.1</b> · 23/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.2</b> · 23/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -509,8 +531,32 @@
     camc: [
       {v:"drone90", p:"drone 90°", e:"drone camera at a perfectly top-down 90-degree angle"},
       {v:"drone45", p:"drone 45°", e:"drone camera at a 45-degree oblique angle"},
-      {v:"24mm",    p:"24 mm", e:"24 mm lens at eye level"},
-      {v:"35mm",    p:"35 mm", e:"35 mm lens with natural perspective"}
+      {v:"eye",     p:"altura do olhar", e:"eye-level camera at human height"},
+      {v:"three4",  p:"três quartos", e:"three-quarter view from a low vantage point"}
+    ],
+    lensc: [
+      {v:"24", p:"24 mm", e:"24 mm lens"},
+      {v:"35", p:"35 mm", e:"35 mm lens"},
+      {v:"50", p:"50 mm", e:"50 mm lens"},
+      {v:"85", p:"85 mm", e:"85 mm lens"}
+    ],
+    ap: [
+      {v:"2.8", p:"f/2.8 (fundo desfocado)", e:"f/2.8 with shallow depth of field"},
+      {v:"5.6", p:"f/5.6", e:"f/5.6"},
+      {v:"8",   p:"f/8 (tudo nítido)", e:"f/8, everything in focus"},
+      {v:"11",  p:"f/11 (paisagem)", e:"f/11 with deep focus"}
+    ],
+    iso: [
+      {v:"100", p:"ISO 100", e:"ISO 100"},
+      {v:"200", p:"ISO 200", e:"ISO 200"},
+      {v:"400", p:"ISO 400", e:"ISO 400"},
+      {v:"800", p:"ISO 800", e:"ISO 800"}
+    ],
+    wb: [
+      {v:"daylight", p:"Luz do dia (5500 K)", e:"daylight white balance at 5500 K"},
+      {v:"warm",     p:"Quente (4500 K)", e:"warm white balance at 4500 K"},
+      {v:"overcast", p:"Frio (6500 K)", e:"cool white balance at 6500 K"},
+      {v:"auto",     p:"Automático", e:"auto white balance"}
     ]
   };
 
@@ -541,6 +587,7 @@
         divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft",
         ajustes:"", inventario:"", enxuto:false},
     c: {cena:"aerial90", emp:"gated", pais:"atlantic", luz:"golden", cam:"drone90",
+        lens:"35", ap:"8", iso:"100", wb:"daylight",
         people:false, cars:true, refl:true, suffix:true}
   };
 
@@ -572,7 +619,7 @@
   $("#c-cena").addEventListener("change", ()=>{
     if(st.c.cena === "aerial90") st.c.cam = "drone90";
     else if(st.c.cena === "aerial45") st.c.cam = "drone45";
-    else if(st.c.cam === "drone90" || st.c.cam === "drone45") st.c.cam = "24mm";
+    else if(st.c.cam === "drone90" || st.c.cam === "drone45") st.c.cam = "eye";
     syncForm(); render();
   });
 
@@ -628,6 +675,10 @@
     const pais = one("pais2", st.c.pais);
     const luz  = one("luzc", st.c.luz);
     const cam  = one("camc", st.c.cam);
+    const lens = one("lensc", st.c.lens);
+    const ap   = one("ap",   st.c.ap);
+    const iso  = one("iso",  st.c.iso);
+    const wb   = one("wb",   st.c.wb);
 
     const extra = [];
     if(st.c.people) extra.push("a few residents walking and cycling");
@@ -639,6 +690,7 @@
       pais.e,
       luz.e,
       cam.e,
+      lens.e + " at " + ap.e + ", " + iso.e + ", " + wb.e,
       extra.join(", "),
       st.c.suffix ? SUFFIX : ""
     ].filter(Boolean);
@@ -694,11 +746,11 @@
       {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],
     criar: [
-      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",luz:"golden",cam:"drone90",people:false,cars:true,refl:true,suffix:true}},
-      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",luz:"golden",cam:"24mm",people:true,cars:true,refl:true,suffix:true}},
-      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",luz:"golden",cam:"35mm",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",luz:"blue",cam:"24mm",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",luz:"golden",cam:"drone45",people:true,cars:false,refl:false,suffix:true}}
+      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
+      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
+      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
     ]
   };
 
@@ -774,8 +826,8 @@
         st.h[k] = rnd(D[k]).v;
       });
     } else {
-      ["cena","emp","pais","luz","cam"].forEach(k=>{
-        const grp = {cena:"cena",emp:"emp",pais:"pais2",luz:"luzc",cam:"camc"}[k];
+      ["cena","emp","pais","luz","cam","lens","ap","iso","wb"].forEach(k=>{
+        const grp = {cena:"cena",emp:"emp",pais:"pais2",luz:"luzc",cam:"camc",lens:"lensc",ap:"ap",iso:"iso",wb:"wb"}[k];
         st.c[k] = rnd(D[grp]).v;
       });
       ["people","cars","refl"].forEach(k=>{ st.c[k] = Math.random() > 0.5; });
