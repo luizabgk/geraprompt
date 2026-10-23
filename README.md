@@ -4,6 +4,8 @@ Ferramenta de **arquivo único (HTML)** que monta o prompt para transformar uma 
 
 Sem instalação, sem servidor, sem login e sem internet. Abre no navegador com dois cliques.
 
+**Usar agora:** <https://luizabgk.github.io/geraprompt/>
+
 ![Interface do GeraPrompt](preview.png)
 
 ## O que ele gera
