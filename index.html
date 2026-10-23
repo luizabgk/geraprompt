@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Gerador de prompt para transformar bases de AutoCAD + Google Earth em fotografias aéreas realistas de loteamentos e condomínios.">
-<title>Gerador de Prompt — Urbanismo</title>
+<meta name="description" content="Monta o prompt que transforma base de CAD e Google Earth em foto aérea de loteamento, com paisagismo preservado.">
+<title>GeraPrompt — gerador de prompt para loteamentos</title>
 <style>
   :root{
     --bg:#0c0c0d; --panel:#131316; --panel2:#1b1b1f; --line:#26262b;
@@ -192,9 +192,9 @@
 <div class="wrap">
 
   <header>
-    <div class="brand"><span class="dot"></span> Arq · Prompt — Urbanismo</div>
+    <div class="brand"><span class="dot"></span> GeraPrompt</div>
     <h1>Gerador de prompt para <em>loteamentos</em></h1>
-    <p class="sub">Base chapada de <b>CAD + Google Earth</b> → fotografia aérea do empreendimento pronto. O gerador <b>sempre</b> entrega prompt, negativo e checklist, e trata o <b>paisagismo como intocável</b>: posição, espécie, porte e proporção.</p>
+    <p class="sub">Monta o texto que transforma a base de CAD e Google Earth na foto aérea do loteamento pronto. Sai em blocos, com prompt negativo e checklist, e o paisagismo entra como está no projeto: posição, espécie, porte e proporção.</p>
     <div class="tabs" role="tablist">
       <button class="tabbtn" role="tab" aria-selected="true" data-tab="hum">Humanizar masterplan</button>
       <button class="tabbtn" role="tab" aria-selected="false" data-tab="criar">Criar do zero</button>
@@ -338,7 +338,7 @@
         <div class="btns">
           <button class="btn primary" id="copy">Copiar prompt</button>
           <button class="btn" id="copy-all">Copiar prompt + negativo</button>
-          <button class="btn" id="shuffle">Surpreenda-me</button>
+          <button class="btn" id="shuffle">Sortear</button>
           <button class="btn" id="download">Baixar .txt</button>
         </div>
 
@@ -350,15 +350,15 @@
           <textarea id="negative" spellcheck="false"></textarea>
           <div class="btns" style="margin-top:8px">
             <button class="btn small" id="copy-neg">Copiar negativo</button>
-            <button class="btn small" id="reset-neg">Restaurar padrão</button>
+            <button class="btn small" id="reset-neg">Voltar ao padrão</button>
           </div>
-          <p class="hint">O Magnific não tem campo de negativo. Use <b>“Copiar prompt + negativo”</b> e cole tudo no campo de prompt — o negativo entra no fim, identificado, e você continua com os dois separados aqui para localizar depois.</p>
+          <p class="hint">No Magnific não existe campo de negativo. O botão "Copiar prompt + negativo" junta os dois: o negativo vai no fim, com o nome na frente, e continua separado aqui para você achar depois.</p>
         </details>
       </div>
 
       <div class="card guide">
         <h3>Parâmetros no Magnific</h3>
-        <p>Para humanizar sem inventar projeto nem paisagismo:</p>
+        <p>Uma configuração que costuma funcionar:</p>
         <div class="mag">
           <div><small>Resemblance</small><b>80–95</b></div>
           <div><small>Creativity</small><b>5–20</b></div>
@@ -366,32 +366,32 @@
           <div><small>Engine</small><b>Magnific / Sharpy</b></div>
           <div><small>Scale</small><b>2x – 4x</b></div>
         </div>
-        <p class="hint">Creativity alto = árvore onde não tem, lote a mais. Em masterplan com paisagismo pago, fique em 5–10.</p>
+        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar árvore e lote. Com paisagismo contratado, 5 a 10 já é bastante.</p>
 
-        <h3 style="margin-top:24px">Por que o paisagismo se perde no caminho</h3>
+        <h3 style="margin-top:24px">O que costuma dar errado</h3>
         <ul>
-          <li><b>Base chapada não dá “pista” de vegetação.</b> O modelo preenche o vazio com o que acha bonito — e o paisagista some.</li>
-          <li><b>Cor é a primeira coisa que escapa.</b> “Árvores variadas” vira verde genérico; por isso o prompt trava cor, porte e posição.</li>
-          <li><b>Adensar não é humanizar.</b> Cada árvore a mais é uma árvore que o cliente não pagou.</li>
-          <li><b>Porte errado denuncia.</b> Palmeira pequena e ipê gigante destroem a leitura de escala.</li>
-          <li><b>O checklist é o que segura o resultado.</b> Deixe ligado: ele repete as regras no fim do prompt, onde o modelo ainda lê.</li>
+          <li><b>A base não indica vegetação.</b> Onde o desenho está vazio, o modelo preenche com o que acha bonito, e o paisagista desaparece.</li>
+          <li><b>A cor muda primeiro.</b> Pedir "árvores variadas" costuma virar verde genérico. Por isso o texto fixa cor, porte e posição.</li>
+          <li><b>Árvore a mais também é erro.</b> Cada uma que aparece fora do projeto é uma que o cliente não pagou.</li>
+          <li><b>Porte fora de escala entrega o problema.</b> Palmeira pequena e ipê gigante quebram a leitura do conjunto.</li>
+          <li><b>O checklist é o que segura.</b> Ele repete as regras no fim do texto, que é onde o modelo ainda presta atenção.</li>
         </ul>
 
-        <h3 style="margin-top:24px">Ferramentas que aceitam esse prompt</h3>
+        <h3 style="margin-top:24px">Onde usar</h3>
         <div class="tools">
-          <div class="tool"><b>Magnific AI</b><span>Enhance/Upscale com referência e Resemblance alto. Modelo Seedream.</span></div>
-          <div class="tool"><b>Google AI Studio / Gemini</b><span>Grátis, aceita imagem + prompt longo em português.</span></div>
-          <div class="tool"><b>Freepik Spaces</b><span>O do vídeo original. Canvas com gerador e upscale.</span></div>
-          <div class="tool"><b>PromeAI</b><span>Planta/masterplan → render; bom para estudo rápido.</span></div>
-          <div class="tool"><b>Stable Diffusion + ControlNet</b><span>Trava o traçado de verdade (lineart/canny). Grátis com GPU.</span></div>
-          <div class="tool"><b>QGIS / CAD</b><span>Base limpa em alta resolução já resolve metade do resultado.</span></div>
+          <div class="tool"><b>Magnific AI</b><span>Enhance e upscale com referência. Modelo Seedream ou Nano Banana.</span></div>
+          <div class="tool"><b>Google AI Studio / Gemini</b><span>Grátis, aceita imagem junto com prompt longo em português.</span></div>
+          <div class="tool"><b>Freepik Spaces</b><span>Canvas com gerador de imagem e upscale.</span></div>
+          <div class="tool"><b>PromeAI</b><span>Planta ou masterplan para render. Bom para estudo rápido.</span></div>
+          <div class="tool"><b>Stable Diffusion + ControlNet</b><span>Trava o traçado de verdade, com lineart ou canny. Grátis se tiver GPU.</span></div>
+          <div class="tool"><b>QGIS / CAD</b><span>Base limpa em alta resolução resolve metade do resultado antes de gerar.</span></div>
         </div>
       </div>
     </section>
 
   </div>
 
-  <footer class="ver">Gerador de Prompt — Urbanismo · <b>v1.0</b> · 23/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.1</b> · 23/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
