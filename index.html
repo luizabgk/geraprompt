@@ -418,7 +418,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.4</b> · 23/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.5</b> · 23/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -660,11 +660,11 @@
 
     out.push("GEOMETRIA\nPreservar traçado, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
 
-    out.push("PAISAGISMO\nA vegetação segue a implantação: existe apenas onde o projeto prevê área de paisagismo. Lote é lote, e não recebe árvore, palmeira nem arbusto. Preservar o projeto paisagístico: posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
+    out.push("PAISAGISMO\nA vegetação segue a implantação: fica exatamente onde está na base, nem a mais, nem a menos. Preservar posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
 
     if(st.h.padrao === "mn"){
       out.push("PAISAGISMO DO ESCRITÓRIO\n" +
-        "Plantio em blocos e faixas, nunca misturado. Palmeiras como acento vertical em prata-azulado (bismarckia, washingtônia, ráfis, rabo-de-raposa), em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, com pluma bege-prateada, em taludes e bordas. Florada em faixa curta: vermelho-tijolo (ixora), amarelo-ouro e rosa. Renques de arbusto aparado como estrutura. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar somente nas áreas de paisagismo da implantação: entrada, clube, praças, taludes e bordas. Nos lotes, somente gramado, sem nenhuma árvore ou arbusto.");
+        "Plantio em blocos e faixas, nunca misturado. Palmeiras como acento vertical em prata-azulado (bismarckia, washingtônia, ráfis, rabo-de-raposa), em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, com pluma bege-prateada, em taludes e bordas. Florada em faixa curta: vermelho-tijolo (ixora), amarelo-ouro e rosa. Renques de arbusto aparado como estrutura. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar o padrão apenas onde a base já indica vegetação: a quantidade e a posição vêm da implantação.");
     }
 
     out.push("ELEMENTOS\nManter a identidade e a quantidade dos equipamentos: quadra de tênis tem piso e linhas de demarcação; quadra de areia tem superfície solta; não converter uma na outra. Nenhum equipamento vira edificação: quadra permanece quadra, com piso e linhas, e não se transforma em casa ou piscina. A água existe apenas onde está desenhada e " + g("agua").t);
@@ -678,7 +678,7 @@
     if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
     if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
 
-    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- os lotes ficam sem vegetação; o paisagismo existe só nas áreas previstas na implantação;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
+    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
 
     return out.join("\n\n");
   }
