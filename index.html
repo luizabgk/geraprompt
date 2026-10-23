@@ -228,6 +228,11 @@
         </div>
 
         <div class="field">
+          <label class="lbl" for="h-padrao">Padrão de paisagismo</label>
+          <select id="h-padrao" data-k="h.padrao" data-group="padrao"></select>
+        </div>
+
+        <div class="field">
           <label class="lbl" for="h-lib">Nível de liberdade</label>
           <select id="h-lib" data-k="h.liberdade" data-group="liberdade"></select>
         </div>
@@ -413,7 +418,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.2</b> · 23/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.3</b> · 23/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -439,6 +444,10 @@
       {v:"full",   t:"Preservar integralmente o paisagismo proposto. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado devem permanecer exatamente como indicadas na base, respeitando o projeto paisagístico contratado."},
       {v:"refine", t:"Preservar integralmente o paisagismo proposto, refinando apenas o realismo das espécies já indicadas: mesma posição, mesma espécie, mesmo porte e mesma proporção de cada árvore, arbusto e área de gramado."},
       {v:"densify",t:"Preservar o paisagismo proposto e adensar somente a vegetação de borda já existente, sem avançar sobre lotes, vias, calçadas ou áreas livres."}
+    ],
+    padrao: [
+      {v:"mn",    p:"Padrão Paisagista MN"},
+      {v:"livre", p:"Sem padrão de paisagismo"}
     ],
     copas: [
       {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes e floração amarela, rosa ou roxa apenas em algumas árvores, como na flora brasileira. A variação de cor não cria árvores novas nem remove as existentes."},
@@ -583,7 +592,7 @@
 
   const st = {
     tab: "hum",
-    h: {base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform",
+    h: {base:"cad", enq:"top", pais:"full", padrao:"mn", liberdade:"equilibrado", copas:"variada", lotes:"uniform",
         divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft",
         ajustes:"", inventario:"", enxuto:false},
     c: {cena:"aerial90", emp:"gated", pais:"atlantic", luz:"golden", cam:"drone90",
@@ -652,6 +661,11 @@
     out.push("GEOMETRIA\nPreservar traçado, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
 
     out.push("PAISAGISMO\nPreservar o projeto paisagístico: posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
+
+    if(st.h.padrao === "mn"){
+      out.push("PAISAGISMO DO ESCRITÓRIO\n" +
+        "Plantio em blocos e faixas, nunca misturado. Palmeiras como acento vertical em prata-azulado (bismarckia, washingtônia, ráfis, rabo-de-raposa), em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, com pluma bege-prateada, em taludes e bordas. Florada em faixa curta: vermelho-tijolo (ixora), amarelo-ouro e rosa. Renques de arbusto aparado como estrutura. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Nas áreas comuns (entrada, clube, praça e talude), usar as faixas coloridas; nos lotes, apenas gramado com árvore isolada.");
+    }
 
     out.push("ELEMENTOS\nManter a identidade e a quantidade dos equipamentos: quadra de tênis tem piso e linhas de demarcação; quadra de areia tem superfície solta; não converter uma na outra. Nenhum equipamento vira edificação: quadra permanece quadra, com piso e linhas, e não se transforma em casa ou piscina. A água existe apenas onde está desenhada e " + g("agua").t);
 
@@ -741,7 +755,7 @@
     hum: [
       {name:"Prancha atual", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
       {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Refinar humanização", s:{base:"ia", enq:"same", pais:"refine", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Refinar humanização", s:{base:"ia", enq:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
       {name:"Litorâneo", s:{base:"cad", enq:"ob45", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
       {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],

@@ -28,6 +28,12 @@ Equipamento não vira outra coisa: quadra continua quadra, com piso e linhas. Ed
 
 Cinco combinações prontas: prancha atual, base CAD + GEarth, refinar humanização, litorâneo e chácaras com vinhedos. Servem como ponto de partida, não como receita.
 
+## Padrão de paisagismo
+
+O campo **Padrão de paisagismo** injeta no prompt uma paleta de espécies e proporções tirada da obra construída de um escritório brasileiro: palmeiras prateadas como acento vertical, árvores de copa ampla em massa, gramíneas ornamentais em maciço, florada em faixa curta e renques de arbusto. Vale para áreas comuns; nos lotes, gramado com árvore isolada.
+
+Escolha **Sem padrão de paisagismo** para outros contextos — aí o paisagismo vem apenas da base e do campo de ajustes.
+
 ## Onde funciona
 
 Qualquer modelo que aceite prompt de imagem. Já foi testado no Magnific com Seedream e com Nano Banana; deve funcionar igual no Gemini, Flux, SDXL e DALL·E.
