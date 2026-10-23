@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Gerador de prompt para transformar bases de AutoCAD + Google Earth em fotografias aéreas realistas de loteamentos e condomínios.">
+<title>Gerador de Prompt — Urbanismo</title>
+<style>
+  :root{
+    --bg:#0c0c0d; --panel:#131316; --panel2:#1b1b1f; --line:#26262b;
+    --text:#ece9e4; --muted:#8d877e; --dim:#6f6a62;
+    --accent:#d2603a; --accent2:#f0c3b0; --sand:#e8dcc8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:
+      radial-gradient(900px 500px at 15% -10%, rgba(210,96,58,.10), transparent 60%),
+      radial-gradient(700px 400px at 95% 0%, rgba(232,220,200,.05), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:ui-sans-serif,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .wrap{max-width:1280px;margin:0 auto;padding:28px 24px 60px}
+
+  header{border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:24px}
+  .brand{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(210,96,58,.14)}
+  h1{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(26px,3.2vw,38px);line-height:1.1;margin:14px 0 8px;letter-spacing:-.01em}
+  h1 em{font-style:italic;color:var(--sand)}
+  .sub{color:var(--muted);font-size:14.5px;max-width:760px;line-height:1.55;margin:0}
+  .sub b{color:var(--text);font-weight:600}
+
+  .tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .tabbtn{
+    background:transparent;border:1px solid #2c2c31;color:#a9a39a;border-radius:999px;
+    padding:9px 16px;font-size:13px;font-family:inherit;cursor:pointer;transition:.15s;
+  }
+  .tabbtn:hover{border-color:#413a34;color:var(--text)}
+  .tabbtn[aria-selected="true"]{background:rgba(210,96,58,.15);border-color:rgba(210,96,58,.55);color:var(--accent2)}
+
+  .grid{display:grid;grid-template-columns:410px minmax(0,1fr);gap:26px;align-items:start}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px}
+  .card h2{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;font-weight:600}
+
+  .sect{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);
+        margin:18px 0 12px;border-top:1px solid var(--line);padding-top:14px;font-weight:600}
+  .sect:first-child{margin-top:0;border-top:0;padding-top:0}
+
+  .field{margin-bottom:15px}
+  .field:last-child{margin-bottom:0}
+  .lbl{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:7px}
+  select,input[type=text],textarea{
+    width:100%;background:var(--panel2);color:var(--text);border:1px solid #2b2b30;
+    border-radius:11px;padding:10px 12px;font-size:14px;font-family:inherit;outline:none;
+  }
+  select{appearance:none;-webkit-appearance:none;padding-right:34px;cursor:pointer;
+    background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238d877e' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 13px center}
+  select:focus,input:focus,textarea:focus{border-color:#4a3a33;box-shadow:0 0 0 3px rgba(210,96,58,.10)}
+  input::placeholder{color:#5d5952}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{
+    padding:7px 11px;border-radius:999px;border:1px solid #2c2c31;background:transparent;
+    color:#b3ada3;font-size:12.5px;font-family:inherit;cursor:pointer;transition:.15s;line-height:1;
+  }
+  .chip:hover{border-color:#413a34;color:var(--text)}
+  .chip[aria-pressed="true"]{background:rgba(210,96,58,.15);border-color:rgba(210,96,58,.55);color:var(--accent2)}
+
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .out{position:sticky;top:20px}
+  .prompt-out{
+    width:100%;min-height:460px;resize:vertical;line-height:1.6;font-size:13px;
+    font-family:ui-monospace,SFMono-Regular,"Cascadia Code",Consolas,monospace;
+    background:#0f0f11;border:1px solid #26262b;border-radius:13px;padding:15px;color:#e6e2db;
+  }
+  .btns{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px;align-items:center}
+  .btn{
+    border:1px solid #2c2c31;background:transparent;color:var(--text);border-radius:10px;
+    padding:10px 15px;font-size:13px;font-family:inherit;cursor:pointer;transition:.15s;
+  }
+  .btn:hover{border-color:#453f37;background:rgba(255,255,255,.02)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+  .btn.primary:hover{background:#e06c44;border-color:#e06c44}
+  .btn.small{padding:7px 11px;font-size:12px;border-radius:8px}
+
+  .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11.5px;color:var(--dim);letter-spacing:.06em}
+  details.neg{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+  details.neg summary{cursor:pointer;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);list-style:none}
+  details.neg summary::-webkit-details-marker{display:none}
+  details.neg summary::before{content:"+ ";color:var(--accent)}
+  details.neg[open] summary::before{content:"– "}
+  details.neg textarea{margin-top:10px;min-height:130px;font-size:12px;line-height:1.55}
+  .hint{font-size:12px;color:var(--dim);line-height:1.55;margin:10px 0 0}
+
+  .presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
+  .presets-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:16px 0 8px;display:block}
+
+  .toast{
+    position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
+    background:var(--sand);color:#191816;padding:10px 18px;border-radius:999px;
+    font-size:13px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0)}
+
+  .guide{margin-top:26px}
+  .guide h3{font-family:Georgia,serif;font-weight:400;font-size:17px;margin:0 0 10px}
+  .guide p,.guide li{color:#a9a39a;font-size:13.5px;line-height:1.65}
+  .guide ul{margin:8px 0 0;padding-left:18px}
+  .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-top:14px}
+  .tool{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.015)}
+  .tool b{display:block;font-size:13px;margin-bottom:4px;color:var(--text)}
+  .tool span{font-size:12px;color:var(--dim);line-height:1.5;display:block}
+
+  .mag{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-top:12px}
+  .mag div{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:rgba(255,255,255,.015)}
+  .mag small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+  .mag b{font-size:14px;font-weight:600;color:var(--sand)}
+
+  [hidden]{display:none !important}
+
+  .seg{display:flex;gap:5px;background:var(--panel2);border:1px solid #2b2b30;border-radius:11px;padding:4px}
+  .seg button{flex:1;border:0;background:transparent;color:#a9a39a;font-family:inherit;font-size:12.5px;
+              padding:8px 10px;border-radius:8px;cursor:pointer;transition:.15s;line-height:1.2}
+  .seg button:hover{color:var(--text)}
+  .seg button[aria-pressed="true"]{background:rgba(210,96,58,.18);color:var(--accent2);font-weight:600}
+
+  .ver{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);
+       font-size:11.5px;color:var(--dim);letter-spacing:.04em;text-align:center}
+  .ver b{color:var(--accent);font-weight:600}
+
+  @media (max-width:980px){
+    .grid{grid-template-columns:1fr}
+    .out{position:static}
+    .wrap{padding:20px 16px 50px}
+  }
+  /* ================= TEMA CLARO ================= */
+  :root{
+    --bg:#f7f3ec; --panel:#ffffff; --panel2:#fcfaf6; --line:#e7dfd3;
+    --text:#1f1b17; --muted:#6f675d; --dim:#8c8378;
+    --accent:#a63a2b; --accent2:#8d2f22; --sand:#efe4d3;
+  }
+  body{
+    background:
+      radial-gradient(900px 480px at 10% -12%, rgba(166,58,43,.07), transparent 62%),
+      radial-gradient(760px 420px at 96% -4%, rgba(198,166,118,.14), transparent 58%),
+      var(--bg);
+    color:var(--text);
+  }
+  header{border-bottom:1px solid var(--line)}
+  .brand{color:var(--muted)}
+  h1{color:#17140f}
+  h1 em{color:var(--accent)}
+  .sub{color:var(--muted)}
+  .card{background:var(--panel);border:1px solid var(--line);
+        box-shadow:0 1px 2px rgba(60,40,20,.04),0 12px 32px -20px rgba(60,40,20,.22)}
+  .card h2{color:var(--dim)}
+  .sect{color:var(--accent);border-top:1px solid var(--line)}
+  .lbl{color:var(--dim)}
+  select,input[type=text],textarea{background:var(--panel2);color:var(--text);border:1px solid #e3dacd}
+  select:focus,input:focus,textarea:focus{border-color:#c9a99d;box-shadow:0 0 0 3px rgba(166,58,43,.10)}
+  input::placeholder,textarea::placeholder{color:#a89e91}
+  .chip{background:#fbf8f2;border:1px solid #e3dacd;color:#5f584f}
+  .chip:hover{border-color:#cdbfae;color:var(--text)}
+  .chip[aria-pressed="true"]{background:rgba(166,58,43,.10);border-color:rgba(166,58,43,.45);color:var(--accent2)}
+  .prompt-out{background:#fffdf8;border:1px solid #e6ddd0;color:#2b261f}
+  .btn{background:#fff;border:1px solid #e0d7c9;color:#2b261f}
+  .btn:hover{border-color:#cdbfae;background:#fdfaf4}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:#b8452f;border-color:#b8452f}
+  .meta{color:var(--dim)}
+  details.neg{border-top:1px solid var(--line)}
+  details.neg summary{color:var(--dim)}
+  .hint{color:#8c8378}
+  .tool,.mag div{background:#fbf8f2;border:1px solid #ece4d8}
+  .mag b{color:#2b261f}
+  .guide h3{color:#2b261f}
+  .guide p,.guide li{color:#575047}
+  .guide a{color:var(--accent2);border-bottom-color:rgba(166,58,43,.25)}
+  .toast{background:#241f1a;color:#f7f1e7}
+  .formula span{background:#fff;border:1px solid #e3dacd;color:#6f675d}
+  .tabbtn{background:#fff;border:1px solid #e0d7c9;color:#6f675d}
+  .tabbtn[aria-selected="true"]{background:rgba(166,58,43,.10);border-color:rgba(166,58,43,.45);color:var(--accent2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand"><span class="dot"></span> Arq · Prompt — Urbanismo</div>
+    <h1>Gerador de prompt para <em>loteamentos</em></h1>
+    <p class="sub">Base chapada de <b>CAD + Google Earth</b> → fotografia aérea do empreendimento pronto. O gerador <b>sempre</b> entrega prompt, negativo e checklist, e trata o <b>paisagismo como intocável</b>: posição, espécie, porte e proporção.</p>
+    <div class="tabs" role="tablist">
+      <button class="tabbtn" role="tab" aria-selected="true" data-tab="hum">Humanizar masterplan</button>
+      <button class="tabbtn" role="tab" aria-selected="false" data-tab="criar">Criar do zero</button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <aside class="card">
+      <h2 id="panel-title">Humanizar masterplan</h2>
+
+      <!-- ============ HUMANIZAR ============ -->
+      <div data-tab="hum">
+        <div class="sect">Base e enquadramento</div>
+
+        <div class="field">
+          <label class="lbl" for="h-base">Imagem de entrada</label>
+          <select id="h-base" data-k="h.base" data-group="base"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-enq">Enquadramento</label>
+          <select id="h-enq" data-k="h.enq" data-group="enq"></select>
+        </div>
+
+        <div class="sect">Paisagismo</div>
+
+        <div class="field">
+          <label class="lbl" for="h-pais">Preservação do paisagismo</label>
+          <select id="h-pais" data-k="h.pais" data-group="pais"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-lib">Nível de liberdade</label>
+          <select id="h-lib" data-k="h.liberdade" data-group="liberdade"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-copas">Cores das copas</label>
+          <select id="h-copas" data-k="h.copas" data-group="copas"></select>
+        </div>
+
+        <div class="sect">Loteamento</div>
+
+        <div class="field">
+          <label class="lbl" for="h-lotes">Lotes e gramados</label>
+          <select id="h-lotes" data-k="h.lotes" data-group="lotes"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-divisas">Divisas dos lotes</label>
+          <select id="h-divisas" data-k="h.divisas" data-group="divisas"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-vias">Sistema viário</label>
+          <select id="h-vias" data-k="h.vias" data-group="vias"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-agua">Água</label>
+          <select id="h-agua" data-k="h.agua" data-group="agua"></select>
+        </div>
+
+        <div class="sect">Elementos da prancha</div>
+
+        <div class="field">
+          <label class="lbl" for="h-inventario">O que existe nesta prancha</label>
+          <textarea id="h-inventario" rows="4" spellcheck="false" placeholder="ex.: 2 quadras de tênis azuis, 1 quadra poliesportiva, 3 piscinas, playground colorido no sul, fonte circular no centro-norte"></textarea>
+        </div>
+
+        <div class="sect">Acabamentos</div>
+
+        <div class="field">
+          <label class="lbl" for="h-cob">Coberturas</label>
+          <select id="h-cob" data-k="h.cob" data-group="cob"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-rev">Revestimentos</label>
+          <select id="h-rev" data-k="h.rev" data-group="rev"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="h-ajustes">Ajustes deste desenho (opcional)</label>
+          <textarea id="h-ajustes" rows="5" spellcheck="false" placeholder="Defina detalhes e especificidades da imagem, por exemplo: 'Telha colonial terracota. Referência: Telha Colonial Cerâmica Tradicional (Barro) ou Telha Colonial Térmica Sanduíche (Modelo Isotelha / Kingspan Isoeste);' a depender do projeto."></textarea>
+        </div>
+
+        <div class="sect">Luz</div>
+
+        <div class="field">
+          <label class="lbl" for="h-luz">Iluminação</label>
+          <select id="h-luz" data-k="h.luz" data-group="luz"></select>
+        </div>
+      </div>
+
+      <!-- ============ CRIAR ============ -->
+      <div data-tab="criar" hidden>
+        <div class="field">
+          <label class="lbl" for="c-cena">Cena</label>
+          <select id="c-cena" data-k="c.cena" data-group="cena"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="c-emp">Empreendimento</label>
+          <select id="c-emp" data-k="c.emp" data-group="emp"></select>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="c-pais">Paisagem</label>
+          <select id="c-pais" data-k="c.pais" data-group="pais2"></select>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label class="lbl" for="c-luz">Luz</label>
+            <select id="c-luz" data-k="c.luz" data-group="luzc"></select>
+          </div>
+          <div class="field">
+            <label class="lbl" for="c-cam">Câmera</label>
+            <select id="c-cam" data-k="c.cam" data-group="camc"></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl">Detalhes</label>
+          <div class="chips" id="c-flags"></div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="out">
+      <div class="card">
+        <h2 id="out-title">Seu prompt</h2>
+        <textarea id="prompt" class="prompt-out" spellcheck="false" readonly></textarea>
+        <div class="meta">
+          <span id="count">0 caracteres</span>
+          <span id="engine-hint">português · imagem de referência</span>
+        </div>
+
+        <div class="btns">
+          <button class="btn primary" id="copy">Copiar prompt</button>
+          <button class="btn" id="copy-all">Copiar prompt + negativo</button>
+          <button class="btn" id="shuffle">Surpreenda-me</button>
+          <button class="btn" id="download">Baixar .txt</button>
+        </div>
+
+        <span class="presets-label">Presets</span>
+        <div class="presets" id="presets"></div>
+
+        <details class="neg" open>
+          <summary>Prompt negativo</summary>
+          <textarea id="negative" spellcheck="false"></textarea>
+          <div class="btns" style="margin-top:8px">
+            <button class="btn small" id="copy-neg">Copiar negativo</button>
+            <button class="btn small" id="reset-neg">Restaurar padrão</button>
+          </div>
+          <p class="hint">O Magnific não tem campo de negativo. Use <b>“Copiar prompt + negativo”</b> e cole tudo no campo de prompt — o negativo entra no fim, identificado, e você continua com os dois separados aqui para localizar depois.</p>
+        </details>
+      </div>
+
+      <div class="card guide">
+        <h3>Parâmetros no Magnific</h3>
+        <p>Para humanizar sem inventar projeto nem paisagismo:</p>
+        <div class="mag">
+          <div><small>Resemblance</small><b>80–95</b></div>
+          <div><small>Creativity</small><b>5–20</b></div>
+          <div><small>HDR</small><b>20–50</b></div>
+          <div><small>Engine</small><b>Magnific / Sharpy</b></div>
+          <div><small>Scale</small><b>2x – 4x</b></div>
+        </div>
+        <p class="hint">Creativity alto = árvore onde não tem, lote a mais. Em masterplan com paisagismo pago, fique em 5–10.</p>
+
+        <h3 style="margin-top:24px">Por que o paisagismo se perde no caminho</h3>
+        <ul>
+          <li><b>Base chapada não dá “pista” de vegetação.</b> O modelo preenche o vazio com o que acha bonito — e o paisagista some.</li>
+          <li><b>Cor é a primeira coisa que escapa.</b> “Árvores variadas” vira verde genérico; por isso o prompt trava cor, porte e posição.</li>
+          <li><b>Adensar não é humanizar.</b> Cada árvore a mais é uma árvore que o cliente não pagou.</li>
+          <li><b>Porte errado denuncia.</b> Palmeira pequena e ipê gigante destroem a leitura de escala.</li>
+          <li><b>O checklist é o que segura o resultado.</b> Deixe ligado: ele repete as regras no fim do prompt, onde o modelo ainda lê.</li>
+        </ul>
+
+        <h3 style="margin-top:24px">Ferramentas que aceitam esse prompt</h3>
+        <div class="tools">
+          <div class="tool"><b>Magnific AI</b><span>Enhance/Upscale com referência e Resemblance alto. Modelo Seedream.</span></div>
+          <div class="tool"><b>Google AI Studio / Gemini</b><span>Grátis, aceita imagem + prompt longo em português.</span></div>
+          <div class="tool"><b>Freepik Spaces</b><span>O do vídeo original. Canvas com gerador e upscale.</span></div>
+          <div class="tool"><b>PromeAI</b><span>Planta/masterplan → render; bom para estudo rápido.</span></div>
+          <div class="tool"><b>Stable Diffusion + ControlNet</b><span>Trava o traçado de verdade (lineart/canny). Grátis com GPU.</span></div>
+          <div class="tool"><b>QGIS / CAD</b><span>Base limpa em alta resolução já resolve metade do resultado.</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="ver">Gerador de Prompt — Urbanismo · <b>v1.0</b> · 23/10/2026</footer>
+</div>
+
+<div class="toast" id="toast">copiado</div>
+
+<script>
+(function(){
+  "use strict";
+
+  const D = {
+    base: [
+      {v:"cad",    p:"a base chapada de AutoCAD + Google Earth", t:"a partir de uma base chapada de AutoCAD com sobreposição de imagem do Google Earth, sem textura, sem iluminação realista e sem vegetação renderizada"},
+      {v:"r3d",    p:"o render 3D do projeto", t:"a partir do render 3D do projeto, ainda com aparência de maquete eletrônica"},
+      {v:"drone",  p:"a foto aérea de drone do terreno", t:"a partir de fotografia aérea de drone do terreno, mantendo a paisagem existente"},
+      {v:"ia",     p:"a humanização anterior", t:"a partir de uma humanização anterior, apenas para refinar acabamento e realismo"}
+    ],
+    enq: [
+      {v:"top",  t:"em vista superior ortogonal, top view, ângulo de 90 graus"},
+      {v:"ob45", t:"em vista aérea oblíqua de 45 graus"},
+      {v:"low",  t:"em vista aérea oblíqua baixa, próxima à linha do horizonte"},
+      {v:"same", t:"no mesmo enquadramento e ângulo de câmera da imagem original"}
+    ],
+    pais: [
+      {v:"full",   t:"Preservar integralmente o paisagismo proposto. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado devem permanecer exatamente como indicadas na base, respeitando o projeto paisagístico contratado."},
+      {v:"refine", t:"Preservar integralmente o paisagismo proposto, refinando apenas o realismo das espécies já indicadas: mesma posição, mesma espécie, mesmo porte e mesma proporção de cada árvore, arbusto e área de gramado."},
+      {v:"densify",t:"Preservar o paisagismo proposto e adensar somente a vegetação de borda já existente, sem avançar sobre lotes, vias, calçadas ou áreas livres."}
+    ],
+    copas: [
+      {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes e floração amarela, rosa ou roxa apenas em algumas árvores, como na flora brasileira. A variação de cor não cria árvores novas nem remove as existentes."},
+      {v:"verde",     t:"Todas as copas em tons naturais de verde, com variação sutil entre indivíduos da mesma espécie; sem floração."},
+      {v:"indicated", t:"Somente as árvores indicadas na base podem ter floração; todas as demais permanecem verdes."},
+      {v:"keep",      t:"Manter as cores de copa exatamente como indicadas na base, sem ampliar as áreas floridas."}
+    ],
+    lotes: [
+      {v:"natural", t:"terreno natural com textura de vegetação rasteira, sem aspecto de grama sintética, mantendo exatamente os limites e as áreas indicadas"},
+      {v:"varied",  t:"gramado verde com variação natural de tom e textura, respeitando as áreas indicadas"},
+      {v:"uniform", t:"gramado verde uniforme e realista, com textura de grama aparada"},
+      {v:"keep",    t:"a representação de lotes da imagem original"}
+    ],
+    liberdade: [
+      {v:"conservador", t:"Modo conservador: não criar variação de terreno, manchas, flores, arbustos ou qualquer detalhe que não esteja indicado na base; apenas converter o que existe em textura realista."},
+      {v:"equilibrado", t:"Modo equilibrado: acrescentar somente textura e detalhe de folhagem sobre os elementos já indicados, sem criar, mover ou redimensionar nada. Árvores vizinhas podem ter porte e forma de copa ligeiramente diferentes entre si, mantendo o espaçamento, a posição e a espécie indicados; nenhuma árvore deve ser cópia da vizinha."},
+      {v:"livre",       t:"Modo livre: permitir variação de textura e de detalhe de vegetação, mantendo posição, quantidade, espécie e porte de tudo o que está indicado."}
+    ],
+    agua: [
+      {v:"natural", t:"tem tom verde-azulado escuro, com margens naturais e reflexo do céu."},
+      {v:"light",   t:"tem tom azul-claro natural, com transparência discreta."},
+      {v:"emerald", t:"tem tom esmeralda profundo, com sombra nas margens."},
+      {v:"keep",    t:"mantém a aparência da base."}
+    ],
+    divisas: [
+      {v:"white", t:"linhas brancas finas e contínuas"},
+      {v:"soft",  t:"linhas brancas discretas, sem competir com a vegetação"},
+      {v:"keep",  t:"as divisas já indicadas na imagem original"}
+    ],
+    vias: [
+      {v:"light", t:"pavimentação de asfalto cinza-claro"},
+      {v:"dark",  t:"asfalto cinza-escuro"},
+      {v:"paver", t:"pavimentação drenante em tons claros"},
+      {v:"keep",  t:"a pavimentação já indicada na imagem original"}
+    ],
+    cob: [
+      {v:"keep",   t:"Manter as cores, os padrões e as texturas de telhado já indicados na imagem original."},
+      {v:"laje",   t:"Todos os telhados em laje plana cinza, sem telha aparente."},
+      {v:"terra",  t:"Todos os telhados em telha colonial terracota."},
+      {v:"marfim", t:"Todos os telhados em telha colonial marfim."}
+    ],
+    rev: [
+      {v:"keep",       t:"Manter os revestimentos já indicados na imagem original."},
+      {v:"terracotta", t:"Revestir os elementos especiais com tijolo cerâmico na cor terra."},
+      {v:"stone",      t:"Revestir os elementos especiais em pedra natural clara."}
+    ],
+    luz: [
+      {v:"soft",     t:"Aplicar iluminação natural suave, com sombras discretas e realistas"},
+      {v:"sun",      t:"Aplicar luz solar direta, com sombras definidas e coerentes"},
+      {v:"golden",   t:"Aplicar luz de golden hour, com tons quentes e sombras alongadas"},
+      {v:"overcast", t:"Aplicar luz difusa de dia nublado, sem sombras marcadas"}
+    ],
+
+    /* ---- criar do zero ---- */
+    cena: [
+      {v:"aerial90", p:"Masterplan aéreo 90°", e:"top-down aerial view"},
+      {v:"aerial45", p:"Aérea oblíqua", e:"oblique aerial view"},
+      {v:"entrance", p:"Entrada / portaria", e:"street-level view of the gated entrance"},
+      {v:"club",     p:"Clube e lazer", e:"view of the clubhouse and leisure area"},
+      {v:"lake",     p:"Lago / orla", e:"view of the lake shore and deck"},
+      {v:"street",   p:"Rua interna", e:"eye-level view of an internal street"},
+      {v:"plaza",    p:"Praça central", e:"view of the central plaza"},
+      {v:"courts",   p:"Quadras esportivas", e:"view of the sports courts"},
+      {v:"equest",   p:"Haras", e:"view of the equestrian area"}
+    ],
+    emp: [
+      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community"},
+      {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community"},
+      {v:"haras",    p:"haras", e:"equestrian estate"},
+      {v:"resort",   p:"resort residencial", e:"residential resort"},
+      {v:"bairro",   p:"bairro planejado", e:"planned neighborhood"},
+      {v:"parque",   p:"parque linear", e:"linear park"}
+    ],
+    pais2: [
+      {v:"atlantic", p:"mata atlântica", e:"surrounded by dense Atlantic rainforest"},
+      {v:"cerrado",  p:"cerrado", e:"in a cerrado landscape with sculptural trees"},
+      {v:"campo",    p:"campo aberto", e:"in open countryside with rolling grass"},
+      {v:"coast",    p:"litoral", e:"on a coastal site with dune vegetation"},
+      {v:"mountain", p:"montanha", e:"in a mountain valley with pine trees"},
+      {v:"vinhedo",  p:"vinhedos", e:"among vineyards and agricultural rows"},
+      {v:"urban",    p:"borda urbana", e:"at the edge of a growing city"}
+    ],
+    luzc: [
+      {v:"golden",   p:"golden hour", e:"golden hour"},
+      {v:"midday",   p:"meio-dia", e:"bright midday"},
+      {v:"blue",     p:"blue hour", e:"blue hour"},
+      {v:"overcast", p:"nublado", e:"soft overcast daylight"},
+      {v:"night",    p:"noite", e:"night"}
+    ],
+    camc: [
+      {v:"drone90", p:"drone 90°", e:"drone camera at a perfectly top-down 90-degree angle"},
+      {v:"drone45", p:"drone 45°", e:"drone camera at a 45-degree oblique angle"},
+      {v:"24mm",    p:"24 mm", e:"24 mm lens at eye level"},
+      {v:"35mm",    p:"35 mm", e:"35 mm lens with natural perspective"}
+    ]
+  };
+
+  const SHORT = {
+    base:{cad:"CAD + Google Earth (chapada)", r3d:"Render 3D", drone:"Foto de drone", ia:"Humanização anterior"},
+    enq:{top:"Top view 90° (ortogonal)", ob45:"Aérea oblíqua 45°", low:"Aérea baixa", same:"Mesma da imagem"},
+    pais:{full:"Preservar integralmente", refine:"Preservar e refinar textura", densify:"Preservar + adensar borda"},
+    liberdade:{conservador:"Conservador (não inventar nada)", equilibrado:"Equilibrado (só textura)", livre:"Livre (variação de textura)"},
+    copas:{variada:"Variada (florada pontual)", verde:"Só verde", indicated:"Só as indicadas", keep:"Manter as da base"},
+    lotes:{natural:"Terreno natural (sem grama sintética)", varied:"Gramado com variação", uniform:"Gramado uniforme", keep:"Manter original"},
+    agua:{natural:"Verde-azulado natural", light:"Azul-clara", emerald:"Esmeralda", keep:"Manter original"},
+    divisas:{white:"Linhas brancas contínuas", soft:"Linhas discretas", keep:"Manter original"},
+    vias:{light:"Asfalto cinza-claro", dark:"Asfalto escuro", paver:"Pavimento drenante", keep:"Manter original"},
+    cob:{keep:"Manter as da imagem", laje:"Laje plana cinza", terra:"Colonial terracota", marfim:"Colonial marfim"},
+    rev:{keep:"Manter os da imagem", terracotta:"Tijolo cerâmico terra", stone:"Pedra natural clara"},
+    luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
+  };
+
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
+
+  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, extra buildings, new roads, invented plots";
+
+  const SUFFIX = "photorealistic architectural visualization, physically based materials, ray-traced reflections and global illumination, subtle atmospheric perspective, cinematic color grading, ultra-detailed, 8k, sharp, high dynamic range, professional archviz";
+
+  const st = {
+    tab: "hum",
+    h: {base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform",
+        divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft",
+        ajustes:"", inventario:"", enxuto:false},
+    c: {cena:"aerial90", emp:"gated", pais:"atlantic", luz:"golden", cam:"drone90",
+        people:false, cars:true, refl:true, suffix:true}
+  };
+
+  const $ = (s,r)=> (r||document).querySelector(s);
+  const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+  const one = (k,v) => D[k].find(o=>o.v===v);
+
+  /* ---------- build selects ---------- */
+  document.querySelectorAll("select[data-group]").forEach(sel=>{
+    const g = sel.dataset.group;
+    const [tab,key] = sel.dataset.k.split(".");
+    D[g].forEach(o=>{
+      const opt = document.createElement("option");
+      opt.value = o.v;
+      opt.textContent = (SHORT[g] && SHORT[g][o.v]) || o.p || o.t || o.e;
+      sel.appendChild(opt);
+    });
+    sel.value = st[tab][key];
+    sel.addEventListener("change", ()=>{
+      st[tab][key] = sel.value;
+      render();
+    });
+  });
+
+  $("#h-ajustes").addEventListener("input", e=>{ st.h.ajustes = e.target.value.trim(); render(); });
+  $("#h-inventario").addEventListener("input", e=>{ st.h.inventario = e.target.value.trim(); render(); });
+
+  /* câmera acompanha a cena aérea */
+  $("#c-cena").addEventListener("change", ()=>{
+    if(st.c.cena === "aerial90") st.c.cam = "drone90";
+    else if(st.c.cena === "aerial45") st.c.cam = "drone45";
+    else if(st.c.cam === "drone90" || st.c.cam === "drone45") st.c.cam = "24mm";
+    syncForm(); render();
+  });
+
+  /* ---------- chips (aba criar) ---------- */
+  const cFlags = [
+    {v:"people", label:"pessoas"},
+    {v:"cars",   label:"carros"},
+    {v:"refl",   label:"reflexos"},
+    {v:"suffix", label:"sufixo global"}
+  ];
+  const cBox = $("#c-flags");
+  cFlags.forEach(f=>{
+    const b = document.createElement("button");
+    b.type="button"; b.className="chip"; b.textContent=f.label; b.dataset.v=f.v;
+    b.addEventListener("click", ()=>{ st.c[f.v]=!st.c[f.v]; syncChips(); render(); });
+    cBox.appendChild(b);
+  });
+
+  function syncChips(){
+    cBox.querySelectorAll("button").forEach(b=> b.setAttribute("aria-pressed", st.c[b.dataset.v]?"true":"false"));
+  }
+
+  /* ---------- builders ---------- */
+  function buildHum(){
+    const g = k => one(k, st.h[k]);
+    const out = [];
+
+    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", com o mesmo enquadramento e a mesma escala.");
+
+    out.push("GEOMETRIA\nPreservar traçado, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
+
+    out.push("PAISAGISMO\nPreservar o projeto paisagístico: posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
+
+    out.push("ELEMENTOS\nManter a identidade e a quantidade dos equipamentos: quadra de tênis tem piso e linhas de demarcação; quadra de areia tem superfície solta; não converter uma na outra. Nenhum equipamento vira edificação: quadra permanece quadra, com piso e linhas, e não se transforma em casa ou piscina. A água existe apenas onde está desenhada e " + g("agua").t);
+
+    out.push("EDIFICAÇÕES\nManter número, posição, planta e cobertura das edificações; não criar construções, quiosques ou equipamentos adicionais. Nenhuma edificação ocupa área de vegetação: onde há maciço arbóreo ou área verde, permanece vegetação.");
+
+    out.push("ACABAMENTOS\n" + [g("cob").t, g("rev").t].filter(Boolean).join(" "));
+
+    out.push("LUZ E REALISMO\n" + g("luz").t + ", com direção de luz única e sombras coerentes. Fotografia aérea nítida em toda a extensão da imagem: folhagem com volume, sombras de contato, asfalto com agregado, telha com textura, leve névoa atmosférica; sem aspecto de CGI, maquete ou ilustração.");
+
+    if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
+    if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
+
+    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
+
+    return out.join("\n\n");
+  }
+
+  function buildCriar(){
+    const cena = one("cena", st.c.cena);
+    const emp  = one("emp",  st.c.emp);
+    const pais = one("pais2", st.c.pais);
+    const luz  = one("luzc", st.c.luz);
+    const cam  = one("camc", st.c.cam);
+
+    const extra = [];
+    if(st.c.people) extra.push("a few residents walking and cycling");
+    if(st.c.cars) extra.push("a couple of cars parked off the street");
+    if(st.c.refl) extra.push("crisp reflections on wet paving and glass");
+
+    const parts = [
+      cap(cena.e) + " of a " + emp.e,
+      pais.e,
+      luz.e,
+      cam.e,
+      extra.join(", "),
+      st.c.suffix ? SUFFIX : ""
+    ].filter(Boolean);
+
+    return parts.join(", ") + ".";
+  }
+
+  function build(){
+    return st.tab === "hum" ? buildHum() : buildCriar();
+  }
+
+  function render(){
+    const p = build();
+    $("#prompt").value = p;
+    $("#count").textContent = p.length + " caracteres · " + p.split(/\s+/).filter(Boolean).length + " palavras";
+    $("#engine-hint").textContent = st.tab === "hum"
+      ? "português · imagem de referência"
+      : "inglês · texto para imagem";
+  }
+
+  /* ---------- negative ---------- */
+  let negTouched = false;
+  const negBox = $("#negative");
+  function syncNegative(force){
+    if(negTouched && !force) return;
+    negBox.value = st.tab === "hum" ? NEG_COMPACTO_PT : NEG_EN;
+  }
+  negBox.addEventListener("input", ()=>{ negTouched = true; });
+  $("#reset-neg").addEventListener("click", ()=>{ negTouched=false; syncNegative(true); toast("negativo restaurado"); });
+
+  /* ---------- tabs ---------- */
+  function setTab(tab){
+    st.tab = tab;
+    document.querySelectorAll(".tabbtn").forEach(b=> b.setAttribute("aria-selected", b.dataset.tab===tab ? "true":"false"));
+    document.querySelectorAll("aside [data-tab]").forEach(el=> el.hidden = (el.dataset.tab !== tab));
+    $("#panel-title").textContent = tab==="hum" ? "Humanizar masterplan" : "Criar do zero";
+    $("#out-title").textContent = tab==="hum" ? "Seu prompt (português)" : "Seu prompt (inglês)";
+    $("#prompt").style.minHeight = tab==="hum" ? "460px" : "300px";
+    renderPresets();
+    negTouched = false;
+    syncNegative(true);
+    render();
+  }
+  document.querySelectorAll(".tabbtn").forEach(b=> b.addEventListener("click", ()=> setTab(b.dataset.tab)));
+
+  /* ---------- presets ---------- */
+  const PRESETS = {
+    hum: [
+      {name:"Prancha atual", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Refinar humanização", s:{base:"ia", enq:"same", pais:"refine", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Litorâneo", s:{base:"cad", enq:"ob45", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
+      {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
+    ],
+    criar: [
+      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",luz:"golden",cam:"drone90",people:false,cars:true,refl:true,suffix:true}},
+      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",luz:"golden",cam:"24mm",people:true,cars:true,refl:true,suffix:true}},
+      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",luz:"golden",cam:"35mm",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",luz:"blue",cam:"24mm",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",luz:"golden",cam:"drone45",people:true,cars:false,refl:false,suffix:true}}
+    ]
+  };
+
+  function renderPresets(){
+    const box = $("#presets");
+    box.innerHTML = "";
+    (PRESETS[st.tab] || []).forEach(p=>{
+      const b = document.createElement("button");
+      b.type="button"; b.className="btn small"; b.textContent=p.name;
+      b.addEventListener("click", ()=>{
+        Object.assign(st[st.tab], p.s);
+        syncForm(); render();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function syncForm(){
+    document.querySelectorAll("select[data-k]").forEach(sel=>{
+      const [tab,key] = sel.dataset.k.split(".");
+      sel.value = st[tab][key];
+    });
+    $("#h-ajustes").value = st.h.ajustes || "";
+    $("#h-inventario").value = st.h.inventario || "";
+    syncChips();
+  }
+
+  /* ---------- actions ---------- */
+  function copy(text, msg){
+    const done = ()=>toast(msg||"copiado");
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text, done));
+    } else fallbackCopy(text, done);
+  }
+  function fallbackCopy(text, done){
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(e){ toast("selecione e copie manualmente"); }
+    document.body.removeChild(ta);
+  }
+
+  let toastTimer;
+  function toast(msg){
+    const t = $("#toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>t.classList.remove("show"), 1600);
+  }
+
+  $("#copy").addEventListener("click", ()=>copy($("#prompt").value, "prompt copiado"));
+  $("#copy-all").addEventListener("click", ()=>{
+    const txt = $("#prompt").value + "\n\nNEGATIVE PROMPT\n" + negBox.value;
+    copy(txt, "prompt + negativo copiados");
+  });
+  $("#copy-neg").addEventListener("click", ()=>copy(negBox.value, "negativo copiado"));
+
+  $("#download").addEventListener("click", ()=>{
+    const txt = $("#prompt").value + "\n\n--- NEGATIVE / NEGATIVO ---\n" + negBox.value;
+    const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = st.tab==="hum" ? "prompt-humanizar-masterplan.txt" : "prompt-empreendimento.txt";
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
+  });
+
+  const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
+  $("#shuffle").addEventListener("click", ()=>{
+    if(st.tab === "hum"){
+      ["base","enq","pais","liberdade","copas","lotes","divisas","vias","agua","cob","rev","luz"].forEach(k=>{
+        st.h[k] = rnd(D[k]).v;
+      });
+    } else {
+      ["cena","emp","pais","luz","cam"].forEach(k=>{
+        const grp = {cena:"cena",emp:"emp",pais:"pais2",luz:"luzc",cam:"camc"}[k];
+        st.c[k] = rnd(D[grp]).v;
+      });
+      ["people","cars","refl"].forEach(k=>{ st.c[k] = Math.random() > 0.5; });
+    }
+    syncForm(); render();
+  });
+
+  /* ---------- init ---------- */
+  syncChips();
+  negTouched = false;
+  syncNegative(true);
+  renderPresets();
+  render();
+
+  if((location.hash||"").replace("#","") === "criar") setTab("criar");
+})();
+</script>
+</body>
+</html>
