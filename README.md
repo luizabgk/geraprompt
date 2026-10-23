@@ -1,74 +1,46 @@
-# GeraPrompt — Gerador de prompt para loteamentos
+# GeraPrompt
 
-Ferramenta de **arquivo único (HTML)** que monta o prompt para transformar uma base chapada de AutoCAD + Google Earth em fotografia aérea realista de loteamentos e condomínios de alto padrão.
+Monta o prompt que transforma uma base chapada de AutoCAD + Google Earth em foto aérea do loteamento pronto.
 
-Sem instalação, sem servidor, sem login e sem internet. Abre no navegador com dois cliques.
-
-**Usar agora:** <https://luizabgk.github.io/geraprompt/>
+Roda no navegador, sem instalar nada: <https://luizabgk.github.io/geraprompt/>
 
 ![Interface do GeraPrompt](preview.png)
 
-## O que ele gera
-
-Sempre os três juntos:
-
-1. **Prompt** — em português, em blocos (geometria, paisagismo, elementos, edificações, acabamentos, luz e realismo)
-2. **Prompt negativo** — curto, em frases imperativas
-3. **Checklist de preservação** — repetido no fim do prompt, onde o modelo ainda presta atenção
-
 ## Como usar
 
-1. Abra o `index.html` no navegador
-2. Escolha o enquadramento, o paisagismo, os equipamentos e os acabamentos
-3. Clique em **Copiar prompt + negativo** e cole no campo de prompt da sua ferramenta
+Abra o link e escolha o enquadramento, o paisagismo e os acabamentos. O prompt aparece à direita e muda a cada escolha.
 
-Para o Magnific, que não tem campo de negativo: o botão já entrega tudo num bloco só, com o negativo identificado no fim.
+No fim da página tem dois botões. "Copiar prompt" leva só o texto principal. "Copiar prompt + negativo" leva os dois juntos, com o negativo identificado no fim — é o que você usa no Magnific, que não tem campo separado para isso.
 
-## O que o prompt protege
+## O que ele entrega
 
-O princípio é simples: **textura pode, geometria não.**
+Três coisas sempre juntas: o prompt, o prompt negativo e um checklist de preservação. O checklist vai no fim do prompt de propósito, porque é a última coisa que o modelo lê antes de gerar.
 
-| Elemento | Regra |
-|---|---|
-| Traçado, lotes e vias | idênticos à base |
-| Paisagismo | mesma posição, espécie, porte e proporção; cor varia dentro do natural |
-| Equipamentos | quadra permanece quadra; nada vira edificação |
-| Edificações | mesmo número, planta e cobertura; nenhuma ocupa área verde |
-| Água | só onde está desenhada |
+## O que o prompt segura
 
-## Por que funciona
+O traçado, os lotes, as vias e o enquadramento ficam como estão na base.
 
-Três decisões explicam o resultado:
+O paisagismo também. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado são mantidos. A cor varia entre tons de verde e uma floração pontual, mas nada é criado nem removido.
 
-**1. Uma instrução por bloco.** Modelos de imagem perdem regras no meio de textos longos. O prompt tem ~350 palavras, divididas em blocos curtos.
-
-**2. Poucas negações.** Cada palavra citada no negativo vira candidata a aparecer na imagem. Por isso o negativo tem 4 frases, não 30.
-
-**3. Regras de substituição explícitas.** O modelo não "cria" uma casa no lugar de uma quadra — ele substitui. Cada substituição possível precisa da sua própria frase: *"quadra permanece quadra"*, *"arbusto não vira árvore"*.
+Equipamento não vira outra coisa: quadra continua quadra, com piso e linhas. Edificação não ocupa área verde. Água só onde está desenhada.
 
 ## Presets
 
-- **Prancha atual** — configuração de uso diário
-- **Base CAD + GEarth** — padrão limpo
-- **Refinar humanização** — para melhorar um resultado anterior
-- **Litorâneo** e **Chácaras e vinhedos** — variações de contexto
+Cinco combinações prontas: prancha atual, base CAD + GEarth, refinar humanização, litorâneo e chácaras com vinhedos. Servem como ponto de partida, não como receita.
 
-## Compatibilidade
+## Onde funciona
 
-Funciona com qualquer modelo que aceite prompt de imagem: Magnific (Seedream, Nano Banana), Gemini/Imagen, Flux, SDXL, DALL·E.
+Qualquer modelo que aceite prompt de imagem. Já foi testado no Magnific com Seedream e com Nano Banana; deve funcionar igual no Gemini, Flux, SDXL e DALL·E.
 
-Para bases muito detalhadas, dá para usar o mesmo texto com ControlNet (lineart/canny) e travar o traçado de verdade.
+## Rodando local
 
-## Rodando localmente
-
-Não há build. Baixe o `index.html` e abra.
+Baixe o `index.html` e abra no navegador. Não tem build, não tem dependência.
 
 ```bash
 git clone https://github.com/luizabgk/geraprompt.git
 cd geraprompt
-# abra index.html no navegador
 ```
 
 ## Licença
 
-MIT — veja [LICENSE](LICENSE).
+MIT. Veja [LICENSE](LICENSE).
