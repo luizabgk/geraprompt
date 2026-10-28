@@ -424,7 +424,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.6</b> · 28/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.7</b> · 28/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -664,7 +664,7 @@
 
     out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", com o mesmo enquadramento e a mesma escala.");
 
-    out.push("GEOMETRIA\nPreservar traçado, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
+    out.push("GEOMETRIA\nPreservar morfologia urbana, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
 
     out.push("PAISAGISMO\nA vegetação segue a implantação: fica exatamente onde está na base, nem a mais, nem a menos. Preservar posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
 
@@ -688,8 +688,6 @@
 
     if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
     if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
-
-    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- linhas de divisa dos lotes nítidas e contínuas em todo o traçado;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
 
     return out.join("\n\n");
   }
