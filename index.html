@@ -372,6 +372,12 @@
         <span class="presets-label">Presets</span>
         <div class="presets" id="presets"></div>
 
+        <span class="presets-label">Projeto</span>
+        <div class="btns" style="margin-top:0">
+          <button class="btn small" id="save-proj">Salvar projeto</button>
+          <button class="btn small" id="load-proj">Carregar projeto</button>
+        </div>
+
         <details class="neg" open>
           <summary>Prompt negativo</summary>
           <textarea id="negative" spellcheck="false"></textarea>
@@ -393,7 +399,7 @@
           <div><small>Engine</small><b>Magnific / Sharpy</b></div>
           <div><small>Scale</small><b>2x – 4x</b></div>
         </div>
-        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar árvore e lote. Com paisagismo contratado, 5 a 10 já é bastante.</p>
+        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar árvore e lote. Com paisagismo contratado, 5 a 10 já é bastante. Para manter as linhas de divisa dos lotes nítidas, segure o Resemblance em 90–95 — linha fina é a primeira coisa que o modelo esmaece.</p>
 
         <h3 style="margin-top:24px">O que costuma dar errado</h3>
         <ul>
@@ -418,7 +424,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.5</b> · 23/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v1.6</b> · 28/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -584,7 +590,7 @@
     luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
   };
 
-  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
   const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, extra buildings, new roads, invented plots";
 
@@ -667,6 +673,11 @@
         "Plantio em blocos e faixas, nunca misturado. Palmeiras como acento vertical em prata-azulado (bismarckia, washingtônia, ráfis, rabo-de-raposa), em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, com pluma bege-prateada, em taludes e bordas. Florada em faixa curta: vermelho-tijolo (ixora), amarelo-ouro e rosa. Renques de arbusto aparado como estrutura. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar o padrão apenas onde a base já indica vegetação: a quantidade e a posição vêm da implantação.");
     }
 
+    out.push("LOTEAMENTO E VIAS\n" +
+      "Manter todas as áreas de lote como " + g("lotes").t + ". " +
+      "Representar todas as estradas e vias com " + g("vias").t + ", mantendo alinhamentos e larguras originais. " +
+      "Preservar as linhas de divisão dos lotes com " + g("divisas").t + ", nítidas em todo o traçado, sem apagar, esmaecer ou deformar.");
+
     out.push("ELEMENTOS\nManter a identidade e a quantidade dos equipamentos: quadra de tênis tem piso e linhas de demarcação; quadra de areia tem superfície solta; não converter uma na outra. Nenhum equipamento vira edificação: quadra permanece quadra, com piso e linhas, e não se transforma em casa ou piscina. A água existe apenas onde está desenhada e " + g("agua").t);
 
     out.push("EDIFICAÇÕES\nManter número, posição, planta e cobertura das edificações; não criar construções, quiosques ou equipamentos adicionais. Nenhuma edificação ocupa área de vegetação: onde há maciço arbóreo ou área verde, permanece vegetação.");
@@ -678,7 +689,7 @@
     if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
     if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
 
-    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
+    out.push("CHECKLIST\n- traçado, lotes, vias e enquadramento idênticos à base;\n- linhas de divisa dos lotes nítidas e contínuas em todo o traçado;\n- paisagismo na mesma posição, espécie, porte e proporção;\n- nenhuma vegetação criada ou removida;\n- edificações e equipamentos na posição original;\n- sem linhas de marcação, cotas, números, textos ou rótulos do desenho técnico;\n- resultado fotográfico, sem CGI.");
 
     return out.join("\n\n");
   }
@@ -721,7 +732,7 @@
     $("#prompt").value = p;
     $("#count").textContent = p.length + " caracteres · " + p.split(/\s+/).filter(Boolean).length + " palavras";
     $("#engine-hint").textContent = st.tab === "hum"
-      ? "português · imagem de referência"
+      ? "Magnific · Seedream / Nano Banana · imagem de referência"
       : "inglês · texto para imagem";
   }
 
@@ -831,6 +842,51 @@
     a.download = st.tab==="hum" ? "prompt-humanizar-masterplan.txt" : "prompt-empreendimento.txt";
     a.click();
     setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
+  });
+
+  /* salvar / carregar projeto */
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+  fileInput.accept = "application/json,.json";
+  fileInput.style.display = "none";
+  document.body.appendChild(fileInput);
+
+  $("#save-proj").addEventListener("click", ()=>{
+    const data = { app:"geraprompt", version:"1.6", savedAt:new Date().toISOString(), state: st };
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "geraprompt-projeto.json";
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
+    toast("projeto salvo");
+  });
+
+  $("#load-proj").addEventListener("click", ()=> fileInput.click());
+
+  fileInput.addEventListener("change", ()=>{
+    const f = fileInput.files && fileInput.files[0];
+    if(!f) return;
+    const r = new FileReader();
+    r.onload = ()=>{
+      try {
+        const data = JSON.parse(r.result);
+        if(data && data.state){
+          if(data.state.tab) st.tab = data.state.tab;
+          if(data.state.h) Object.assign(st.h, data.state.h);
+          if(data.state.c) Object.assign(st.c, data.state.c);
+          syncForm();
+          setTab(st.tab === "criar" ? "criar" : "hum");
+          toast("projeto carregado");
+        } else {
+          toast("arquivo não reconhecido");
+        }
+      } catch(e){
+        toast("não consegui ler o arquivo");
+      }
+      fileInput.value = "";
+    };
+    r.readAsText(f);
   });
 
   const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
