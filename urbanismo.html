@@ -1,10 +1,10 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR">
 <head><link rel="icon" href="G.ico">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Monta o prompt que transforma base de CAD e Google Earth em foto aÃ©rea de loteamento, com paisagismo preservado.">
-<title>GeraPrompt â€” gerador de prompt para loteamentos</title>
+<meta name="description" content="Monta o prompt que transforma base de CAD e Google Earth em foto aérea de loteamento, com paisagismo preservado.">
+<title>GeraPrompt — gerador de prompt para loteamentos</title>
 <style>
   :root{
     --bg:#0c0c0d; --panel:#131316; --panel2:#1b1b1f; --line:#26262b;
@@ -94,7 +94,7 @@
   details.neg summary{cursor:pointer;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);list-style:none}
   details.neg summary::-webkit-details-marker{display:none}
   details.neg summary::before{content:"+ ";color:var(--accent)}
-  details.neg[open] summary::before{content:"â€“ "}
+  details.neg[open] summary::before{content:"– "}
   details.neg textarea{margin-top:10px;min-height:130px;font-size:12px;line-height:1.55}
   .hint{font-size:12px;color:var(--dim);line-height:1.55;margin:10px 0 0}
 
@@ -194,7 +194,7 @@
   <header>
     <div class="brand"><span class="dot"></span> GeraPrompt</div>
     <h1>Gerador de prompt para <em>loteamentos</em></h1>
-    <p class="sub">Monta o texto que transforma a base de CAD e Google Earth na foto aÃ©rea do loteamento pronto. Sai em blocos, com prompt negativo e checklist, e o paisagismo entra como estÃ¡ no projeto: posiÃ§Ã£o, espÃ©cie, porte e proporÃ§Ã£o.</p>
+    <p class="sub">Monta o texto que transforma a base de CAD e Google Earth na foto aérea do loteamento pronto. Sai em blocos, com prompt negativo e checklist, e o paisagismo entra como está no projeto: posição, espécie, porte e proporção.</p>
     <div class="tabs" role="tablist">
       <button class="tabbtn" role="tab" aria-selected="true" data-tab="hum">Humanizar masterplan</button>
       <button class="tabbtn" role="tab" aria-selected="false" data-tab="criar">Criar do zero</button>
@@ -221,24 +221,24 @@
         </div>
 
         <div class="field">
-          <label class="lbl" for="h-formato">ProporÃ§Ã£o da saÃ­da</label>
+          <label class="lbl" for="h-formato">Proporção da saída</label>
           <select id="h-formato" data-k="h.formato" data-group="formato"></select>
         </div>
 
         <div class="sect">Paisagismo</div>
 
         <div class="field">
-          <label class="lbl" for="h-pais">PreservaÃ§Ã£o do paisagismo</label>
+          <label class="lbl" for="h-pais">Preservação do paisagismo</label>
           <select id="h-pais" data-k="h.pais" data-group="pais"></select>
         </div>
 
         <div class="field">
-          <label class="lbl" for="h-padrao">PadrÃ£o de paisagismo</label>
+          <label class="lbl" for="h-padrao">Padrão de paisagismo</label>
           <select id="h-padrao" data-k="h.padrao" data-group="padrao"></select>
         </div>
 
         <div class="field">
-          <label class="lbl" for="h-lib">NÃ­vel de liberdade</label>
+          <label class="lbl" for="h-lib">Nível de liberdade</label>
           <select id="h-lib" data-k="h.liberdade" data-group="liberdade"></select>
         </div>
 
@@ -260,12 +260,12 @@
         </div>
 
         <div class="field">
-          <label class="lbl" for="h-vias">Sistema viÃ¡rio</label>
+          <label class="lbl" for="h-vias">Sistema viário</label>
           <select id="h-vias" data-k="h.vias" data-group="vias"></select>
         </div>
 
         <div class="field">
-          <label class="lbl" for="h-agua">Ãgua</label>
+          <label class="lbl" for="h-agua">Água</label>
           <select id="h-agua" data-k="h.agua" data-group="agua"></select>
         </div>
 
@@ -273,7 +273,7 @@
 
         <div class="field">
           <label class="lbl" for="h-inventario">O que existe nesta prancha</label>
-          <textarea id="h-inventario" rows="4" spellcheck="false" placeholder="ex.: 2 quadras de tÃªnis azuis, 1 quadra poliesportiva, 3 piscinas, playground colorido no sul, fonte circular no centro-norte"></textarea>
+          <textarea id="h-inventario" rows="4" spellcheck="false" placeholder="ex.: 2 quadras de tênis azuis, 1 quadra poliesportiva, 3 piscinas, playground colorido no sul, fonte circular no centro-norte"></textarea>
         </div>
 
         <div class="sect">Acabamentos</div>
@@ -290,13 +290,13 @@
 
         <div class="field">
           <label class="lbl" for="h-ajustes">Ajustes deste desenho (opcional)</label>
-          <textarea id="h-ajustes" rows="5" spellcheck="false" placeholder="Defina detalhes e especificidades da imagem, por exemplo: 'Telha colonial terracota. ReferÃªncia: Telha Colonial CerÃ¢mica Tradicional (Barro) ou Telha Colonial TÃ©rmica SanduÃ­che (Modelo Isotelha / Kingspan Isoeste);' a depender do projeto."></textarea>
+          <textarea id="h-ajustes" rows="5" spellcheck="false" placeholder="Defina detalhes e especificidades da imagem, por exemplo: 'Telha colonial terracota. Referência: Telha Colonial Cerâmica Tradicional (Barro) ou Telha Colonial Térmica Sanduíche (Modelo Isotelha / Kingspan Isoeste);' a depender do projeto."></textarea>
         </div>
 
         <div class="sect">Luz</div>
 
         <div class="field">
-          <label class="lbl" for="h-luz">IluminaÃ§Ã£o</label>
+          <label class="lbl" for="h-luz">Iluminação</label>
           <select id="h-luz" data-k="h.luz" data-group="luz"></select>
         </div>
       </div>
@@ -329,7 +329,7 @@
             <select id="c-luz" data-k="c.luz" data-group="luzc"></select>
           </div>
           <div class="field">
-            <label class="lbl" for="c-cam">CÃ¢mera</label>
+            <label class="lbl" for="c-cam">Câmera</label>
             <select id="c-cam" data-k="c.cam" data-group="camc"></select>
           </div>
         </div>
@@ -351,13 +351,13 @@
             <select id="c-iso" data-k="c.iso" data-group="iso"></select>
           </div>
           <div class="field">
-            <label class="lbl" for="c-wb">BalanÃ§o de branco</label>
+            <label class="lbl" for="c-wb">Balanço de branco</label>
             <select id="c-wb" data-k="c.wb" data-group="wb"></select>
           </div>
         </div>
 
         <div class="field">
-          <label class="lbl" for="c-formato3">ProporÃ§Ã£o da saÃ­da</label>
+          <label class="lbl" for="c-formato3">Proporção da saída</label>
           <select id="c-formato3" data-k="c.formato3" data-group="formato3"></select>
         </div>
 
@@ -381,7 +381,7 @@
         <textarea id="prompt" class="prompt-out" spellcheck="false" readonly></textarea>
         <div class="meta">
           <span id="count">0 caracteres</span>
-          <span id="engine-hint">portuguÃªs Â· imagem de referÃªncia</span>
+          <span id="engine-hint">português · imagem de referência</span>
         </div>
 
         <div class="btns">
@@ -405,48 +405,48 @@
           <textarea id="negative" spellcheck="false"></textarea>
           <div class="btns" style="margin-top:8px">
             <button class="btn small" id="copy-neg">Copiar negativo</button>
-            <button class="btn small" id="reset-neg">Voltar ao padrÃ£o</button>
+            <button class="btn small" id="reset-neg">Voltar ao padrão</button>
           </div>
-          <p class="hint">No Magnific nÃ£o existe campo de negativo. O botÃ£o "Copiar prompt + negativo" junta os dois: o negativo vai no fim, com o nome na frente, e continua separado aqui para vocÃª achar depois.</p>
+          <p class="hint">No Magnific não existe campo de negativo. O botão "Copiar prompt + negativo" junta os dois: o negativo vai no fim, com o nome na frente, e continua separado aqui para você achar depois.</p>
         </details>
       </div>
 
       <div class="card guide">
-        <h3>ParÃ¢metros no Magnific</h3>
-        <p>Uma configuraÃ§Ã£o que costuma funcionar:</p>
+        <h3>Parâmetros no Magnific</h3>
+        <p>Uma configuração que costuma funcionar:</p>
         <div class="mag">
-          <div><small>Resemblance</small><b>80â€“95</b></div>
-          <div><small>Creativity</small><b>5â€“20</b></div>
-          <div><small>HDR</small><b>20â€“50</b></div>
+          <div><small>Resemblance</small><b>80–95</b></div>
+          <div><small>Creativity</small><b>5–20</b></div>
+          <div><small>HDR</small><b>20–50</b></div>
           <div><small>Engine</small><b>Magnific / Sharpy</b></div>
-          <div><small>Scale</small><b>2x â€“ 4x</b></div>
+          <div><small>Scale</small><b>2x – 4x</b></div>
         </div>
-        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar Ã¡rvore e lote. Com paisagismo contratado, 5 a 10 jÃ¡ Ã© bastante. Para manter as linhas de divisa dos lotes nÃ­tidas, segure o Resemblance em 90â€“95 â€” linha fina Ã© a primeira coisa que o modelo esmaece.</p>
+        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar árvore e lote. Com paisagismo contratado, 5 a 10 já é bastante. Para manter as linhas de divisa dos lotes nítidas, segure o Resemblance em 90–95 — linha fina é a primeira coisa que o modelo esmaece.</p>
 
         <h3 style="margin-top:24px">O que costuma dar errado</h3>
         <ul>
-          <li><b>A base nÃ£o indica vegetaÃ§Ã£o.</b> Onde o desenho estÃ¡ vazio, o modelo preenche com o que acha bonito, e o paisagista desaparece.</li>
-          <li><b>A cor muda primeiro.</b> Pedir "Ã¡rvores variadas" costuma virar verde genÃ©rico. Por isso o texto fixa cor, porte e posiÃ§Ã£o.</li>
-          <li><b>Ãrvore a mais tambÃ©m Ã© erro.</b> Cada uma que aparece fora do projeto Ã© uma que o cliente nÃ£o pagou.</li>
-          <li><b>Porte fora de escala entrega o problema.</b> Palmeira pequena e ipÃª gigante quebram a leitura do conjunto.</li>
-          <li><b>O checklist Ã© o que segura.</b> Ele repete as regras no fim do texto, que Ã© onde o modelo ainda presta atenÃ§Ã£o.</li>
+          <li><b>A base não indica vegetação.</b> Onde o desenho está vazio, o modelo preenche com o que acha bonito, e o paisagista desaparece.</li>
+          <li><b>A cor muda primeiro.</b> Pedir "árvores variadas" costuma virar verde genérico. Por isso o texto fixa cor, porte e posição.</li>
+          <li><b>Árvore a mais também é erro.</b> Cada uma que aparece fora do projeto é uma que o cliente não pagou.</li>
+          <li><b>Porte fora de escala entrega o problema.</b> Palmeira pequena e ipê gigante quebram a leitura do conjunto.</li>
+          <li><b>O checklist é o que segura.</b> Ele repete as regras no fim do texto, que é onde o modelo ainda presta atenção.</li>
         </ul>
 
         <h3 style="margin-top:24px">Onde usar</h3>
         <div class="tools">
-          <div class="tool"><b>Magnific AI</b><span>Enhance e upscale com referÃªncia. Modelo Seedream ou Nano Banana.</span></div>
-          <div class="tool"><b>Google AI Studio / Gemini</b><span>GrÃ¡tis, aceita imagem junto com prompt longo em portuguÃªs.</span></div>
+          <div class="tool"><b>Magnific AI</b><span>Enhance e upscale com referência. Modelo Seedream ou Nano Banana.</span></div>
+          <div class="tool"><b>Google AI Studio / Gemini</b><span>Grátis, aceita imagem junto com prompt longo em português.</span></div>
           <div class="tool"><b>Freepik Spaces</b><span>Canvas com gerador de imagem e upscale.</span></div>
-          <div class="tool"><b>PromeAI</b><span>Planta ou masterplan para render. Bom para estudo rÃ¡pido.</span></div>
-          <div class="tool"><b>Stable Diffusion + ControlNet</b><span>Trava o traÃ§ado de verdade, com lineart ou canny. GrÃ¡tis se tiver GPU.</span></div>
-          <div class="tool"><b>QGIS / CAD</b><span>Base limpa em alta resoluÃ§Ã£o resolve metade do resultado antes de gerar.</span></div>
+          <div class="tool"><b>PromeAI</b><span>Planta ou masterplan para render. Bom para estudo rápido.</span></div>
+          <div class="tool"><b>Stable Diffusion + ControlNet</b><span>Trava o traçado de verdade, com lineart ou canny. Grátis se tiver GPU.</span></div>
+          <div class="tool"><b>QGIS / CAD</b><span>Base limpa em alta resolução resolve metade do resultado antes de gerar.</span></div>
         </div>
       </div>
     </section>
 
   </div>
 
-  <footer class="ver">GeraPrompt Â· <b>v2.0</b> Â· 30/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.1</b> · 04/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -457,80 +457,80 @@
 
   const D = {
     base: [
-      {v:"cad",    p:"a base chapada de AutoCAD + Google Earth", t:"a partir de uma base chapada de AutoCAD com sobreposiÃ§Ã£o de imagem do Google Earth, sem textura, sem iluminaÃ§Ã£o realista e sem vegetaÃ§Ã£o renderizada"},
-      {v:"r3d",    p:"o render 3D do projeto", t:"a partir do render 3D do projeto, ainda com aparÃªncia de maquete eletrÃ´nica"},
-      {v:"drone",  p:"a foto aÃ©rea de drone do terreno", t:"a partir de fotografia aÃ©rea de drone do terreno, mantendo a paisagem existente"},
-      {v:"ia",     p:"a humanizaÃ§Ã£o anterior", t:"a partir de uma humanizaÃ§Ã£o anterior, apenas para refinar acabamento e realismo"}
+      {v:"cad",    p:"a base chapada de AutoCAD + Google Earth", t:"a partir de uma base chapada de AutoCAD com sobreposição de imagem do Google Earth, sem textura, sem iluminação realista e sem vegetação renderizada"},
+      {v:"r3d",    p:"o render 3D do projeto", t:"a partir do render 3D do projeto, ainda com aparência de maquete eletrônica"},
+      {v:"drone",  p:"a foto aérea de drone do terreno", t:"a partir de fotografia aérea de drone do terreno, mantendo a paisagem existente"},
+      {v:"ia",     p:"a humanização anterior", t:"a partir de uma humanização anterior, apenas para refinar acabamento e realismo"}
     ],
     enq: [
-      {v:"top",  t:"em vista superior ortogonal, top view, Ã¢ngulo de 90 graus"},
-      {v:"ob45", t:"em vista aÃ©rea oblÃ­qua de 45 graus"},
-      {v:"low",  t:"em vista aÃ©rea oblÃ­qua baixa, prÃ³xima Ã  linha do horizonte"},
-      {v:"same", t:"no mesmo enquadramento e Ã¢ngulo de cÃ¢mera da imagem original"}
+      {v:"top",  t:"em vista superior ortogonal, top view, ângulo de 90 graus"},
+      {v:"ob45", t:"em vista aérea oblíqua de 45 graus"},
+      {v:"low",  t:"em vista aérea oblíqua baixa, próxima à linha do horizonte"},
+      {v:"same", t:"no mesmo enquadramento e ângulo de câmera da imagem original"}
     ],
     formato: [
-      {v:"same",  p:"Mesma da base", t:"mantendo exatamente a proporÃ§Ã£o da base"},
+      {v:"same",  p:"Mesma da base", t:"mantendo exatamente a proporção da base"},
       {v:"16:9",  p:"16:9 (paisagem)", t:"em formato 16:9 horizontal"},
       {v:"4:3",   p:"4:3", t:"em formato 4:3"},
       {v:"9:16",  p:"9:16 (retrato)", t:"em formato 9:16 vertical"},
       {v:"3:4",   p:"3:4 (retrato)", t:"em formato 3:4 vertical"}
     ],
     pais: [
-      {v:"full",   t:"Preservar integralmente o paisagismo proposto. A posiÃ§Ã£o, a espÃ©cie, o porte e a proporÃ§Ã£o de cada Ã¡rvore, arbusto e Ã¡rea de gramado devem permanecer exatamente como indicadas na base, respeitando o projeto paisagÃ­stico contratado."},
-      {v:"refine", t:"Preservar integralmente o paisagismo proposto, refinando apenas o realismo das espÃ©cies jÃ¡ indicadas: mesma posiÃ§Ã£o, mesma espÃ©cie, mesmo porte e mesma proporÃ§Ã£o de cada Ã¡rvore, arbusto e Ã¡rea de gramado."},
-      {v:"densify",t:"Preservar o paisagismo proposto e adensar somente a vegetaÃ§Ã£o de borda jÃ¡ existente, sem avanÃ§ar sobre lotes, vias, calÃ§adas ou Ã¡reas livres."}
+      {v:"full",   t:"Preservar integralmente o paisagismo proposto. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado devem permanecer exatamente como indicadas na base, respeitando o projeto paisagístico contratado."},
+      {v:"refine", t:"Preservar integralmente o paisagismo proposto, refinando apenas o realismo das espécies já indicadas: mesma posição, mesma espécie, mesmo porte e mesma proporção de cada árvore, arbusto e área de gramado."},
+      {v:"densify",t:"Preservar o paisagismo proposto e adensar somente a vegetação de borda já existente, sem avançar sobre lotes, vias, calçadas ou áreas livres."}
     ],
     padrao: [
-      {v:"mn",    p:"PadrÃ£o Paisagista MN"},
-      {v:"livre", p:"Sem padrÃ£o de paisagismo"}
+      {v:"mn",    p:"Padrão Paisagista MN"},
+      {v:"livre", p:"Sem padrão de paisagismo"}
     ],
     copas: [
-      {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes, com floraÃ§Ã£o amarela (ipÃª-amarelo), rosa (quaresmeira), roxa (ipÃª-roxo) e branca em cerca de 1 a cada 3 Ã¡rvores, em maciÃ§os visÃ­veis ao longo das ruas e nas Ã¡reas verdes, como nas implantaÃ§Ãµes humanizadas do escritÃ³rio; a variaÃ§Ã£o de cor nÃ£o cria Ã¡rvores novas nem remove as existentes."},
-      {v:"verde",     t:"Todas as copas em tons naturais de verde, com variaÃ§Ã£o sutil entre indivÃ­duos da mesma espÃ©cie; sem floraÃ§Ã£o."},
-      {v:"indicated", t:"Somente as Ã¡rvores indicadas na base podem ter floraÃ§Ã£o; todas as demais permanecem verdes."},
-      {v:"keep",      t:"Manter as cores de copa exatamente como indicadas na base, sem ampliar as Ã¡reas floridas."}
+      {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes, com floração amarela (ipê-amarelo), rosa (quaresmeira), roxa (ipê-roxo) e branca em cerca de 1 a cada 3 árvores, em maciços visíveis ao longo das ruas e nas áreas verdes, como nas implantações humanizadas do escritório; a variação de cor não cria árvores novas nem remove as existentes."},
+      {v:"verde",     t:"Todas as copas em tons naturais de verde, com variação sutil entre indivíduos da mesma espécie; sem floração."},
+      {v:"indicated", t:"Somente as árvores indicadas na base podem ter floração; todas as demais permanecem verdes."},
+      {v:"keep",      t:"Manter as cores de copa exatamente como indicadas na base, sem ampliar as áreas floridas."}
     ],
     lotes: [
-      {v:"natural", t:"terreno natural com textura de vegetaÃ§Ã£o rasteira, sem aspecto de grama sintÃ©tica, mantendo exatamente os limites e as Ã¡reas indicadas"},
-      {v:"varied",  t:"gramado verde com variaÃ§Ã£o natural de tom e textura, respeitando as Ã¡reas indicadas"},
+      {v:"natural", t:"terreno natural com textura de vegetação rasteira, sem aspecto de grama sintética, mantendo exatamente os limites e as áreas indicadas"},
+      {v:"varied",  t:"gramado verde com variação natural de tom e textura, respeitando as áreas indicadas"},
       {v:"uniform", t:"gramado verde uniforme e realista, com textura de grama aparada"},
-      {v:"keep",    t:"a representaÃ§Ã£o de lotes da imagem original"}
+      {v:"keep",    t:"a representação de lotes da imagem original"}
     ],
     liberdade: [
-      {v:"conservador", t:"Modo conservador: nÃ£o criar variaÃ§Ã£o de terreno, manchas, flores, arbustos ou qualquer detalhe que nÃ£o esteja indicado na base; apenas converter o que existe em textura realista."},
-      {v:"equilibrado", t:"Modo equilibrado: acrescentar somente textura e detalhe de folhagem sobre os elementos jÃ¡ indicados, sem criar, mover ou redimensionar nada. Ãrvores vizinhas podem ter porte e forma de copa ligeiramente diferentes entre si, mantendo o espaÃ§amento, a posiÃ§Ã£o e a espÃ©cie indicados; nenhuma Ã¡rvore deve ser cÃ³pia da vizinha."},
-      {v:"livre",       t:"Modo livre: permitir variaÃ§Ã£o de textura e de detalhe de vegetaÃ§Ã£o, mantendo posiÃ§Ã£o, quantidade, espÃ©cie e porte de tudo o que estÃ¡ indicado."}
+      {v:"conservador", t:"Modo conservador: não criar variação de terreno, manchas, flores, arbustos ou qualquer detalhe que não esteja indicado na base; apenas converter o que existe em textura realista."},
+      {v:"equilibrado", t:"Modo equilibrado: acrescentar somente textura e detalhe de folhagem sobre os elementos já indicados, sem criar, mover ou redimensionar nada. Árvores vizinhas podem ter porte e forma de copa ligeiramente diferentes entre si, mantendo o espaçamento, a posição e a espécie indicados; nenhuma árvore deve ser cópia da vizinha."},
+      {v:"livre",       t:"Modo livre: permitir variação de textura e de detalhe de vegetação, mantendo posição, quantidade, espécie e porte de tudo o que está indicado."}
     ],
     agua: [
-      {v:"natural", t:"tem tom verde-azulado escuro, com margens naturais e reflexo do cÃ©u."},
-      {v:"light",   t:"tem tom azul-claro natural, com transparÃªncia discreta."},
+      {v:"natural", t:"tem tom verde-azulado escuro, com margens naturais e reflexo do céu."},
+      {v:"light",   t:"tem tom azul-claro natural, com transparência discreta."},
       {v:"emerald", t:"tem tom esmeralda profundo, com sombra nas margens."},
-      {v:"keep",    t:"mantÃ©m a aparÃªncia da base."}
+      {v:"keep",    t:"mantém a aparência da base."}
     ],
     divisas: [
-      {v:"white", t:"linhas brancas finas e contÃ­nuas"},
-      {v:"soft",  t:"linhas brancas discretas, sem competir com a vegetaÃ§Ã£o"},
-      {v:"keep",  t:"as divisas jÃ¡ indicadas na imagem original"}
+      {v:"white", t:"linhas brancas finas e contínuas"},
+      {v:"soft",  t:"linhas brancas discretas, sem competir com a vegetação"},
+      {v:"keep",  t:"as divisas já indicadas na imagem original"}
     ],
     vias: [
-      {v:"light", t:"pavimentaÃ§Ã£o de asfalto cinza-claro"},
+      {v:"light", t:"pavimentação de asfalto cinza-claro"},
       {v:"dark",  t:"asfalto cinza-escuro"},
-      {v:"paver", t:"pavimentaÃ§Ã£o drenante em tons claros"},
-      {v:"keep",  t:"a pavimentaÃ§Ã£o jÃ¡ indicada na imagem original"}
+      {v:"paver", t:"pavimentação drenante em tons claros"},
+      {v:"keep",  t:"a pavimentação já indicada na imagem original"}
     ],
     cob: [
-      {v:"keep",   t:"Manter as cores, os padrÃµes e as texturas de telhado jÃ¡ indicados na imagem original."},
+      {v:"keep",   t:"Manter as cores, os padrões e as texturas de telhado já indicados na imagem original."},
       {v:"laje",   t:"Todos os telhados em laje plana cinza, sem telha aparente."},
       {v:"terra",  t:"Todos os telhados em telha colonial terracota."},
       {v:"marfim", t:"Todos os telhados em telha colonial marfim."}
     ],
     rev: [
-      {v:"keep",       t:"Manter os revestimentos jÃ¡ indicados na imagem original."},
-      {v:"terracotta", t:"Revestir os elementos especiais com tijolo cerÃ¢mico na cor terra."},
+      {v:"keep",       t:"Manter os revestimentos já indicados na imagem original."},
+      {v:"terracotta", t:"Revestir os elementos especiais com tijolo cerâmico na cor terra."},
       {v:"stone",      t:"Revestir os elementos especiais em pedra natural clara."}
     ],
     luz: [
-      {v:"soft",     t:"Aplicar iluminaÃ§Ã£o natural suave, com sombras discretas e realistas"},
+      {v:"soft",     t:"Aplicar iluminação natural suave, com sombras discretas e realistas"},
       {v:"sun",      t:"Aplicar luz solar direta, com sombras definidas e coerentes"},
       {v:"golden",   t:"Aplicar luz de golden hour, com tons quentes e sombras alongadas"},
       {v:"overcast", t:"Aplicar luz difusa de dia nublado, sem sombras marcadas"}
@@ -538,26 +538,26 @@
 
     /* ---- criar do zero ---- */
     cena: [
-      {v:"aerial90", p:"Masterplan aÃ©reo 90Â°", e:"top-down aerial view"},
-      {v:"aerial45", p:"AÃ©rea oblÃ­qua", e:"oblique aerial view"},
+      {v:"aerial90", p:"Masterplan aéreo 90°", e:"top-down aerial view"},
+      {v:"aerial45", p:"Aérea oblíqua", e:"oblique aerial view"},
       {v:"entrance", p:"Entrada / portaria", e:"street-level view of the gated entrance, with palms and flower beds lining the driveway"},
       {v:"club",     p:"Clube e lazer", e:"view of the clubhouse and leisure area, with swimming pool, palms and flower beds"},
       {v:"lake",     p:"Lago / orla", e:"view of the lake shore and deck, with reflecting water, palms and flower beds"},
       {v:"street",   p:"Rua interna", e:"eye-level view of an internal street lined with palms and flower beds"},
-      {v:"plaza",    p:"PraÃ§a central", e:"view of the central plaza with palms and flower beds"},
+      {v:"plaza",    p:"Praça central", e:"view of the central plaza with palms and flower beds"},
       {v:"courts",   p:"Quadras esportivas", e:"view of the sports courts surrounded by palms and lawn"},
       {v:"equest",   p:"Haras", e:"view of the equestrian area with paddocks and tropical planting"}
     ],
     emp: [
-      {v:"gated",    p:"loteamento fechado de alto padrÃ£o", e:"high-end gated community with empty residential lots ready to build, tree-lined streets and private lots"},
-      {v:"chacaras", p:"condomÃ­nio de chÃ¡caras", e:"gated country-lot community with large private lots and houses"},
+      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community with empty residential lots ready to build, tree-lined streets and private lots"},
+      {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community with large private lots and houses"},
       {v:"haras",    p:"haras", e:"equestrian estate with houses, paddocks and stables"},
       {v:"resort",   p:"resort residencial", e:"residential resort with houses, clubhouse and leisure areas"},
       {v:"bairro",   p:"bairro planejado", e:"planned neighborhood with houses, streets and public spaces"},
       {v:"parque",   p:"parque linear", e:"linear park with landscaped paths and open spaces"}
     ],
     pais2: [
-      {v:"atlantic", p:"mata atlÃ¢ntica", e:"surrounded by dense Atlantic rainforest"},
+      {v:"atlantic", p:"mata atlântica", e:"surrounded by dense Atlantic rainforest"},
       {v:"cerrado",  p:"cerrado", e:"in a cerrado landscape with sculptural trees"},
       {v:"campo",    p:"campo aberto", e:"in open countryside with rolling grass"},
       {v:"coast",    p:"litoral", e:"on a coastal site with dune vegetation"},
@@ -566,7 +566,7 @@
       {v:"urban",    p:"borda urbana", e:"at the edge of a growing city"}
     ],
     pais3: [
-      {v:"mn",    p:"PadrÃ£o MN (tropical de alto padrÃ£o)", e:"with high-end tropical landscaping: royal palms, bismarckia and washingtonia palms, broad-canopy trees, manicured lawn and accent flower beds of red ixora and yellow flowers"},
+      {v:"mn",    p:"Padrão MN (tropical de alto padrão)", e:"with high-end tropical landscaping: royal palms, bismarckia and washingtonia palms, broad-canopy trees, manicured lawn and accent flower beds of red ixora and yellow flowers"},
       {v:"livre", p:"Livre", e:""}
     ],
     formato3: [
@@ -583,10 +583,10 @@
       {v:"night",    p:"noite", e:"night"}
     ],
     camc: [
-      {v:"drone90", p:"drone 90Â°", e:"drone camera at a perfectly top-down 90-degree angle"},
-      {v:"drone45", p:"drone 45Â°", e:"drone camera at a 45-degree oblique angle"},
+      {v:"drone90", p:"drone 90°", e:"drone camera at a perfectly top-down 90-degree angle"},
+      {v:"drone45", p:"drone 45°", e:"drone camera at a 45-degree oblique angle"},
       {v:"eye",     p:"altura do olhar", e:"eye-level camera at human height"},
-      {v:"three4",  p:"trÃªs quartos", e:"three-quarter view from a low vantage point"}
+      {v:"three4",  p:"três quartos", e:"three-quarter view from a low vantage point"}
     ],
     lensc: [
       {v:"24", p:"24 mm", e:"24 mm lens"},
@@ -597,7 +597,7 @@
     ap: [
       {v:"2.8", p:"f/2.8 (fundo desfocado)", e:"f/2.8 with shallow depth of field"},
       {v:"5.6", p:"f/5.6", e:"f/5.6"},
-      {v:"8",   p:"f/8 (tudo nÃ­tido)", e:"f/8, everything in focus"},
+      {v:"8",   p:"f/8 (tudo nítido)", e:"f/8, everything in focus"},
       {v:"11",  p:"f/11 (paisagem)", e:"f/11 with deep focus"}
     ],
     iso: [
@@ -610,26 +610,26 @@
       {v:"daylight", p:"Luz do dia (5500 K)", e:"daylight white balance at 5500 K"},
       {v:"warm",     p:"Quente (4500 K)", e:"warm white balance at 4500 K"},
       {v:"overcast", p:"Frio (6500 K)", e:"cool white balance at 6500 K"},
-      {v:"auto",     p:"AutomÃ¡tico", e:"auto white balance"}
+      {v:"auto",     p:"Automático", e:"auto white balance"}
     ]
   };
 
   const SHORT = {
-    base:{cad:"CAD + Google Earth (chapada)", r3d:"Render 3D", drone:"Foto de drone", ia:"HumanizaÃ§Ã£o anterior"},
-    enq:{top:"Top view 90Â° (ortogonal)", ob45:"AÃ©rea oblÃ­qua 45Â°", low:"AÃ©rea baixa", same:"Mesma da imagem"},
+    base:{cad:"CAD + Google Earth (chapada)", r3d:"Render 3D", drone:"Foto de drone", ia:"Humanização anterior"},
+    enq:{top:"Top view 90° (ortogonal)", ob45:"Aérea oblíqua 45°", low:"Aérea baixa", same:"Mesma da imagem"},
     pais:{full:"Preservar integralmente", refine:"Preservar e refinar textura", densify:"Preservar + adensar borda"},
-    liberdade:{conservador:"Conservador (nÃ£o inventar nada)", equilibrado:"Equilibrado (sÃ³ textura)", livre:"Livre (variaÃ§Ã£o de textura)"},
-    copas:{variada:"Variada (florada pontual)", verde:"SÃ³ verde", indicated:"SÃ³ as indicadas", keep:"Manter as da base"},
-    lotes:{natural:"Terreno natural (sem grama sintÃ©tica)", varied:"Gramado com variaÃ§Ã£o", uniform:"Gramado uniforme", keep:"Manter original"},
+    liberdade:{conservador:"Conservador (não inventar nada)", equilibrado:"Equilibrado (só textura)", livre:"Livre (variação de textura)"},
+    copas:{variada:"Variada (florada pontual)", verde:"Só verde", indicated:"Só as indicadas", keep:"Manter as da base"},
+    lotes:{natural:"Terreno natural (sem grama sintética)", varied:"Gramado com variação", uniform:"Gramado uniforme", keep:"Manter original"},
     agua:{natural:"Verde-azulado natural", light:"Azul-clara", emerald:"Esmeralda", keep:"Manter original"},
-    divisas:{white:"Linhas brancas contÃ­nuas", soft:"Linhas discretas", keep:"Manter original"},
+    divisas:{white:"Linhas brancas contínuas", soft:"Linhas discretas", keep:"Manter original"},
     vias:{light:"Asfalto cinza-claro", dark:"Asfalto escuro", paver:"Pavimento drenante", keep:"Manter original"},
     cob:{keep:"Manter as da imagem", laje:"Laje plana cinza", terra:"Colonial terracota", marfim:"Colonial marfim"},
-    rev:{keep:"Manter os da imagem", terracotta:"Tijolo cerÃ¢mico terra", stone:"Pedra natural clara"},
+    rev:{keep:"Manter os da imagem", terracotta:"Tijolo cerâmico terra", stone:"Pedra natural clara"},
     luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
   };
 
-  const NEG_COMPACTO_PT = "NÃ£o alterar o traÃ§ado, os lotes, as vias, as edificaÃ§Ãµes ou a vegetaÃ§Ã£o indicada. NÃ£o apagar, esmaecer ou deformar as linhas de divisa dos lotes. NÃ£o criar vegetaÃ§Ã£o, construÃ§Ãµes, quadras ou Ã¡gua onde nÃ£o existe; nÃ£o remover o que existe. Sem deformar a proporÃ§Ã£o nem esticar a imagem; sem vegetaÃ§Ã£o derretida ou flutuante. Sem aspecto de CGI, de ilustraÃ§Ã£o ou de maquete, sem texto ou marca d'Ã¡gua.";
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
   const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
@@ -669,7 +669,7 @@
   $("#h-ajustes").addEventListener("input", e=>{ st.h.ajustes = e.target.value.trim(); render(); });
   $("#h-inventario").addEventListener("input", e=>{ st.h.inventario = e.target.value.trim(); render(); });
 
-  /* cÃ¢mera acompanha a cena aÃ©rea */
+  /* câmera acompanha a cena aérea */
   $("#c-cena").addEventListener("change", ()=>{
     if(st.c.cena === "aerial90") st.c.cam = "drone90";
     else if(st.c.cena === "aerial45") st.c.cam = "drone45";
@@ -699,32 +699,98 @@
   /* ---------- builders ---------- */
   function buildHum(){
     const g = k => one(k, st.h[k]);
+
+    const pais = {
+      full: "Preservar integralmente posição, espécie, porte e proporção da vegetação indicada.",
+      refine: "Preservar posição, espécie e porte, refinando apenas o realismo.",
+      densify: "Preservar o projeto e adensar somente a vegetação de borda."
+    }[st.h.pais];
+
+    const liberdade = {
+      conservador: "Não inventar detalhes; converter só o que existe.",
+      equilibrado: "Variação sutil de textura e copa entre árvores, sem criar, mover ou redimensionar.",
+      livre: "Variação de textura e detalhe, mantendo posição, quantidade, espécie e porte."
+    }[st.h.liberdade];
+
+    const copas = {
+      variada: "Copas em verdes variados, com floração amarela (ipê-amarelo), rosa (quaresmeira), roxa (ipê-roxo) e branca em cerca de 1 de cada 3 árvores, em maciços junto às ruas e áreas verdes; sem criar ou remover árvores.",
+      verde: "Copas em tons naturais de verde, com variação sutil; sem floração.",
+      indicated: "Só as árvores indicadas na base têm floração; as demais ficam verdes.",
+      keep: "Manter as cores de copa da base, sem ampliar áreas floridas."
+    }[st.h.copas];
+
+    const lotes = {
+      natural: "terreno natural com vegetação rasteira, sem grama sintética",
+      varied: "gramado com variação natural de tom e textura",
+      uniform: "gramado verde uniforme e aparado",
+      keep: "os lotes da imagem original"
+    }[st.h.lotes];
+
+    const vias = {
+      light: "asfalto cinza-claro",
+      dark: "asfalto cinza-escuro",
+      paver: "pavimento drenante claro",
+      keep: "a pavimentação da base"
+    }[st.h.vias];
+
+    const divisas = {
+      white: "linhas brancas finas e contínuas",
+      soft: "linhas brancas discretas",
+      keep: "as divisas da base"
+    }[st.h.divisas];
+
+    const agua = {
+      natural: "tom verde-azulado escuro, margens naturais e reflexo do céu",
+      light: "tom azul-claro natural, com transparência discreta",
+      emerald: "tom esmeralda profundo, com sombra nas margens",
+      keep: "a aparência da base"
+    }[st.h.agua];
+
+    const cob = {
+      keep: "Manter telhados, cores e texturas da imagem original.",
+      laje: "Todos os telhados em laje plana cinza.",
+      terra: "Todos os telhados em telha colonial terracota.",
+      marfim: "Todos os telhados em telha colonial marfim."
+    }[st.h.cob];
+
+    const rev = {
+      keep: "Manter os revestimentos da imagem original.",
+      terracotta: "Revestir elementos especiais em tijolo cerâmico terra.",
+      stone: "Revestir elementos especiais em pedra natural clara."
+    }[st.h.rev];
+
+    const luz = {
+      soft: "Iluminação natural suave, com sombras discretas e realistas",
+      sun: "Luz solar direta, com sombras definidas e coerentes",
+      golden: "Golden hour, com tons quentes e sombras alongadas",
+      overcast: "Luz difusa de dia nublado, sem sombras marcadas"
+    }[st.h.luz];
+
     const out = [];
 
-    out.push("Converter " + g("base").p + " em fotografia aÃ©rea real do empreendimento concluÃ­do, " + g("enq").t + ", " + g("formato").t + ", mesma escala da base." + (st.h.enq === "top" ? " Imagem plana de topo, ortogonal, sem perspectiva nem volumetria; como foto de satÃ©lite." : ""));
+    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", " + g("formato").t + ", mesma escala." + (st.h.enq === "top" ? " Imagem plana e ortogonal, sem perspectiva nem volumetria." : ""));
 
-    out.push("GEOMETRIA\nPreservar morfologia, divisas, largura das vias e posiÃ§Ã£o de edificaÃ§Ãµes, equipamentos e Ã¡reas de lazer; mesmo recorte, sem deformar.");
+    out.push("GEOMETRIA\nPreservar morfologia, divisas, largura das vias e posição de edificações, equipamentos e lazer; mesmo recorte, sem deformar.");
 
-    out.push("PAISAGISMO\nA vegetaÃ§Ã£o segue a implantaÃ§Ã£o, nem a mais nem a menos; preservar posiÃ§Ã£o, espÃ©cie e porte. " + g("copas").t);
+    out.push("PAISAGISMO\n" + pais + " " + liberdade + " " + copas + " Aplicar só onde a base já indica vegetação.");
 
     if(st.h.padrao === "mn"){
-      out.push("PAISAGISMO DO ESCRITÃ“RIO\n" +
-        "Plantio em blocos e faixas, nunca misturado: palmeiras royal/coco e bismarckia em grupos, copas amplas, gramado aparado, faixas de ixora vermelho-tijolo, flores amarelas e rosas, bougainville roxo. Aplicar sÃ³ onde a base jÃ¡ indica vegetaÃ§Ã£o.");
+      out.push("PAISAGISMO DO ESCRITÓRIO\n" +
+        "Plantio em blocos e faixas, nunca misturado: palmeiras royal/coco e bismarckia em grupos, copas amplas, gramado aparado, faixas de ixora vermelho-tijolo, flores amarelas e rosas, bougainville roxo. Só onde a base já indica vegetação.");
     }
 
-    out.push("LOTEAMENTO E VIAS\n" +
-      "Lotes como " + g("lotes").t + "; vias com " + g("vias").t + "; divisas com " + g("divisas").t + ", nÃ­tidas, sem apagar.");
+    out.push("LOTEAMENTO E VIAS\nLotes com " + lotes + "; vias com " + vias + "; divisas com " + divisas + ", nítidas, sem apagar.");
 
-    out.push("ELEMENTOS\nManter os equipamentos (quadra com piso e linhas, nÃ£o vira edificaÃ§Ã£o); Ã¡gua sÃ³ onde desenhada, " + g("agua").t);
+    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação); água só onde desenhada, " + agua + ".");
 
-    out.push("EDIFICAÃ‡Ã•ES\nManter nÃºmero, posiÃ§Ã£o e cobertura; nÃ£o criar construÃ§Ãµes; edificaÃ§Ã£o nÃ£o ocupa vegetaÃ§Ã£o.");
+    out.push("EDIFICAÇÕES\nManter número, posição e cobertura; não criar construções; edificação não ocupa vegetação.");
 
-    out.push("ACABAMENTOS\n" + [g("cob").t, g("rev").t].filter(Boolean).join(" "));
+    out.push("ACABAMENTOS\n" + cob + " " + rev);
 
-    out.push("LUZ E REALISMO\n" + g("luz").t + ", luz natural com sombras coerentes; sem aspecto de CGI, maquete ou ilustraÃ§Ã£o.");
+    out.push("LUZ E REALISMO\n" + luz + "; fotografia nítida, sem aspecto de CGI, maquete ou ilustração.");
 
     if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
-    if(st.h.inventario) out.push("INVENTÃRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
+    if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
 
     return out.join("\n\n");
   }
@@ -770,10 +836,12 @@
   function render(){
     const p = build();
     $("#prompt").value = p;
-    $("#count").textContent = p.length + " caracteres Â· " + p.split(/\s+/).filter(Boolean).length + " palavras";
+    const over = p.length > 2000;
+    $("#count").textContent = p.length + " caracteres · " + p.split(/\s+/).filter(Boolean).length + " palavras" + (over ? " · ACIMA DO LIMITE (2000)" : "");
+    $("#count").style.color = over ? "#b8452f" : "";
     $("#engine-hint").textContent = st.tab === "hum"
-      ? "Magnific Â· Seedream / Nano Banana Â· imagem de referÃªncia"
-      : "inglÃªs Â· texto para imagem";
+      ? "Magnific · Seedream / Nano Banana · imagem de referência"
+      : "inglês · texto para imagem";
   }
 
   /* ---------- negative ---------- */
@@ -792,7 +860,7 @@
     document.querySelectorAll(".tabbtn").forEach(b=> b.setAttribute("aria-selected", b.dataset.tab===tab ? "true":"false"));
     document.querySelectorAll("aside [data-tab]").forEach(el=> el.hidden = (el.dataset.tab !== tab));
     $("#panel-title").textContent = tab==="hum" ? "Humanizar masterplan" : "Criar do zero";
-    $("#out-title").textContent = tab==="hum" ? "Seu prompt (portuguÃªs)" : "Seu prompt (inglÃªs)";
+    $("#out-title").textContent = tab==="hum" ? "Seu prompt (português)" : "Seu prompt (inglês)";
     $("#prompt").style.minHeight = tab==="hum" ? "460px" : "300px";
     renderPresets();
     negTouched = false;
@@ -806,13 +874,13 @@
     hum: [
       {name:"Prancha atual", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
       {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Refinar humanizaÃ§Ã£o", s:{base:"ia", enq:"same", formato:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"LitorÃ¢neo", s:{base:"cad", enq:"ob45", formato:"16:9", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
-      {name:"ChÃ¡caras e vinhedos", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
+      {name:"Refinar humanização", s:{base:"ia", enq:"same", formato:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Litorâneo", s:{base:"cad", enq:"ob45", formato:"16:9", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
+      {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],
     criar: [
-      {name:"Masterplan aÃ©reo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
-      {name:"Entrada do condomÃ­nio", s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
+      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
+      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
       {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
       {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
       {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
@@ -925,10 +993,10 @@
           setTab(st.tab === "criar" ? "criar" : "hum");
           toast("projeto carregado");
         } else {
-          toast("arquivo nÃ£o reconhecido");
+          toast("arquivo não reconhecido");
         }
       } catch(e){
-        toast("nÃ£o consegui ler o arquivo");
+        toast("não consegui ler o arquivo");
       }
       fileInput.value = "";
     };

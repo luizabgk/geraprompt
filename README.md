@@ -1,46 +1,44 @@
 # GeraPrompt
 
-Monta o prompt que transforma uma base chapada de AutoCAD + Google Earth em foto aérea do loteamento pronto.
+Monta o prompt que transforma uma base de AutoCAD + Google Earth em fotografia aérea real de um loteamento, com fidelidade à implantação.
 
-Roda no navegador, sem instalar nada: <https://luizabgk.github.io/geraprompt/>
+Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/geraprompt/>
 
 ![Interface do GeraPrompt](preview.png)
 
 ## Como usar
 
-Abra o link e escolha o enquadramento, o paisagismo e os acabamentos. O prompt aparece à direita e muda a cada escolha.
+1. Abra o link.
+2. Escolha a base, o enquadramento e o padrão de paisagismo.
+3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
+4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-No fim da página tem dois botões. "Copiar prompt" leva só o texto principal. "Copiar prompt + negativo" leva os dois juntos, com o negativo identificado no fim — é o que você usa no Magnific, que não tem campo separado para isso.
+## Novidades da versão 2.1
 
-## O que ele entrega
-
-Três coisas sempre juntas: o prompt, o prompt negativo e um checklist de preservação. O checklist vai no fim do prompt de propósito, porque é a última coisa que o modelo lê antes de gerar.
+- Prompt humanizar reduzido para **1.784 caracteres** no padrão (limite recomendado: ~2.000).
+- Aviso visual quando o prompt passa de 2.000 caracteres.
+- Opções de **preservação do paisagismo** e **nível de liberdade** agora entram de fato no prompt.
+- Linguagem explícita de **vista superior ortogonal a 90°**.
+- Copas coloridas: ipê-amarelo, quaresmeira rosa, ipê-roxo e branca.
+- Checkbox **incluir casas nos lotes** no modo Criar do zero.
+- Correção geral dos acentos e da codificação UTF-8.
 
 ## O que o prompt segura
 
-O traçado, os lotes, as vias e o enquadramento ficam como estão na base.
+- Traçado, lotes, vias e enquadramento da base.
+- Posição, espécie, porte e proporção da vegetação indicada.
+- Quadra continua quadra; edificação não ocupa área verde; água só onde está desenhada.
+- Cores e texturas de telhado e revestimento já indicadas.
 
-O paisagismo também. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado são mantidos. A cor varia entre tons de verde e uma floração pontual, mas nada é criado nem removido.
-
-Equipamento não vira outra coisa: quadra continua quadra, com piso e linhas. Edificação não ocupa área verde. Água só onde está desenhada.
-
-## Presets
-
-Cinco combinações prontas: prancha atual, base CAD + GEarth, refinar humanização, litorâneo e chácaras com vinhedos. Servem como ponto de partida, não como receita.
-
-## Padrão de paisagismo
-
-O campo **Padrão de paisagismo** injeta no prompt uma paleta de espécies e proporções tirada da obra construída de um escritório brasileiro: palmeiras prateadas como acento vertical, árvores de copa ampla em massa, gramíneas ornamentais em maciço, florada em faixa curta e renques de arbusto. A paleta define aparência, não quantidade: aplica-se onde a base já indica vegetação, e quem decide posição e densidade é a implantação.
-
-Escolha **Sem padrão de paisagismo** para outros contextos — aí o paisagismo vem apenas da base e do campo de ajustes.
+O campo **Copiar prompt + negativo** junta o prompt positivo e o negativo. O Magnific não tem campo separado de negativo.
 
 ## Onde funciona
 
-Qualquer modelo que aceite prompt de imagem. Já foi testado no Magnific com Seedream e com Nano Banana; deve funcionar igual no Gemini, Flux, SDXL e DALL·E.
+Qualquer modelo que aceite prompt de imagem. Já foi testado no Magnific com Seedream e Nano Banana; deve funcionar também no Gemini, Flux, SDXL e DALL·E.
 
 ## Rodando local
 
-Baixe o `index.html` e abra no navegador. Não tem build, não tem dependência.
+Baixe o `index.html` e abra no navegador. Não tem build, não tem dependência e não faz chamadas externas.
 
 ```bash
 git clone https://github.com/luizabgk/geraprompt.git

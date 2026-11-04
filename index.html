@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
+<head><link rel="icon" href="G.ico">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Monta o prompt que transforma base de CAD e Google Earth em foto aérea de loteamento, com paisagismo preservado.">
@@ -362,6 +362,13 @@
         </div>
 
         <div class="field">
+          <label class="lbl">Casas</label>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" id="c-casas"> incluir casas nos lotes</label>
+          </div>
+        </div>
+
+        <div class="field">
           <label class="lbl">Detalhes</label>
           <div class="chips" id="c-flags"></div>
         </div>
@@ -439,7 +446,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.0</b> · 30/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.1</b> · 04/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -478,7 +485,7 @@
       {v:"livre", p:"Sem padrão de paisagismo"}
     ],
     copas: [
-      {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes, com floração amarela (ipê-amarelo), rosa (quaresmeira) ou roxa em cerca de 1 a cada 8 árvores, como na flora brasileira. A variação de cor não cria árvores novas nem remove as existentes."},
+      {v:"variada",   t:"As copas variam de cor entre si: verdes em tons diferentes, com floração amarela (ipê-amarelo), rosa (quaresmeira), roxa (ipê-roxo) e branca em cerca de 1 a cada 3 árvores, em maciços visíveis ao longo das ruas e nas áreas verdes, como nas implantações humanizadas do escritório; a variação de cor não cria árvores novas nem remove as existentes."},
       {v:"verde",     t:"Todas as copas em tons naturais de verde, com variação sutil entre indivíduos da mesma espécie; sem floração."},
       {v:"indicated", t:"Somente as árvores indicadas na base podem ter floração; todas as demais permanecem verdes."},
       {v:"keep",      t:"Manter as cores de copa exatamente como indicadas na base, sem ampliar as áreas floridas."}
@@ -542,7 +549,7 @@
       {v:"equest",   p:"Haras", e:"view of the equestrian area with paddocks and tropical planting"}
     ],
     emp: [
-      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community with detached houses, tree-lined streets and private lots"},
+      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community with empty residential lots ready to build, tree-lined streets and private lots"},
       {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community with large private lots and houses"},
       {v:"haras",    p:"haras", e:"equestrian estate with houses, paddocks and stables"},
       {v:"resort",   p:"resort residencial", e:"residential resort with houses, clubhouse and leisure areas"},
@@ -624,7 +631,7 @@
 
   const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
-  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
+  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
   const SUFFIX = "real photograph taken with a full-frame camera, natural daylight, physically based materials, accurate proportions, ultra-detailed, 8k, sharp, high dynamic range, photorealistic";
 
@@ -635,7 +642,7 @@
         ajustes:"", inventario:"", enxuto:false},
     c: {cena:"aerial90", emp:"gated", pais:"atlantic", pais3:"mn", formato3:"16:9",
         luz:"golden", cam:"drone90", lens:"35", ap:"8", iso:"100", wb:"daylight",
-        people:false, cars:true, refl:true, suffix:true}
+        people:false, cars:true, refl:true, suffix:true, casas:false}
   };
 
   const $ = (s,r)=> (r||document).querySelector(s);
@@ -692,31 +699,95 @@
   /* ---------- builders ---------- */
   function buildHum(){
     const g = k => one(k, st.h[k]);
+
+    const pais = {
+      full: "Preservar integralmente posição, espécie, porte e proporção da vegetação indicada.",
+      refine: "Preservar posição, espécie e porte, refinando apenas o realismo.",
+      densify: "Preservar o projeto e adensar somente a vegetação de borda."
+    }[st.h.pais];
+
+    const liberdade = {
+      conservador: "Não inventar detalhes; converter só o que existe.",
+      equilibrado: "Variação sutil de textura e copa entre árvores, sem criar, mover ou redimensionar.",
+      livre: "Variação de textura e detalhe, mantendo posição, quantidade, espécie e porte."
+    }[st.h.liberdade];
+
+    const copas = {
+      variada: "Copas em verdes variados, com floração amarela (ipê-amarelo), rosa (quaresmeira), roxa (ipê-roxo) e branca em cerca de 1 de cada 3 árvores, em maciços junto às ruas e áreas verdes; sem criar ou remover árvores.",
+      verde: "Copas em tons naturais de verde, com variação sutil; sem floração.",
+      indicated: "Só as árvores indicadas na base têm floração; as demais ficam verdes.",
+      keep: "Manter as cores de copa da base, sem ampliar áreas floridas."
+    }[st.h.copas];
+
+    const lotes = {
+      natural: "terreno natural com vegetação rasteira, sem grama sintética",
+      varied: "gramado com variação natural de tom e textura",
+      uniform: "gramado verde uniforme e aparado",
+      keep: "os lotes da imagem original"
+    }[st.h.lotes];
+
+    const vias = {
+      light: "asfalto cinza-claro",
+      dark: "asfalto cinza-escuro",
+      paver: "pavimento drenante claro",
+      keep: "a pavimentação da base"
+    }[st.h.vias];
+
+    const divisas = {
+      white: "linhas brancas finas e contínuas",
+      soft: "linhas brancas discretas",
+      keep: "as divisas da base"
+    }[st.h.divisas];
+
+    const agua = {
+      natural: "tom verde-azulado escuro, margens naturais e reflexo do céu",
+      light: "tom azul-claro natural, com transparência discreta",
+      emerald: "tom esmeralda profundo, com sombra nas margens",
+      keep: "a aparência da base"
+    }[st.h.agua];
+
+    const cob = {
+      keep: "Manter telhados, cores e texturas da imagem original.",
+      laje: "Todos os telhados em laje plana cinza.",
+      terra: "Todos os telhados em telha colonial terracota.",
+      marfim: "Todos os telhados em telha colonial marfim."
+    }[st.h.cob];
+
+    const rev = {
+      keep: "Manter os revestimentos da imagem original.",
+      terracotta: "Revestir elementos especiais em tijolo cerâmico terra.",
+      stone: "Revestir elementos especiais em pedra natural clara."
+    }[st.h.rev];
+
+    const luz = {
+      soft: "Iluminação natural suave, com sombras discretas e realistas",
+      sun: "Luz solar direta, com sombras definidas e coerentes",
+      golden: "Golden hour, com tons quentes e sombras alongadas",
+      overcast: "Luz difusa de dia nublado, sem sombras marcadas"
+    }[st.h.luz];
+
     const out = [];
 
-    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", " + g("formato").t + ", com a mesma escala da base, em alta resolução (mínimo 2000 px de largura)." + (st.h.enq === "top" ? " Imagem plana de topo, ortogonal, sem perspectiva nem volumetria de edifícios; fachadas e laterais de casas não aparecem, como foto de satélite." : ""));
+    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", " + g("formato").t + ", mesma escala." + (st.h.enq === "top" ? " Imagem plana e ortogonal, sem perspectiva nem volumetria." : ""));
 
-    out.push("GEOMETRIA\nPreservar morfologia urbana, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base, sem re-enquadrar, esticar ou deformar a geometria.");
+    out.push("GEOMETRIA\nPreservar morfologia, divisas, largura das vias e posição de edificações, equipamentos e lazer; mesmo recorte, sem deformar.");
 
-    out.push("PAISAGISMO\nA vegetação segue a implantação: fica exatamente onde está na base, nem a mais, nem a menos. Preservar posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
+    out.push("PAISAGISMO\n" + pais + " " + liberdade + " " + copas + " Aplicar só onde a base já indica vegetação.");
 
     if(st.h.padrao === "mn"){
       out.push("PAISAGISMO DO ESCRITÓRIO\n" +
-        "Plantio em blocos e faixas, nunca misturado. Palmeiras altas de tronco fino (royal, coco) e bismarckia prateada como acento vertical, em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, em taludes e bordas. Florada em faixa curta: ixora vermelho-tijolo, amarelo-ouro e rosa; bougainville roxo pontuando as vias. Renques de arbusto aparado como estrutura. Gramado aparado em tapete, sem falhas. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar o padrão apenas onde a base já indica vegetação: a quantidade e a posição vêm da implantação.");
+        "Plantio em blocos e faixas, nunca misturado: palmeiras royal/coco e bismarckia em grupos, copas amplas, gramado aparado, faixas de ixora vermelho-tijolo, flores amarelas e rosas, bougainville roxo. Só onde a base já indica vegetação.");
     }
 
-    out.push("LOTEAMENTO E VIAS\n" +
-      "Manter todas as áreas de lote como " + g("lotes").t + ". " +
-      "Representar todas as estradas e vias com " + g("vias").t + ", mantendo alinhamentos e larguras originais. " +
-      "Preservar as linhas de divisão dos lotes com " + g("divisas").t + ", nítidas em todo o traçado, sem apagar, esmaecer ou deformar.");
+    out.push("LOTEAMENTO E VIAS\nLotes com " + lotes + "; vias com " + vias + "; divisas com " + divisas + ", nítidas, sem apagar.");
 
-    out.push("ELEMENTOS\nManter a identidade e a quantidade dos equipamentos: quadra de tênis tem piso e linhas de demarcação; quadra de areia tem superfície solta; não converter uma na outra. Nenhum equipamento vira edificação: quadra permanece quadra, com piso e linhas, e não se transforma em casa ou piscina. A água existe apenas onde está desenhada e " + g("agua").t);
+    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação); água só onde desenhada, " + agua + ".");
 
-    out.push("EDIFICAÇÕES\nManter número, posição, planta e cobertura das edificações; não criar construções, quiosques ou equipamentos adicionais. Nenhuma edificação ocupa área de vegetação: onde há maciço arbóreo ou área verde, permanece vegetação.");
+    out.push("EDIFICAÇÕES\nManter número, posição e cobertura; não criar construções; edificação não ocupa vegetação.");
 
-    out.push("ACABAMENTOS\n" + [g("cob").t, g("rev").t].filter(Boolean).join(" "));
+    out.push("ACABAMENTOS\n" + cob + " " + rev);
 
-    out.push("LUZ E REALISMO\n" + g("luz").t + ", com direção de luz única e sombras coerentes. Fotografia aérea nítida em toda a extensão da imagem: folhagem com volume, sombras de contato, asfalto com agregado, telha com textura, leve névoa atmosférica; sem aspecto de CGI, maquete ou ilustração.");
+    out.push("LUZ E REALISMO\n" + luz + "; fotografia nítida, sem aspecto de CGI, maquete ou ilustração.");
 
     if(st.h.ajustes) out.push("AJUSTES DESTE DESENHO\n" + st.h.ajustes);
     if(st.h.inventario) out.push("INVENTÁRIO\n" + st.h.inventario + "\nManter forma, cor e quantidade de cada item.");
@@ -746,6 +817,7 @@
       cap(cena.e) + " of a " + emp.e,
       pais.e,
       pais3.e,
+      (st.c.casas ? "" : "empty lots, no houses, no buildings"),
       fmt3.e,
       luz.e,
       cam.e,
@@ -764,7 +836,9 @@
   function render(){
     const p = build();
     $("#prompt").value = p;
-    $("#count").textContent = p.length + " caracteres · " + p.split(/\s+/).filter(Boolean).length + " palavras";
+    const over = p.length > 2000;
+    $("#count").textContent = p.length + " caracteres · " + p.split(/\s+/).filter(Boolean).length + " palavras" + (over ? " · ACIMA DO LIMITE (2000)" : "");
+    $("#count").style.color = over ? "#b8452f" : "";
     $("#engine-hint").textContent = st.tab === "hum"
       ? "Magnific · Seedream / Nano Banana · imagem de referência"
       : "inglês · texto para imagem";
@@ -834,6 +908,7 @@
     });
     $("#h-ajustes").value = st.h.ajustes || "";
     $("#h-inventario").value = st.h.inventario || "";
+    if($("#c-casas")) $("#c-casas").checked = !!st.c.casas;
     syncChips();
   }
 
@@ -877,6 +952,11 @@
     a.click();
     setTimeout(()=>URL.revokeObjectURL(a.href), 1500);
   });
+
+  const casasEl = $("#c-casas");
+  if(casasEl){
+    casasEl.addEventListener("change", ()=>{ st.c.casas = casasEl.checked; render(); });
+  }
 
   /* salvar / carregar projeto */
   const fileInput = document.createElement("input");
@@ -951,3 +1031,4 @@
 </script>
 </body>
 </html>
+
