@@ -220,6 +220,11 @@
           <select id="h-enq" data-k="h.enq" data-group="enq"></select>
         </div>
 
+        <div class="field">
+          <label class="lbl" for="h-formato">Proporção da saída</label>
+          <select id="h-formato" data-k="h.formato" data-group="formato"></select>
+        </div>
+
         <div class="sect">Paisagismo</div>
 
         <div class="field">
@@ -313,6 +318,11 @@
           <select id="c-pais" data-k="c.pais" data-group="pais2"></select>
         </div>
 
+        <div class="field">
+          <label class="lbl" for="c-pais3">Paisagismo</label>
+          <select id="c-pais3" data-k="c.pais3" data-group="pais3"></select>
+        </div>
+
         <div class="row2">
           <div class="field">
             <label class="lbl" for="c-luz">Luz</label>
@@ -344,6 +354,11 @@
             <label class="lbl" for="c-wb">Balanço de branco</label>
             <select id="c-wb" data-k="c.wb" data-group="wb"></select>
           </div>
+        </div>
+
+        <div class="field">
+          <label class="lbl" for="c-formato3">Proporção da saída</label>
+          <select id="c-formato3" data-k="c.formato3" data-group="formato3"></select>
         </div>
 
         <div class="field">
@@ -424,7 +439,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v1.8</b> · 28/10/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.0</b> · 30/10/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -445,6 +460,13 @@
       {v:"ob45", t:"em vista aérea oblíqua de 45 graus"},
       {v:"low",  t:"em vista aérea oblíqua baixa, próxima à linha do horizonte"},
       {v:"same", t:"no mesmo enquadramento e ângulo de câmera da imagem original"}
+    ],
+    formato: [
+      {v:"same",  p:"Mesma da base", t:"mantendo exatamente a proporção da base"},
+      {v:"16:9",  p:"16:9 (paisagem)", t:"em formato 16:9 horizontal"},
+      {v:"4:3",   p:"4:3", t:"em formato 4:3"},
+      {v:"9:16",  p:"9:16 (retrato)", t:"em formato 9:16 vertical"},
+      {v:"3:4",   p:"3:4 (retrato)", t:"em formato 3:4 vertical"}
     ],
     pais: [
       {v:"full",   t:"Preservar integralmente o paisagismo proposto. A posição, a espécie, o porte e a proporção de cada árvore, arbusto e área de gramado devem permanecer exatamente como indicadas na base, respeitando o projeto paisagístico contratado."},
@@ -511,21 +533,21 @@
     cena: [
       {v:"aerial90", p:"Masterplan aéreo 90°", e:"top-down aerial view"},
       {v:"aerial45", p:"Aérea oblíqua", e:"oblique aerial view"},
-      {v:"entrance", p:"Entrada / portaria", e:"street-level view of the gated entrance"},
-      {v:"club",     p:"Clube e lazer", e:"view of the clubhouse and leisure area"},
-      {v:"lake",     p:"Lago / orla", e:"view of the lake shore and deck"},
-      {v:"street",   p:"Rua interna", e:"eye-level view of an internal street"},
-      {v:"plaza",    p:"Praça central", e:"view of the central plaza"},
-      {v:"courts",   p:"Quadras esportivas", e:"view of the sports courts"},
-      {v:"equest",   p:"Haras", e:"view of the equestrian area"}
+      {v:"entrance", p:"Entrada / portaria", e:"street-level view of the gated entrance, with palms and flower beds lining the driveway"},
+      {v:"club",     p:"Clube e lazer", e:"view of the clubhouse and leisure area, with swimming pool, palms and flower beds"},
+      {v:"lake",     p:"Lago / orla", e:"view of the lake shore and deck, with reflecting water, palms and flower beds"},
+      {v:"street",   p:"Rua interna", e:"eye-level view of an internal street lined with palms and flower beds"},
+      {v:"plaza",    p:"Praça central", e:"view of the central plaza with palms and flower beds"},
+      {v:"courts",   p:"Quadras esportivas", e:"view of the sports courts surrounded by palms and lawn"},
+      {v:"equest",   p:"Haras", e:"view of the equestrian area with paddocks and tropical planting"}
     ],
     emp: [
-      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community"},
-      {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community"},
-      {v:"haras",    p:"haras", e:"equestrian estate"},
-      {v:"resort",   p:"resort residencial", e:"residential resort"},
-      {v:"bairro",   p:"bairro planejado", e:"planned neighborhood"},
-      {v:"parque",   p:"parque linear", e:"linear park"}
+      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community with detached houses, tree-lined streets and private lots"},
+      {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community with large private lots and houses"},
+      {v:"haras",    p:"haras", e:"equestrian estate with houses, paddocks and stables"},
+      {v:"resort",   p:"resort residencial", e:"residential resort with houses, clubhouse and leisure areas"},
+      {v:"bairro",   p:"bairro planejado", e:"planned neighborhood with houses, streets and public spaces"},
+      {v:"parque",   p:"parque linear", e:"linear park with landscaped paths and open spaces"}
     ],
     pais2: [
       {v:"atlantic", p:"mata atlântica", e:"surrounded by dense Atlantic rainforest"},
@@ -535,6 +557,16 @@
       {v:"mountain", p:"montanha", e:"in a mountain valley with pine trees"},
       {v:"vinhedo",  p:"vinhedos", e:"among vineyards and agricultural rows"},
       {v:"urban",    p:"borda urbana", e:"at the edge of a growing city"}
+    ],
+    pais3: [
+      {v:"mn",    p:"Padrão MN (tropical de alto padrão)", e:"with high-end tropical landscaping: royal palms, bismarckia and washingtonia palms, broad-canopy trees, manicured lawn and accent flower beds of red ixora and yellow flowers"},
+      {v:"livre", p:"Livre", e:""}
+    ],
+    formato3: [
+      {v:"16:9", p:"16:9 (paisagem)", e:"in 16:9 horizontal format"},
+      {v:"4:3",  p:"4:3", e:"in 4:3 format"},
+      {v:"9:16", p:"9:16 (retrato)", e:"in 9:16 vertical format"},
+      {v:"3:4",  p:"3:4 (retrato)", e:"in 3:4 vertical format"}
     ],
     luzc: [
       {v:"golden",   p:"golden hour", e:"golden hour"},
@@ -590,19 +622,19 @@
     luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
   };
 
-  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
-  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, extra buildings, new roads, invented plots";
+  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
-  const SUFFIX = "photorealistic architectural visualization, physically based materials, ray-traced reflections and global illumination, subtle atmospheric perspective, cinematic color grading, ultra-detailed, 8k, sharp, high dynamic range, professional archviz";
+  const SUFFIX = "real photograph taken with a full-frame camera, natural daylight, physically based materials, accurate proportions, ultra-detailed, 8k, sharp, high dynamic range, photorealistic";
 
   const st = {
     tab: "hum",
-    h: {base:"cad", enq:"top", pais:"full", padrao:"mn", liberdade:"equilibrado", copas:"variada", lotes:"uniform",
+    h: {base:"cad", enq:"top", formato:"same", pais:"full", padrao:"mn", liberdade:"equilibrado", copas:"variada", lotes:"uniform",
         divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft",
         ajustes:"", inventario:"", enxuto:false},
-    c: {cena:"aerial90", emp:"gated", pais:"atlantic", luz:"golden", cam:"drone90",
-        lens:"35", ap:"8", iso:"100", wb:"daylight",
+    c: {cena:"aerial90", emp:"gated", pais:"atlantic", pais3:"mn", formato3:"16:9",
+        luz:"golden", cam:"drone90", lens:"35", ap:"8", iso:"100", wb:"daylight",
         people:false, cars:true, refl:true, suffix:true}
   };
 
@@ -662,15 +694,15 @@
     const g = k => one(k, st.h[k]);
     const out = [];
 
-    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", com o mesmo enquadramento e a mesma escala.");
+    out.push("Converter " + g("base").p + " em fotografia aérea real do empreendimento concluído, " + g("enq").t + ", " + g("formato").t + ", com a mesma escala da base, em alta resolução (mínimo 2000 px de largura)." + (st.h.enq === "top" ? " Imagem plana de topo, ortogonal, sem perspectiva nem volumetria de edifícios; fachadas e laterais de casas não aparecem, como foto de satélite." : ""));
 
-    out.push("GEOMETRIA\nPreservar morfologia urbana, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base.");
+    out.push("GEOMETRIA\nPreservar morfologia urbana, proporções, divisas, largura das vias e a posição de edificações, equipamentos e áreas de lazer. Manter o mesmo recorte da base, sem re-enquadrar, esticar ou deformar a geometria.");
 
     out.push("PAISAGISMO\nA vegetação segue a implantação: fica exatamente onde está na base, nem a mais, nem a menos. Preservar posição, espécie, porte e proporção de cada árvore, arbusto e área de gramado. " + g("copas").t + " Não criar vegetação onde não existe nem omitir a existente; arbustos não viram árvores; maciços não viram clareiras.");
 
     if(st.h.padrao === "mn"){
       out.push("PAISAGISMO DO ESCRITÓRIO\n" +
-        "Plantio em blocos e faixas, nunca misturado. Palmeiras como acento vertical em prata-azulado (bismarckia, washingtônia, ráfis, rabo-de-raposa), em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, com pluma bege-prateada, em taludes e bordas. Florada em faixa curta: vermelho-tijolo (ixora), amarelo-ouro e rosa. Renques de arbusto aparado como estrutura. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar o padrão apenas onde a base já indica vegetação: a quantidade e a posição vêm da implantação.");
+        "Plantio em blocos e faixas, nunca misturado. Palmeiras altas de tronco fino (royal, coco) e bismarckia prateada como acento vertical, em grupos de 3 a 5. Árvores de copa ampla formando massa verde. Gramíneas ornamentais em maciço, em taludes e bordas. Florada em faixa curta: ixora vermelho-tijolo, amarelo-ouro e rosa; bougainville roxo pontuando as vias. Renques de arbusto aparado como estrutura. Gramado aparado em tapete, sem falhas. Proporção aproximada: 30% árvores de copa, 25% palmeiras, 15% gramíneas, 12% florada, 10% arbustos, 8% gramado. Aplicar o padrão apenas onde a base já indica vegetação: a quantidade e a posição vêm da implantação.");
     }
 
     out.push("LOTEAMENTO E VIAS\n" +
@@ -696,6 +728,8 @@
     const cena = one("cena", st.c.cena);
     const emp  = one("emp",  st.c.emp);
     const pais = one("pais2", st.c.pais);
+    const pais3= one("pais3", st.c.pais3);
+    const fmt3 = one("formato3", st.c.formato3);
     const luz  = one("luzc", st.c.luz);
     const cam  = one("camc", st.c.cam);
     const lens = one("lensc", st.c.lens);
@@ -704,13 +738,15 @@
     const wb   = one("wb",   st.c.wb);
 
     const extra = [];
-    if(st.c.people) extra.push("a few residents walking and cycling");
-    if(st.c.cars) extra.push("a couple of cars parked off the street");
+    if(st.c.people) extra.push("a few residents walking and cycling, all at consistent human scale");
+    if(st.c.cars) extra.push("a couple of cars parked in the parking area, away from the courts");
     if(st.c.refl) extra.push("crisp reflections on wet paving and glass");
 
     const parts = [
       cap(cena.e) + " of a " + emp.e,
       pais.e,
+      pais3.e,
+      fmt3.e,
       luz.e,
       cam.e,
       lens.e + " at " + ap.e + ", " + iso.e + ", " + wb.e,
@@ -762,18 +798,18 @@
   /* ---------- presets ---------- */
   const PRESETS = {
     hum: [
-      {name:"Prancha atual", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Refinar humanização", s:{base:"ia", enq:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Litorâneo", s:{base:"cad", enq:"ob45", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
-      {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
+      {name:"Prancha atual", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Refinar humanização", s:{base:"ia", enq:"same", formato:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
+      {name:"Litorâneo", s:{base:"cad", enq:"ob45", formato:"16:9", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
+      {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],
     criar: [
-      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
-      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
-      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
+      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
+      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
+      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
     ]
   };
 
@@ -890,12 +926,12 @@
   const rnd = arr => arr[Math.floor(Math.random()*arr.length)];
   $("#shuffle").addEventListener("click", ()=>{
     if(st.tab === "hum"){
-      ["base","enq","pais","liberdade","copas","lotes","divisas","vias","agua","cob","rev","luz"].forEach(k=>{
+      ["base","enq","formato","pais","liberdade","copas","lotes","divisas","vias","agua","cob","rev","luz"].forEach(k=>{
         st.h[k] = rnd(D[k]).v;
       });
     } else {
-      ["cena","emp","pais","luz","cam","lens","ap","iso","wb"].forEach(k=>{
-        const grp = {cena:"cena",emp:"emp",pais:"pais2",luz:"luzc",cam:"camc",lens:"lensc",ap:"ap",iso:"iso",wb:"wb"}[k];
+      ["cena","emp","pais","pais3","formato3","luz","cam","lens","ap","iso","wb"].forEach(k=>{
+        const grp = {cena:"cena",emp:"emp",pais:"pais2",pais3:"pais3",formato3:"formato3",luz:"luzc",cam:"camc",lens:"lensc",ap:"ap",iso:"iso",wb:"wb"}[k];
         st.c[k] = rnd(D[grp]).v;
       });
       ["people","cars","refl"].forEach(k=>{ st.c[k] = Math.random() > 0.5; });
