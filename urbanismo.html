@@ -446,7 +446,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.1</b> · 04/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.2</b> · 04/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -629,7 +629,7 @@
     luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
   };
 
-  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Não ampliar lagos, represas ou espelhos d'água; não criar mar, oceano, costa, praia ou novas margens. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
   const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
@@ -740,10 +740,10 @@
     }[st.h.divisas];
 
     const agua = {
-      natural: "tom verde-azulado escuro, margens naturais e reflexo do céu",
-      light: "tom azul-claro natural, com transparência discreta",
-      emerald: "tom esmeralda profundo, com sombra nas margens",
-      keep: "a aparência da base"
+      natural: "Tom verde-azulado escuro, com reflexo discreto do céu",
+      light: "Tom azul-claro natural, com transparência discreta",
+      emerald: "Tom esmeralda profundo, com sombra nas margens",
+      keep: "Aparência da base"
     }[st.h.agua];
 
     const cob = {
@@ -781,7 +781,7 @@
 
     out.push("LOTEAMENTO E VIAS\nLotes com " + lotes + "; vias com " + vias + "; divisas com " + divisas + ", nítidas, sem apagar.");
 
-    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação); água só onde desenhada, " + agua + ".");
+    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação). ÁGUA: só onde desenhada, no mesmo contorno, área e posição; não ampliar lagos nem criar mar, oceano, costa, praia ou novas margens. " + agua + ".");
 
     out.push("EDIFICAÇÕES\nManter número, posição e cobertura; não criar construções; edificação não ocupa vegetação.");
 

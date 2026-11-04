@@ -13,9 +13,11 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.1
+## Novidades da versão 2.2
 
-- Prompt humanizar reduzido para **1.784 caracteres** no padrão (limite recomendado: ~2.000).
+- **Trava de água:** o prompt agora manda manter lagos, lagoas e espelhos d'água no mesmo contorno, área e posição.
+- Proibição explícita de criar mar, oceano, costa, praia ou novas margens.
+- Prompt humanizar com **1.886 caracteres** no padrão (limite recomendado: ~2.000).
 - Aviso visual quando o prompt passa de 2.000 caracteres.
 - Opções de **preservação do paisagismo** e **nível de liberdade** agora entram de fato no prompt.
 - Linguagem explícita de **vista superior ortogonal a 90°**.
