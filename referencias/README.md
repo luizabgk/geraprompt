@@ -15,7 +15,7 @@ Regra: referência é ativo do escritório, não lixo de teste.
 
 ## Masterplan
 
-O preset usa duas imagens:
+O fluxo top-down usa duas imagens:
 
 1. `masterplan_obliquo.jpg` — referência visual aprovada pela Luiza, 4096×2286.
 2. `loteamento_linhas.jpg` — planta com divisas, usada como estrutura para as linhas de lote continuarem aparecendo.
@@ -26,7 +26,8 @@ A referência visual dá o acabamento. A planta de divisas dá o traçado. Uma n
 
 - Clube: benchmark aprovado.
 - Lago e deck: referência preferida da Luiza.
-- Masterplan: referência visual aprovada + planta de divisas como estrutura.
+- Masterplan top-down: referência visual aprovada + planta de divisas como estrutura.
+- Masterplan oblíquo: render 3D oblíquo do escritório.
 - Pavilhão: revisar enquadramento.
 - Entrada e playground: ainda são conceitos de IA.
 - Haras: 640×480; precisa de foto/render real.

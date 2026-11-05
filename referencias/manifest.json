@@ -1,5 +1,5 @@
 {
-  "versao": 2,
+  "versao": 3,
   "atualizado": "2026-11-05",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -28,12 +28,24 @@
       "existe": true
     },
     {
-      "arquivo": "masterplan_obliquo.jpg",
+      "arquivo": "masterplan_obliquo_3d.jpg",
       "preset": "Masterplan oblíquo",
+      "tipo": "render_3d_escritorio",
+      "origem": "3D-VistaAerea.png",
+      "status": "approved",
+      "nota": "Referência oblíqua do escritório; para linhas de lote usar o preset top-down.",
+      "largura": 2508,
+      "altura": 1664,
+      "bytes": 2251199,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_obliquo.jpg",
+      "preset": "Masterplan top-down",
       "tipo": "referencia_aprovada",
       "origem": "FINAL_melhor_resultado_28-10-2026_magnific PNG, escolhido pela Luiza; reduzido para 4096 px",
       "status": "approved",
-      "nota": "Referência visual aprovada. Para as linhas de lote, usar também loteamento_linhas.jpg como estrutura.",
+      "nota": "Referência visual top-down aprovada. Usar com loteamento_linhas.jpg como estrutura.",
       "largura": 4096,
       "altura": 2286,
       "bytes": 4318448,
@@ -41,7 +53,7 @@
     },
     {
       "arquivo": "loteamento_linhas.jpg",
-      "preset": "Masterplan / linhas de lote",
+      "preset": "Masterplan top-down",
       "tipo": "estrutura",
       "origem": "LOTEAMENTO.png extraído de _REFERENCIA_PLANTA",
       "status": "approved",

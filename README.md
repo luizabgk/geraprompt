@@ -13,8 +13,13 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.11
+## Novidades da versão 2.12
 
+- **Masterplan separado:** `Masterplan top-down` usa a referência aprovada + planta de divisas; `Masterplan oblíquo` usa o render 3D oblíquo do escritório.
+- **Carros e reflexos por cena:** playground, haras, lago, quadra e masterplan não recebem mais textos genéricos de estacionamento/vidro.
+- **Prompt deduplicado:** removidas repetições de contexto, lotes vazios e foco.
+- **Salvar/carregar projeto:** agora salva a versão correta e o prompt negativo.
+- **Cópia mais segura:** o fallback verifica se o comando de copiar realmente funcionou.
 - **Quadra não vira piscina:** prompts de quadra agora pedem piso seco, linhas nítidas e nenhuma água sob a quadra.
 - **Trava de água só com referência:** o bloco de controle de água não é mais enviado quando não há imagem de referência.
 - **Copiar prompt + negativo:** o botão separado agora junta prompt positivo e negativo para ferramentas que aceitam campo de negativo.
