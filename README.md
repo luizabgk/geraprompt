@@ -13,8 +13,22 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.3
+## Novidades da versão 2.9
 
+- **Biblioteca de referências:** cada preset mostra resolução, origem e status da referência; o controle fica em `referencias/manifest.json`.
+- **Masterplan com duas referências:** imagem visual aprovada + `loteamento_linhas.jpg` como estrutura para as divisas dos lotes continuarem aparecendo.
+- **Lago e deck:** referência trocada para a versão preferida da Luiza.
+- **Entrada do condomínio:** referência atualizada; ainda é conceito IA até entrar um render/foto oficial.
+- **Copiar prompt limpo:** o botão não junta mais o negativo ao prompt. O Mystic não aceita campo negativo; colar o bloco junto piora a geração.
+- **Controle de nitidez:** chip Nitidez máxima, foco em todo o quadro e negativo contra blur/motion blur.
+- **Controle de nitidez:** novo chip Nitidez máxima, foco nítido em todo o quadro, alta velocidade de obturador e negativo contra blur/motion blur.
+- **Masterplan oblíquo:** o antigo preset Masterplan aéreo foi renomeado e ajustado para câmera oblíqua 45°.
+- **Ajustes do ponto 4:** clube com quadra, lago pequeno e contido, entrada com rotatória/portão, playground com uma estrutura principal, haras com cavalos/piquetes/arena.
+- **Referência sugerida por preset:** cada preset do Criar do zero mostra uma miniatura, o caminho do arquivo e um botão para copiar o caminho.
+- A referência deve ser escolhida no GeraRender como **imagem de referência de estilo**.
+- **Criar do zero com lógica foto-real:** chip Fotografia real, luz natural suave por padrão, texturas, imperfeições, escala humana e bloqueio de aparência CGI.
+- **Presets de cena:** Clube e lazer, Lago e deck, Playground tropical, Pavilhão e lago e Haras.
+- Correção dos presets da aba Criar do zero, que não estavam aplicando os valores.
 - **Trava de água:** o prompt manda manter lagos, lagoas e espelhos d'água no mesmo contorno, área e posição.
 - Removidas referências a ambientes costeiros e ajustados os presets para o contexto de interior do Brasil.
 - Prompt humanizar com **1.871 caracteres** no padrão (limite recomendado: ~2.000).
@@ -32,7 +46,7 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 - Quadra continua quadra; edificação não ocupa área verde; água só onde está desenhada.
 - Cores e texturas de telhado e revestimento já indicadas.
 
-O campo **Copiar prompt + negativo** junta o prompt positivo e o negativo. O Magnific não tem campo separado de negativo.
+No Magnific/Mystic não existe campo de negativo. Use **Copiar prompt limpo** e não cole o bloco de negativo junto.
 
 ## Onde funciona
 

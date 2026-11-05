@@ -100,6 +100,16 @@
 
   .presets{display:flex;flex-wrap:wrap;gap:7px;margin-top:4px}
   .presets-label{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin:16px 0 8px;display:block}
+  .ref-card{border:1px solid var(--line);border-radius:14px;padding:12px;background:var(--panel2);margin-top:14px}
+  .ref-card img{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block;margin-bottom:9px;background:#ddd}
+  .ref-card .ref-title{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:6px}
+  .ref-card .ref-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.35}
+  .ref-card .ref-note{font-size:11.5px;color:var(--muted);line-height:1.45;margin-top:4px}
+  .ref-card .ref-path{font-size:10.5px;color:var(--dim);word-break:break-all;margin:7px 0}
+  .ref-card .ref-meta{font-size:10.5px;color:var(--accent);font-weight:600;margin-top:5px}
+  .ref-struct{border-top:1px solid var(--line);margin-top:10px;padding-top:9px}
+  .ref-struct-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:4px}
+  .ref-card .btn{margin-top:2px}
 
   .toast{
     position:fixed;left:50%;bottom:28px;transform:translate(-50%,20px);
@@ -386,13 +396,30 @@
 
         <div class="btns">
           <button class="btn primary" id="copy">Copiar prompt</button>
-          <button class="btn" id="copy-all">Copiar prompt + negativo</button>
+          <button class="btn" id="copy-all">Copiar prompt limpo</button>
           <button class="btn" id="shuffle">Sortear</button>
           <button class="btn" id="download">Baixar .txt</button>
         </div>
 
         <span class="presets-label">Presets</span>
         <div class="presets" id="presets"></div>
+
+        <div class="ref-card" id="ref-card" hidden>
+          <div class="ref-title">Referência sugerida no GeraRender</div>
+          <img id="ref-thumb" alt="Prévia da referência">
+          <div class="ref-name" id="ref-name">Escolha um preset</div>
+          <div class="ref-note" id="ref-note">A referência entra no GeraRender como imagem de estilo, não como estrutura de planta.</div>
+          <div class="ref-meta" id="ref-meta"></div>
+          <div class="ref-path" id="ref-path"></div>
+          <button class="btn small" id="copy-ref" type="button">Copiar caminho</button>
+          <div class="ref-struct" id="ref-struct" hidden>
+            <div class="ref-struct-title">Linhas de lote / estrutura</div>
+            <div class="ref-note" id="ref-struct-note"></div>
+            <div class="ref-meta" id="ref-struct-meta"></div>
+            <div class="ref-path" id="ref-struct-path"></div>
+            <button class="btn small" id="copy-struct" type="button">Copiar caminho das linhas</button>
+          </div>
+        </div>
 
         <span class="presets-label">Projeto</span>
         <div class="btns" style="margin-top:0">
@@ -407,7 +434,7 @@
             <button class="btn small" id="copy-neg">Copiar negativo</button>
             <button class="btn small" id="reset-neg">Voltar ao padrão</button>
           </div>
-          <p class="hint">No Magnific não existe campo de negativo. O botão "Copiar prompt + negativo" junta os dois: o negativo vai no fim, com o nome na frente, e continua separado aqui para você achar depois.</p>
+          <p class="hint">No Magnific/Mystic não existe campo de negativo. Copie somente o prompt principal. Não cole o bloco de negativo junto — ele vira texto positivo e pode deixar a imagem tremida ou piorar a cena.</p>
         </details>
       </div>
 
@@ -415,13 +442,22 @@
         <h3>Parâmetros no Magnific</h3>
         <p>Uma configuração que costuma funcionar:</p>
         <div class="mag">
-          <div><small>Resemblance</small><b>80–95</b></div>
-          <div><small>Creativity</small><b>5–20</b></div>
-          <div><small>HDR</small><b>20–50</b></div>
-          <div><small>Engine</small><b>Magnific / Sharpy</b></div>
+          <div><small>Modelo</small><b>Seedream 5 / Nano Banana</b></div>
+          <div><small>Resemblance</small><b>85–95</b></div>
+          <div><small>Creativity</small><b>5–15</b></div>
+          <div><small>HDR</small><b>10–25</b></div>
+          <div><small>Engine</small><b>Sharpy (foto/arquitetura)</b></div>
           <div><small>Scale</small><b>2x – 4x</b></div>
         </div>
-        <p class="hint">Quanto mais Creativity, mais o modelo se sente livre para acrescentar árvore e lote. Com paisagismo contratado, 5 a 10 já é bastante. Para manter as linhas de divisa dos lotes nítidas, segure o Resemblance em 90–95 — linha fina é a primeira coisa que o modelo esmaece.</p>
+        <p class="hint">Para parecer foto real: use luz natural suave ou nublada, HDR baixo, texturas reais e imperfeições discretas. Evite excesso de 8k, HDR e golden hour — isso costuma aumentar a cara de CGI. Para linhas de lote nítidas, segure o Resemblance em 90–95.</p>
+        <h3 style="margin-top:24px">Receita de foto real</h3>
+        <ul>
+          <li><b>Câmera:</b> 24–35 mm, f/5.6–8, ISO 100, luz natural.</li>
+          <li><b>Composição:</b> primeiro plano (flores, deck, banco, pergolado), ponto focal e fundo com mata/montanha.</li>
+          <li><b>Materiais:</b> madeira gasta, pedra, vidro, areia granular e borracha fosca.</li>
+          <li><b>Escala:</b> pessoas, cadeiras, carros e bicicletas em proporção coerente.</li>
+          <li><b>Acabamento:</b> cores naturais, sombras suaves, pouca saturação e nenhum aspecto de render 3D.</li>
+        </ul>
 
         <h3 style="margin-top:24px">O que costuma dar errado</h3>
         <ul>
@@ -446,7 +482,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.3</b> · 05/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.9</b> · 05/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -538,23 +574,24 @@
 
     /* ---- criar do zero ---- */
     cena: [
-      {v:"aerial90", p:"Masterplan aéreo 90°", e:"top-down aerial view"},
-      {v:"aerial45", p:"Aérea oblíqua", e:"oblique aerial view"},
-      {v:"entrance", p:"Entrada / portaria", e:"street-level view of the gated entrance, with palms and flower beds lining the driveway"},
-      {v:"club",     p:"Clube e lazer", e:"view of the clubhouse and leisure area, with swimming pool, palms and flower beds"},
-      {v:"lake",     p:"Lago / orla", e:"view of the lake shore and deck, with reflecting water, palms and flower beds"},
-      {v:"street",   p:"Rua interna", e:"eye-level view of an internal street lined with palms and flower beds"},
-      {v:"plaza",    p:"Praça central", e:"view of the central plaza with palms and flower beds"},
-      {v:"courts",   p:"Quadras esportivas", e:"view of the sports courts surrounded by palms and lawn"},
-      {v:"equest",   p:"Haras", e:"view of the equestrian area with paddocks and tropical planting"}
+      {v:"aerial90", p:"Masterplan top-down 90°", e:"top-down aerial view of a high-end gated community with tree-lined streets, landscaped common areas, a clubhouse and clearly subdivided residential lots"},
+      {v:"aerial45", p:"Masterplan oblíquo", e:"oblique aerial view of a high-end gated community with tree-lined streets, landscaped common areas, a clubhouse and clearly subdivided residential lots"},
+      {v:"entrance", p:"Entrada / portaria", e:"street-level view of a high-end gated entrance with a modern gatehouse, porte-cochère, guardhouse, security gate with barrier, paved driveway, landscaped roundabout, royal palms and flower beds"},
+      {v:"club",     p:"Clube e lazer", e:"view of a modern clubhouse with glass walls and wood pergola, swimming pool with clear water, sun loungers, umbrellas, tennis court in the middle ground and tropical landscaping"},
+      {v:"lake",     p:"Lago / orla", e:"view of a small contained lake with visible opposite bank and forested shoreline, wooden deck, lounge chairs, flower beds along the water, palms and hills in the background"},
+      {v:"street",   p:"Rua interna", e:"eye-level view of an internal street with asphalt, curbs, sidewalks, palms, low walls and flower beds"},
+      {v:"plaza",    p:"Praça central", e:"view of a central plaza with natural stone paving, benches, palms, flower beds and a simple water feature"},
+      {v:"courts",   p:"Quadras esportivas", e:"view of tennis courts with green surface, painted lines and nets, surrounded by lawn, palms and tropical planting"},
+      {v:"playground", p:"Playground", e:"eye-level view of a high-end tropical playground with one main wooden play structure, natural sand play area, rubber flooring, benches, a few children and parents, lush planting"},
+      {v:"equest",   p:"Haras", e:"view of a high-end equestrian center with wooden paddock fences, horses grazing, stable barn, riding arena, trainer and tropical planting"}
     ],
     emp: [
-      {v:"gated",    p:"loteamento fechado de alto padrão", e:"high-end gated community with empty residential lots ready to build, tree-lined streets and private lots"},
-      {v:"chacaras", p:"condomínio de chácaras", e:"gated country-lot community with large private lots and houses"},
-      {v:"haras",    p:"haras", e:"equestrian estate with houses, paddocks and stables"},
-      {v:"resort",   p:"resort residencial", e:"residential resort with houses, clubhouse and leisure areas"},
-      {v:"bairro",   p:"bairro planejado", e:"planned neighborhood with houses, streets and public spaces"},
-      {v:"parque",   p:"parque linear", e:"linear park with landscaped paths and open spaces"}
+      {v:"gated",    p:"loteamento fechado de alto padrão", e:"in a high-end gated community with tree-lined streets, landscaped common areas and residential lots"},
+      {v:"chacaras", p:"condomínio de chácaras", e:"in a gated country-lot community with large private lots and houses"},
+      {v:"haras",    p:"haras", e:"in an equestrian estate with houses, paddocks and stables"},
+      {v:"resort",   p:"resort residencial", e:"in a residential resort with houses, clubhouse and leisure areas"},
+      {v:"bairro",   p:"bairro planejado", e:"in a planned neighborhood with houses, streets and public spaces"},
+      {v:"parque",   p:"parque linear", e:"in a linear park with landscaped paths and open spaces"}
     ],
     pais2: [
       {v:"atlantic", p:"mata atlântica", e:"surrounded by dense Atlantic rainforest"},
@@ -575,10 +612,12 @@
       {v:"3:4",  p:"3:4 (retrato)", e:"in 3:4 vertical format"}
     ],
     luzc: [
-      {v:"golden",   p:"golden hour", e:"golden hour"},
+      {v:"golden",   p:"golden hour", e:"warm late-afternoon sunlight, clear blue sky with soft clouds, long soft shadows and natural warm color"},
+      {v:"sun",      p:"sol direto", e:"clear late-afternoon sunlight, blue sky with soft clouds, crisp natural shadows"},
+      {v:"soft",     p:"luz natural suave", e:"soft natural daylight with gentle shadows, neutral colors and a clear sky with soft clouds"},
+      {v:"overcast", p:"nublado", e:"soft overcast daylight, diffused shadows and natural muted colors"},
       {v:"midday",   p:"meio-dia", e:"bright midday"},
       {v:"blue",     p:"blue hour", e:"blue hour"},
-      {v:"overcast", p:"nublado", e:"soft overcast daylight"},
       {v:"night",    p:"noite", e:"night"}
     ],
     camc: [
@@ -630,9 +669,9 @@
 
   const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções ou quadras onde não existe; não remover o que existe. Manter os corpos d'água exatamente como estão desenhados. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
-  const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
+  const NEG_EN = "cartoon, anime, illustration, painting, 3D render, architectural visualization, CGI, video game, plastic-looking surfaces, over-smoothed materials, oversaturated colors, HDR halo, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, mannequin people, mannequin people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
-  const SUFFIX = "real photograph taken with a full-frame camera, natural daylight, physically based materials, accurate proportions, ultra-detailed, 8k, sharp, high dynamic range, photorealistic";
+  const SUFFIX = "real photograph taken with a full-frame camera, natural colors, physically based materials, accurate proportions, realistic textures, subtle imperfections, sharp focus across the frame, photorealistic";
 
   const st = {
     tab: "hum",
@@ -640,8 +679,8 @@
         divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft",
         ajustes:"", inventario:"", enxuto:false},
     c: {cena:"aerial90", emp:"gated", pais:"atlantic", pais3:"mn", formato3:"16:9",
-        luz:"golden", cam:"drone90", lens:"35", ap:"8", iso:"100", wb:"daylight",
-        people:false, cars:true, refl:true, suffix:true, casas:false}
+        luz:"golden", cam:"drone90", lens:"35", ap:"8", iso:"100", wb:"warm",
+        people:false, cars:true, refl:true, foto:true, nitidez:true, casas:false}
   };
 
   const $ = (s,r)=> (r||document).querySelector(s);
@@ -681,7 +720,8 @@
     {v:"people", label:"pessoas"},
     {v:"cars",   label:"carros"},
     {v:"refl",   label:"reflexos"},
-    {v:"suffix", label:"sufixo global"}
+    {v:"foto",   label:"fotografia real"},
+    {v:"nitidez", label:"nitidez máxima"}
   ];
   const cBox = $("#c-flags");
   cFlags.forEach(f=>{
@@ -808,21 +848,60 @@
     const wb   = one("wb",   st.c.wb);
 
     const extra = [];
-    if(st.c.people) extra.push("a few residents walking and cycling, all at consistent human scale");
+    const primeiroPlano = {
+      club: "foreground flower bed and lawn leading to the pool and tennis court",
+      lake: "foreground wooden deck with two lounge chairs and flower beds",
+      playground: "foreground bench, flower bed and sand play area",
+      entrance: "foreground landscaped roundabout with flower beds and paved driveway",
+      street: "foreground sidewalk, curb and tropical planting",
+      plaza: "foreground paving and flower beds",
+      courts: "foreground lawn and tropical shrubs",
+      equest: "foreground horse grazing beside a wooden paddock fence"
+    }[st.c.cena] || "";
+    if(st.c.cena === "club") extra.push("tennis court visible in the middle ground, calm pool water and people relaxing on the deck");
+    if(st.c.cena === "lake") extra.push("small lake contained by land and forest with the opposite bank visible");
+    if(st.c.cena === "entrance") extra.push("access gate with barrier, guardhouse and landscaped roundabout");
+    if(st.c.cena === "playground") extra.push("one main wooden play structure with a single tower and slide");
+    if(st.c.cena === "equest") extra.push("horses, wooden paddocks, stable barn and riding arena");
+    if((st.c.cena === "aerial45" || st.c.cena === "aerial90") && !st.c.casas){
+      extra.push("thin continuous white boundary lines outline every residential lot, clearly visible, crisp and unbroken, preserving the lot subdivisions and not merging adjacent lots");
+      extra.push("empty grassy residential lots ready to build, with no houses and no buildings inside the lots");
+    }
+    if((st.c.cena === "aerial45" || st.c.cena === "aerial90") && st.c.casas){
+      extra.push("houses on the residential lots, respecting the lot boundaries and street layout");
+    }
+    if(primeiroPlano) extra.push(primeiroPlano);
+    const pessoas = {
+      playground: "four to six children playing with anatomically correct poses and a few parents watching",
+      club: "a few residents relaxing on poolside loungers and walking on the deck, natural posture and scale",
+      lake: "a few people seated on the deck and walking along the shore, natural posture and scale",
+      entrance: "a resident walking and a car entering, plus a security guard at the gatehouse",
+      street: "residents walking and cycling, natural posture and scale",
+      plaza: "families walking and relaxing, natural posture and scale",
+      courts: "players on the court and people watching, natural scale",
+      equest: "a trainer leading a horse and a rider in the arena, natural scale"
+    }[st.c.cena] || "a few residents walking, natural posture and consistent human scale";
+    if(st.c.people) extra.push(pessoas);
     if(st.c.cars) extra.push("a couple of cars parked in the parking area, away from the courts");
-    if(st.c.refl) extra.push("crisp reflections on wet paving and glass");
+    const reflexos = st.c.cena === "lake" ? "natural reflections on the lake surface" : (st.c.cena === "club" ? "crisp reflections on pool water and glass" : "crisp reflections on wet paving and glass");
+    if(st.c.refl) extra.push(reflexos);
+    if(st.c.foto) extra.push("candid architectural photograph, realistic materials and textures, subtle imperfections and natural human scale");
+    if(st.c.nitidez) extra.push("sharp focus across the frame, crisp textures, high shutter speed, stable camera, no motion blur");
+
+    const ehAereo = st.c.cena === "aerial90" || st.c.cena === "aerial45";
+    const vazio = (ehAereo && !st.c.casas) ? "empty residential lots ready to build, no houses, no buildings" : "";
 
     const parts = [
-      cap(cena.e) + " of a " + emp.e,
+      cap(cena.e) + " " + emp.e,
       pais.e,
       pais3.e,
-      (st.c.casas ? "" : "empty lots, no houses, no buildings"),
+      vazio,
       fmt3.e,
       luz.e,
       cam.e,
       lens.e + " at " + ap.e + ", " + iso.e + ", " + wb.e,
       extra.join(", "),
-      st.c.suffix ? SUFFIX : ""
+      st.c.foto ? SUFFIX : ""
     ].filter(Boolean);
 
     return parts.join(", ") + ".";
@@ -861,6 +940,7 @@
     $("#panel-title").textContent = tab==="hum" ? "Humanizar masterplan" : "Criar do zero";
     $("#out-title").textContent = tab==="hum" ? "Seu prompt (português)" : "Seu prompt (inglês)";
     $("#prompt").style.minHeight = tab==="hum" ? "460px" : "300px";
+    $("#ref-card").hidden = tab !== "criar";
     renderPresets();
     negTouched = false;
     syncNegative(true);
@@ -877,13 +957,38 @@
       {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],
     criar: [
-      {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
-      {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
-      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
-      {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
+      {name:"Masterplan oblíquo", ref:{name:"Masterplan — referência aprovada", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/masterplan_obliquo.jpg", img:"referencias/masterplan_obliquo.jpg", note:"Referência top-down aprovada. Use também a planta com divisas como estrutura para as linhas de lote continuarem aparecendo.", meta:"4096×2286 · referência aprovada", struct:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/loteamento_linhas.jpg", structNote:"Planta com divisas de lote. No GeraRender, use em Linhas de lote (opcional) para preservar o traçado.", structMeta:"2400×1697 · linhas de lote"}, s:{cena:"aerial45",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:false,cars:true,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Entrada do condomínio", ref:{name:"Portaria — referência de estilo", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/entrada_condominio.jpg", img:"referencias/entrada_condominio.jpg", note:"Use no GeraRender como imagem de estilo para portaria, materiais e luz.", meta:"2752×1536 · conceito IA melhorado — revisar"}, s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"warm",people:true,cars:true,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Clube e lazer", ref:{name:"Clube e piscina — benchmark", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/clube_piscina.jpg", img:"referencias/clube_piscina.jpg", note:"Benchmark de melhor resultado. Use como style reference de acabamento e composição.", meta:"2688×1536 · benchmark aprovado"}, s:{cena:"club",emp:"resort",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Lago e deck", ref:{name:"Lago e deck — referência de estilo", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/lago_deck.jpg", img:"referencias/lago_deck.jpg", note:"Use como estilo de deck, vegetação e reflexos. O lago deve ser pequeno e contido.", meta:"2688×1536 · referência aprovada — preferida Luiza"}, s:{cena:"lake",emp:"chacaras",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Playground tropical", ref:{name:"Playground — referência do escritório", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/playground.jpg", img:"referencias/playground.jpg", note:"Use como style reference de playground, madeira, areia e vegetação.", meta:"1536×1024 · conceito IA — revisar"}, s:{cena:"playground",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:false,foto:true,nitidez:true,casas:false}},
+      {name:"Pavilhão e lago", ref:{name:"Pavilhão e lago — referência de estilo", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/pavilhao_lago.jpg", img:"referencias/pavilhao_lago.jpg", note:"Use como referência de pavilhão, deck e vegetação. Mantenha o lago pequeno.", meta:"2688×1520 · render de referência"}, s:{cena:"lake",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Haras", ref:{name:"Haras — foto de referência", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/haras_referencia.jpg", img:"referencias/haras_referencia.jpg", note:"Foto real de apoio. Hoje é a referência mais fraca da biblioteca: use só para composição e substitua por foto/render de alto padrão.", meta:"640×480 · BAIXA RESOLUÇÃO — substituir"}, s:{cena:"equest",emp:"haras",pais:"campo",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,foto:true,nitidez:true,casas:false}}
     ]
   };
+
+  let refAtual = "";
+  let structAtual = "";
+  function mostrarReferencia(ref){
+    const card = $("#ref-card");
+    if(!ref || st.tab !== "criar"){ card.hidden = true; return; }
+    card.hidden = false;
+    refAtual = ref.path || "";
+    $("#ref-name").textContent = ref.name || "Referência sugerida";
+    $("#ref-note").textContent = ref.note || "";
+    $("#ref-meta").textContent = ref.meta || "";
+    $("#ref-path").textContent = ref.path || "";
+    const stWrap = $("#ref-struct");
+    stWrap.hidden = !ref.struct;
+    structAtual = ref.struct || "";
+    $("#ref-struct-note").textContent = ref.structNote || "";
+    $("#ref-struct-meta").textContent = ref.structMeta || "";
+    $("#ref-struct-path").textContent = ref.struct || "";
+    const img = $("#ref-thumb");
+    img.src = ref.img || "";
+    img.hidden = !ref.img;
+    img.onerror = ()=>{ img.hidden = true; };
+  }
 
   function renderPresets(){
     const box = $("#presets");
@@ -892,7 +997,9 @@
       const b = document.createElement("button");
       b.type="button"; b.className="btn small"; b.textContent=p.name;
       b.addEventListener("click", ()=>{
-        Object.assign(st[st.tab], p.s);
+        const destino = st.tab === "hum" ? st.h : st.c;
+        Object.assign(destino, p.s);
+        mostrarReferencia(p.ref);
         syncForm(); render();
       });
       box.appendChild(b);
@@ -935,14 +1042,21 @@
   }
 
   $("#copy").addEventListener("click", ()=>copy($("#prompt").value, "prompt copiado"));
+  $("#copy-ref").addEventListener("click", ()=>{
+    if(!refAtual){ toast("escolha um preset primeiro"); return; }
+    copy(refAtual, "caminho da referência copiado");
+  });
+  $("#copy-struct").addEventListener("click", ()=>{
+    if(!structAtual){ toast("este preset não tem estrutura de linhas"); return; }
+    copy(structAtual, "caminho das linhas copiado");
+  });
   $("#copy-all").addEventListener("click", ()=>{
-    const txt = $("#prompt").value + "\n\nNEGATIVE PROMPT\n" + negBox.value;
-    copy(txt, "prompt + negativo copiados");
+    copy($("#prompt").value, "prompt limpo copiado");
   });
   $("#copy-neg").addEventListener("click", ()=>copy(negBox.value, "negativo copiado"));
 
   $("#download").addEventListener("click", ()=>{
-    const txt = $("#prompt").value + "\n\n--- NEGATIVE / NEGATIVO ---\n" + negBox.value;
+    const txt = $("#prompt").value;
     const blob = new Blob([txt], {type:"text/plain;charset=utf-8"});
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);

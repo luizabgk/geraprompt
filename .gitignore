@@ -1,0 +1,8 @@
+# imagens de referencia sao locais (ativos de projeto/escritorio)
+referencias/*.jpg
+referencias/*.jpeg
+referencias/*.png
+referencias/*.webp
+*.log
+.DS_Store
+Thumbs.db

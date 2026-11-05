@@ -1,0 +1,160 @@
+{
+  "versao": 2,
+  "atualizado": "2026-11-05",
+  "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
+  "itens": [
+    {
+      "arquivo": "clube_piscina.jpg",
+      "preset": "Clube e lazer",
+      "tipo": "benchmark",
+      "origem": "Benchmark aprovado",
+      "status": "approved",
+      "nota": "Referência principal de acabamento e composição.",
+      "largura": 2688,
+      "altura": 1536,
+      "bytes": 1952491,
+      "existe": true
+    },
+    {
+      "arquivo": "lago_deck.jpg",
+      "preset": "Lago e deck",
+      "tipo": "referencia_aprovada",
+      "origem": "lago_deck_soft_antigo.jpg, escolhido pela Luiza",
+      "status": "approved",
+      "nota": "Referência preferida da Luiza para lago/deck; substitui a vista aérea Contemplação.",
+      "largura": 2688,
+      "altura": 1536,
+      "bytes": 2153866,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_obliquo.jpg",
+      "preset": "Masterplan oblíquo",
+      "tipo": "referencia_aprovada",
+      "origem": "FINAL_melhor_resultado_28-10-2026_magnific PNG, escolhido pela Luiza; reduzido para 4096 px",
+      "status": "approved",
+      "nota": "Referência visual aprovada. Para as linhas de lote, usar também loteamento_linhas.jpg como estrutura.",
+      "largura": 4096,
+      "altura": 2286,
+      "bytes": 4318448,
+      "existe": true
+    },
+    {
+      "arquivo": "loteamento_linhas.jpg",
+      "preset": "Masterplan / linhas de lote",
+      "tipo": "estrutura",
+      "origem": "LOTEAMENTO.png extraído de _REFERENCIA_PLANTA",
+      "status": "approved",
+      "nota": "Planta com divisas. Usar em Linhas de lote (opcional) no GeraRender para preservar o traçado.",
+      "largura": 2400,
+      "altura": 1697,
+      "bytes": 1708933,
+      "existe": true
+    },
+    {
+      "arquivo": "pavilhao_lago.jpg",
+      "preset": "Pavilhão e lago",
+      "tipo": "render_referencia",
+      "origem": "Referência de pavilhão e lago",
+      "status": "review",
+      "nota": "Alta resolução; revisar enquadramento.",
+      "largura": 2688,
+      "altura": 1520,
+      "bytes": 1600933,
+      "existe": true
+    },
+    {
+      "arquivo": "entrada_condominio.jpg",
+      "preset": "Entrada do condomínio",
+      "tipo": "ia_conceito",
+      "origem": "teste_entrada_prompt_v24_20261105.jpg",
+      "status": "review",
+      "nota": "Substitui a referência anterior; ainda é conceito IA. Precisa de render/foto oficial de portaria.",
+      "largura": 2752,
+      "altura": 1536,
+      "bytes": 1726471,
+      "existe": true
+    },
+    {
+      "arquivo": "playground.jpg",
+      "preset": "Playground tropical",
+      "tipo": "ia_conceito",
+      "origem": "Imagem conceitual",
+      "status": "review",
+      "nota": "Representa o programa, mas é conceito IA; trocar por render do escritório quando houver.",
+      "largura": 1536,
+      "altura": 1024,
+      "bytes": 626892,
+      "existe": true
+    },
+    {
+      "arquivo": "haras_referencia.jpg",
+      "preset": "Haras",
+      "tipo": "foto_baixa_resolucao",
+      "origem": "Foto real de apoio",
+      "status": "replace",
+      "nota": "640×480. Referência mais fraca; substituir por foto/render de alto padrão.",
+      "largura": 640,
+      "altura": 480,
+      "bytes": 219067,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_planta.jpg",
+      "preset": "Masterplan / planta",
+      "tipo": "arquivo_para_estudo",
+      "origem": "Prancha de implantação",
+      "status": "archived",
+      "nota": "Não usar como referência de estilo. Serve só para estudo/humanização com Seedream.",
+      "largura": 2048,
+      "altura": 1570,
+      "bytes": 1353257,
+      "existe": true
+    },
+    {
+      "arquivo": "lago_deck_soft_antigo.jpg",
+      "preset": "Arquivo",
+      "tipo": "arquivo",
+      "origem": "Referência antiga de lago",
+      "status": "archived",
+      "nota": "Mantida como backup; a versão ativa é lago_deck.jpg.",
+      "largura": 2688,
+      "altura": 1536,
+      "bytes": 2219281,
+      "existe": true
+    },
+    {
+      "arquivo": "lago_deck_contemplacao_antigo.jpg",
+      "preset": "Arquivo",
+      "tipo": "arquivo",
+      "origem": "Contemplação.jpg anterior",
+      "status": "archived",
+      "nota": "Mantida como histórico.",
+      "existe": false
+    },
+    {
+      "arquivo": "masterplan_obliquo_3d_antigo.jpg",
+      "preset": "Arquivo",
+      "tipo": "arquivo",
+      "origem": "3D-VistaAerea.png anterior",
+      "status": "archived",
+      "nota": "Mantida como histórico.",
+      "largura": 2508,
+      "altura": 1664,
+      "bytes": 2251199,
+      "existe": true
+    },
+    {
+      "arquivo": "entrada_condominio_ia_antiga.jpg",
+      "preset": "Arquivo",
+      "tipo": "arquivo",
+      "origem": "Referência antiga de entrada",
+      "status": "archived",
+      "nota": "Mantida como histórico.",
+      "largura": 2752,
+      "altura": 1536,
+      "bytes": 1571611,
+      "existe": true
+    }
+  ]
+}
