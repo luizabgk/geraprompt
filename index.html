@@ -482,7 +482,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.10</b> · 05/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.11</b> · 05/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -863,6 +863,7 @@
     if(st.c.cena === "entrance") extra.push("access gate with barrier, guardhouse and landscaped roundabout");
     if(st.c.cena === "playground") extra.push("one main wooden play structure with a single tower and slide");
     if(st.c.cena === "equest") extra.push("horses, wooden paddocks, stable barn and riding arena");
+    if(st.c.cena === "courts") extra.push("tennis court on dry land, surrounded by lawn and planting, no water or reflective pool under the court");
     if((st.c.cena === "aerial45" || st.c.cena === "aerial90") && !st.c.casas){
       extra.push("thin continuous white boundary lines outline every residential lot, clearly visible, crisp and unbroken, preserving the lot subdivisions and not merging adjacent lots");
       extra.push("empty grassy residential lots ready to build, with no houses and no buildings inside the lots");
@@ -883,7 +884,7 @@
     }[st.c.cena] || "a few residents walking, natural posture and consistent human scale";
     if(st.c.people) extra.push(pessoas);
     if(st.c.cars) extra.push("a couple of cars parked in the parking area, away from the courts");
-    const reflexos = st.c.cena === "lake" ? "natural reflections on the lake surface" : (st.c.cena === "club" ? "crisp reflections on pool water and glass" : "crisp reflections on wet paving and glass");
+    const reflexos = st.c.cena === "lake" ? "natural reflections on the lake surface" : (st.c.cena === "club" ? "crisp reflections on pool water and glass" : (st.c.cena === "courts" ? "dry tennis court surface with crisp painted lines and a taut net" : "crisp reflections on glass and polished surfaces"));
     if(st.c.refl) extra.push(reflexos);
     if(st.c.foto) extra.push("candid architectural photograph, realistic materials and textures, subtle imperfections and natural human scale");
     if(st.c.nitidez) extra.push("sharp focus across the frame, crisp textures, high shutter speed, stable camera, no motion blur");

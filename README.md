@@ -13,8 +13,10 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.10
+## Novidades da versão 2.11
 
+- **Quadra não vira piscina:** prompts de quadra agora pedem piso seco, linhas nítidas e nenhuma água sob a quadra.
+- **Trava de água só com referência:** o bloco de controle de água não é mais enviado quando não há imagem de referência.
 - **Copiar prompt + negativo:** o botão separado agora junta prompt positivo e negativo para ferramentas que aceitam campo de negativo.
 - O botão **Copiar prompt** continua copiando somente o prompt principal, que é o correto para Mystic/Magnific.
 - **Biblioteca de referências:** cada preset mostra resolução, origem e status da referência; o controle fica em `referencias/manifest.json`.
