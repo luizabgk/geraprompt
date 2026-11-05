@@ -446,7 +446,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.2</b> · 04/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.3</b> · 05/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -560,7 +560,6 @@
       {v:"atlantic", p:"mata atlântica", e:"surrounded by dense Atlantic rainforest"},
       {v:"cerrado",  p:"cerrado", e:"in a cerrado landscape with sculptural trees"},
       {v:"campo",    p:"campo aberto", e:"in open countryside with rolling grass"},
-      {v:"coast",    p:"litoral", e:"on a coastal site with dune vegetation"},
       {v:"mountain", p:"montanha", e:"in a mountain valley with pine trees"},
       {v:"vinhedo",  p:"vinhedos", e:"among vineyards and agricultural rows"},
       {v:"urban",    p:"borda urbana", e:"at the edge of a growing city"}
@@ -629,7 +628,7 @@
     luz:{soft:"Luz natural suave", sun:"Sol direto", golden:"Golden hour", overcast:"Dia nublado"}
   };
 
-  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções, quadras ou água onde não existe; não remover o que existe. Não ampliar lagos, represas ou espelhos d'água; não criar mar, oceano, costa, praia ou novas margens. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
+  const NEG_COMPACTO_PT = "Não alterar o traçado, os lotes, as vias, as edificações ou a vegetação indicada. Não apagar, esmaecer ou deformar as linhas de divisa dos lotes. Não criar vegetação, construções ou quadras onde não existe; não remover o que existe. Manter os corpos d'água exatamente como estão desenhados. Sem deformar a proporção nem esticar a imagem; sem vegetação derretida ou flutuante. Sem aspecto de CGI, de ilustração ou de maquete, sem texto ou marca d'água.";
 
   const NEG_EN = "cartoon, anime, illustration, painting, oversaturated colors, plastic-looking CGI, low-poly, distorted perspective, warped vertical lines, fisheye distortion, duplicate windows, floating objects, text, watermark, logo, deformed people, cluttered composition, noisy, blurry, houses, buildings, houses on lots, extra buildings, new roads, invented plots, coconut palms, repeated identical trees, cars on the courts, inconsistent scale";
 
@@ -781,7 +780,7 @@
 
     out.push("LOTEAMENTO E VIAS\nLotes com " + lotes + "; vias com " + vias + "; divisas com " + divisas + ", nítidas, sem apagar.");
 
-    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação). ÁGUA: só onde desenhada, no mesmo contorno, área e posição; não ampliar lagos nem criar mar, oceano, costa, praia ou novas margens. " + agua + ".");
+    out.push("ELEMENTOS\nManter equipamentos (quadra com piso e linhas, não vira edificação). ÁGUA: manter exatamente o contorno, a área e a posição dos corpos d'água já desenhados; não ampliar nem criar novos. " + agua + ".");
 
     out.push("EDIFICAÇÕES\nManter número, posição e cobertura; não criar construções; edificação não ocupa vegetação.");
 
@@ -875,13 +874,12 @@
       {name:"Prancha atual", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
       {name:"Base CAD + GEarth", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"uniform", divisas:"white", vias:"light", agua:"natural", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
       {name:"Refinar humanização", s:{base:"ia", enq:"same", formato:"same", pais:"refine", padrao:"livre", liberdade:"conservador", copas:"keep", lotes:"keep", divisas:"keep", vias:"keep", agua:"keep", cob:"keep", rev:"keep", luz:"soft", ajustes:"", enxuto:false}},
-      {name:"Litorâneo", s:{base:"cad", enq:"ob45", formato:"16:9", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"varied", divisas:"soft", vias:"paver", agua:"natural", cob:"marfim", rev:"stone", luz:"golden", ajustes:"", enxuto:false}},
       {name:"Chácaras e vinhedos", s:{base:"cad", enq:"top", formato:"same", pais:"full", liberdade:"equilibrado", copas:"variada", lotes:"natural", divisas:"white", vias:"paver", agua:"natural", cob:"terra", rev:"terracotta", luz:"sun", ajustes:"", enxuto:false}}
     ],
     criar: [
       {name:"Masterplan aéreo", s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"daylight",people:false,cars:true,refl:true,suffix:true}},
       {name:"Entrada do condomínio", s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"daylight",people:true,cars:true,refl:true,suffix:true}},
-      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"coast",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
+      {name:"Clube e lazer", s:{cena:"club",emp:"resort",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,suffix:true}},
       {name:"Lago ao entardecer", s:{cena:"lake",emp:"chacaras",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"blue",cam:"eye",lens:"24",ap:"8",iso:"200",wb:"overcast",people:true,cars:false,refl:true,suffix:true}},
       {name:"Haras", s:{cena:"equest",emp:"haras",pais:"campo",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:true,cars:false,refl:false,suffix:true}}
     ]
