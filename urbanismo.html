@@ -396,7 +396,7 @@
 
         <div class="btns">
           <button class="btn primary" id="copy">Copiar prompt</button>
-          <button class="btn" id="copy-all">Copiar prompt limpo</button>
+          <button class="btn" id="copy-all">Copiar prompt + negativo</button>
           <button class="btn" id="shuffle">Sortear</button>
           <button class="btn" id="download">Baixar .txt</button>
         </div>
@@ -434,7 +434,7 @@
             <button class="btn small" id="copy-neg">Copiar negativo</button>
             <button class="btn small" id="reset-neg">Voltar ao padrão</button>
           </div>
-          <p class="hint">No Magnific/Mystic não existe campo de negativo. Copie somente o prompt principal. Não cole o bloco de negativo junto — ele vira texto positivo e pode deixar a imagem tremida ou piorar a cena.</p>
+          <p class="hint">Use <b>Copiar prompt</b> para Mystic/Magnific, que não têm campo de negativo separado. Use <b>Copiar prompt + negativo</b> apenas em ferramentas que aceitam o negativo em um campo próprio.</p>
         </details>
       </div>
 
@@ -482,7 +482,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.9</b> · 05/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.10</b> · 05/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -1051,7 +1051,8 @@
     copy(structAtual, "caminho das linhas copiado");
   });
   $("#copy-all").addEventListener("click", ()=>{
-    copy($("#prompt").value, "prompt limpo copiado");
+    const txt = $("#prompt").value + "\n\nNEGATIVE PROMPT\n" + negBox.value;
+    copy(txt, "prompt + negativo copiados");
   });
   $("#copy-neg").addEventListener("click", ()=>copy(negBox.value, "negativo copiado"));
 

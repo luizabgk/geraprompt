@@ -13,8 +13,10 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.9
+## Novidades da versão 2.10
 
+- **Copiar prompt + negativo:** o botão separado agora junta prompt positivo e negativo para ferramentas que aceitam campo de negativo.
+- O botão **Copiar prompt** continua copiando somente o prompt principal, que é o correto para Mystic/Magnific.
 - **Biblioteca de referências:** cada preset mostra resolução, origem e status da referência; o controle fica em `referencias/manifest.json`.
 - **Masterplan com duas referências:** imagem visual aprovada + `loteamento_linhas.jpg` como estrutura para as divisas dos lotes continuarem aparecendo.
 - **Lago e deck:** referência trocada para a versão preferida da Luiza.
