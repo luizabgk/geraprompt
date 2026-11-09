@@ -64,7 +64,8 @@
       "altura": 1240,
       "bytes": 1165584,
       "existe": true,
-      "licenca": "ativo interno"
+      "licenca": "ativo interno",
+      "categoria": "masterplan"
     },
     {
       "arquivo": "pavilhao_lago.jpg",

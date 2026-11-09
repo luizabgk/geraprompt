@@ -484,7 +484,7 @@
 
   </div>
 
-  <footer class="ver">GeraPrompt · <b>v2.15</b> · 09/11/2026</footer>
+  <footer class="ver">GeraPrompt · <b>v2.16</b> · 09/11/2026</footer>
 </div>
 
 <div class="toast" id="toast">copiado</div>
@@ -675,7 +675,7 @@
 
   const SUFFIX = "real photograph taken with a full-frame camera, natural colors, physically based materials, accurate proportions, realistic textures, subtle imperfections, photorealistic";
 
-  const APP_VERSION = "2.12";
+  const APP_VERSION = "2.16";
 
   const st = {
     tab: "hum",
@@ -839,6 +839,9 @@
   }
 
   function buildCriar(){
+    if(st.c.seedream){
+      return "Photorealistic top-down aerial masterplan of a high-end gated community. Empty residential lots with uniform light green lawns, each lot outlined by thin, crisp, continuous white boundary lines. Clean white lot divisions, no dark parcel fill, no crop rows, no hedges inside lots. Light gray asphalt roads with white curbs, roundabouts, tree-lined avenues, lakes, dense Atlantic rainforest, clubhouse and tropical landscaping. No houses, no buildings. Natural late-afternoon light, sharp focus, 16:9.";
+    }
     const cena = one("cena", st.c.cena);
     const emp  = one("emp",  st.c.emp);
     const pais = one("pais2", st.c.pais);
@@ -986,6 +989,7 @@
     ],
     criar: [
       {name:"Masterplan top-down", ref:{name:"Masterplan top-down — referência aprovada", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/masterplan_obliquo.jpg", img:"referencias/masterplan_obliquo.jpg", note:"Referência top-down aprovada. Use a planta com divisas como estrutura para as linhas de lote continuarem aparecendo.", meta:"4096×2286 · referência aprovada", struct:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/loteamento_linhas.jpg", structNote:"Foto aérea com quadras, ruas e divisas de lotes. No GeraRender, use em Linhas de lote como estrutura para preservar o traçado.", structMeta:"1888×1240 · malha de lotes"}, s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"warm",people:false,cars:true,refl:true,foto:true,nitidez:true,casas:false}},
+      {name:"Masterplan top-down — Seedream", ref:{name:"Masterplan — malha de lotes (Seedream)", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/loteamento_linhas.jpg", img:"referencias/loteamento_linhas.jpg", note:"Use no GeraRender com motor Seedream 5 Pro Edit e esta imagem como referência. O prompt já pede lotes vazios, gramado uniforme e divisas brancas finas. Não use Linhas de lote com Seedream.", meta:"1888×1240 · malha de lotes · referência estrutural"}, s:{cena:"aerial90",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone90",lens:"35",ap:"8",iso:"100",wb:"warm",people:false,cars:true,refl:true,foto:true,nitidez:true,casas:false,seedream:true}},
       {name:"Masterplan oblíquo", ref:{name:"Masterplan oblíquo — render 3D do escritório", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/masterplan_obliquo_3d.jpg", img:"referencias/masterplan_obliquo_3d.jpg", note:"Render 3D oblíquo do escritório. Para preservar divisas de lote, use o preset Masterplan top-down com a planta de linhas.", meta:"2508×1664 · render 3D do escritório"}, s:{cena:"aerial45",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"drone45",lens:"35",ap:"8",iso:"100",wb:"warm",people:false,cars:true,refl:true,foto:true,nitidez:true,casas:false}},
       {name:"Entrada do condomínio", ref:{name:"Portaria — padrão Alphaville", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/entrada_condominio.jpg", img:"referencias/entrada_condominio.jpg", note:"Foto real de portaria de loteamento horizontal com pórtico, guarita e rotatória (Wikimedia Commons, CC BY-SA 4.0).", meta:"3840×2878 · foto real · CC BY-SA 4.0"}, s:{cena:"entrance",emp:"gated",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"eye",lens:"24",ap:"8",iso:"100",wb:"warm",people:true,cars:true,refl:true,foto:true,nitidez:true,casas:false}},
       {name:"Clube e lazer", ref:{name:"Clube e piscina — benchmark", path:"F:/Internet/Luiza/GERENCIAMENTO IA/geraprompt/referencias/clube_piscina.jpg", img:"referencias/clube_piscina.jpg", note:"Benchmark de melhor resultado. Use como style reference de acabamento e composição.", meta:"2688×1536 · benchmark aprovado"}, s:{cena:"club",emp:"resort",pais:"atlantic",pais3:"mn",formato3:"16:9",luz:"golden",cam:"three4",lens:"35",ap:"5.6",iso:"100",wb:"warm",people:true,cars:false,refl:true,foto:true,nitidez:true,casas:false}},
@@ -1030,6 +1034,7 @@
       b.type="button"; b.className="btn small"; b.textContent=p.name;
       b.addEventListener("click", ()=>{
         const destino = st.tab === "hum" ? st.h : st.c;
+        if(st.tab !== "hum") st.c.seedream = !!p.s.seedream;
         Object.assign(destino, p.s);
         mostrarReferencia(p.ref);
         syncForm(); render();
