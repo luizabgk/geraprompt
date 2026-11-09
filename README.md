@@ -13,8 +13,9 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.14
+## Novidades da versão 2.15
 
+- **Playground com brinquedos:** o prompt agora pede explicitamente balanços e gangorra, além da estrutura principal.
 - **Entrada padrão Alphaville:** referência trocada por portaria real de loteamento horizontal com pórtico, guarita e rotatória.
 - **Playground com contexto + brinquedos:** referência virou um moodboard real com visão geral, balanços e gangorra.
 - **Referências externas:** fotos do Wikimedia Commons em alta resolução, com autor e link registrados no manifesto.
