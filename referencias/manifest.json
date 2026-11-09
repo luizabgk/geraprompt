@@ -1,5 +1,5 @@
 {
-  "versao": 5,
+  "versao": 6,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -55,13 +55,14 @@
       "arquivo": "loteamento_linhas.jpg",
       "preset": "Masterplan top-down",
       "tipo": "estrutura",
-      "origem": "LOTEAMENTO.png extraído de _REFERENCIA_PLANTA",
+      "origem": "mapa de linhas derivado da base local",
       "status": "approved",
-      "nota": "Planta com divisas. Usar em Linhas de lote (opcional) no GeraRender para preservar o traçado.",
-      "largura": 2400,
-      "altura": 1697,
-      "bytes": 1708933,
-      "existe": true
+      "nota": "Mapa de linhas de lote em preto e branco. Usar como estrutura para preservar o traçado.",
+      "largura": 2444,
+      "altura": 1728,
+      "bytes": 626410,
+      "existe": true,
+      "licenca": "ativo interno"
     },
     {
       "arquivo": "pavilhao_lago.jpg",
@@ -200,6 +201,19 @@
       "largura": 2752,
       "altura": 1536,
       "bytes": 1571611,
+      "existe": true
+    },
+    {
+      "arquivo": "loteamento_linhas_orto.jpg",
+      "preset": "Masterplan top-down — ortofoto",
+      "tipo": "backup",
+      "origem": "base local",
+      "status": "backup",
+      "nota": "Ortofoto original usada para derivar o mapa de linhas.",
+      "licenca": "ativo interno",
+      "largura": 2400,
+      "altura": 1697,
+      "bytes": 1549164,
       "existe": true
     }
   ]

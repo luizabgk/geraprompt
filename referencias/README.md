@@ -26,7 +26,7 @@ A referência visual dá o acabamento. A planta de divisas dá o traçado. Uma n
 
 - Clube: benchmark aprovado.
 - Lago e deck: referência preferida da Luiza.
-- Masterplan top-down: referência visual aprovada + planta de divisas como estrutura.
+- Masterplan top-down: referência visual aprovada + mapa de linhas de lote em preto e branco como estrutura.
 - Masterplan oblíquo: render 3D oblíquo do escritório.
 - Pavilhão: revisar enquadramento.
 - Entrada: portaria real padrão Alphaville, Wikimedia Commons, CC BY-SA 4.0.
