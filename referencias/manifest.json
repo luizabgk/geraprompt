@@ -1,5 +1,5 @@
 {
-  "versao": 7,
+  "versao": 8,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -55,14 +55,14 @@
     },
     {
       "arquivo": "loteamento_linhas.jpg",
-      "preset": "Masterplan top-down",
+      "preset": "Masterplan top-down — malha de lotes",
       "tipo": "estrutura",
-      "origem": "mapa de linhas derivado da base local",
+      "origem": "acervo do escritório / VERIFICAR_RENDERS",
       "status": "approved",
-      "nota": "Mapa de linhas de lote em preto e branco. Usar como estrutura para preservar o traçado.",
-      "largura": 2444,
-      "altura": 1728,
-      "bytes": 626410,
+      "nota": "Foto aérea com quadras, ruas e divisas de lotes. Usar como referência de estrutura; não é imagem de estilo.",
+      "largura": 1888,
+      "altura": 1240,
+      "bytes": 1165584,
       "existe": true,
       "licenca": "ativo interno"
     },
