@@ -29,6 +29,8 @@ A referência visual dá o acabamento. A planta de divisas dá o traçado. Uma n
 - Masterplan top-down: referência visual aprovada + planta de divisas como estrutura.
 - Masterplan oblíquo: render 3D oblíquo do escritório.
 - Pavilhão: revisar enquadramento.
-- Entrada, playground e haras: fotos reais CC0 do Wikimedia Commons, com autor e link registrados no manifesto.
+- Entrada: portaria real padrão Alphaville, Wikimedia Commons, CC BY-SA 4.0.
+- Haras: foto real CC0, Wikimedia Commons.
+- Playground: moodboard de 3 fotos reais com visão geral, balanços e gangorra, Wikimedia Commons, com autores e links no manifesto.
 
 O arquivo `manifest.json` guarda origem, tipo, resolução e status de cada imagem.

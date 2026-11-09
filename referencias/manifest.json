@@ -1,5 +1,5 @@
 {
-  "versao": 4,
+  "versao": 5,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -81,29 +81,54 @@
       "tipo": "foto_real",
       "origem": "Wikimedia Commons",
       "status": "approved",
-      "nota": "Foto real de portaria de condomínio fechado. Referência de composição, materiais e luz.",
-      "largura": 2999,
-      "altura": 1999,
-      "bytes": 1719209,
+      "nota": "Portaria real de loteamento horizontal, com pórtico, guarita e rotatória. Referência de acesso padrão Alphaville.",
+      "largura": 3840,
+      "altura": 2878,
+      "bytes": 3015839,
       "existe": true,
-      "licenca": "CC0",
-      "autor": "Kemistrystorm",
-      "pagina": "https://commons.wikimedia.org/wiki/File:Gate_of_the_Arkadien-compound_in_Potsdam_Germany.jpg"
+      "licenca": "CC BY-SA 4.0",
+      "autor": "Kyoren",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Portaria_Ninho_Verde_2.jpg"
     },
     {
       "arquivo": "playground.jpg",
       "preset": "Playground tropical",
-      "tipo": "foto_real",
+      "tipo": "moodboard_foto_real",
       "origem": "Wikimedia Commons",
       "status": "approved",
-      "nota": "Foto real de playground de madeira com areia e piso emborrachado. Referência de estrutura e materiais.",
-      "largura": 3168,
-      "altura": 2747,
-      "bytes": 3443659,
+      "nota": "Moodboard: visão geral + balanços + gangorra.",
+      "largura": 2400,
+      "altura": 1800,
+      "bytes": 2191292,
       "existe": true,
-      "licenca": "CC0",
+      "licenca": "CC BY 4.0 + CC BY 2.0 + CC BY-SA 4.0",
       "autor": "Andy Li",
-      "pagina": "https://commons.wikimedia.org/wiki/File:Newhaven_Fort_adventure_playground_playset_2025-05-06.jpg"
+      "pagina": "https://commons.wikimedia.org/wiki/File:Newhaven_Fort_adventure_playground_playset_2025-05-06.jpg",
+      "autores": [
+        "Bjankuloski06",
+        "Shixart1985",
+        "Such0012"
+      ],
+      "fontes": [
+        {
+          "arquivo": "Slide and swings, Kennedy Park.jpg",
+          "licenca": "CC BY 4.0",
+          "autor": "Bjankuloski06",
+          "pagina": "https://commons.wikimedia.org/wiki/File:Slide_and_swings,_Kennedy_Park.jpg"
+        },
+        {
+          "arquivo": "Playground with swings and slide near wooden house.jpg",
+          "licenca": "CC BY 2.0",
+          "autor": "Shixart1985",
+          "pagina": "https://commons.wikimedia.org/wiki/File:Playground_with_swings_and_slide_near_wooden_house.jpg"
+        },
+        {
+          "arquivo": "Playground Residence Talanssa - Talence France - 09 Sept 2020.jpg",
+          "licenca": "CC BY-SA 4.0",
+          "autor": "Such0012",
+          "pagina": "https://commons.wikimedia.org/wiki/File:Playground_Residence_Talanssa_-_Talence_France_-_09_Sept_2020.jpg"
+        }
+      ]
     },
     {
       "arquivo": "haras_referencia.jpg",

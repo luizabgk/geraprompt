@@ -13,9 +13,11 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.13
+## Novidades da versão 2.14
 
-- **Referências externas aprovadas:** entrada, playground e haras agora usam fotos reais CC0 do Wikimedia Commons, em alta resolução, com autor e link registrados no manifesto.
+- **Entrada padrão Alphaville:** referência trocada por portaria real de loteamento horizontal com pórtico, guarita e rotatória.
+- **Playground com contexto + brinquedos:** referência virou um moodboard real com visão geral, balanços e gangorra.
+- **Referências externas:** fotos do Wikimedia Commons em alta resolução, com autor e link registrados no manifesto.
 - **Masterplan separado:** `Masterplan top-down` usa a referência aprovada + planta de divisas; `Masterplan oblíquo` usa o render 3D oblíquo do escritório.
 - **Carros e reflexos por cena:** playground, haras, lago, quadra e masterplan não recebem mais textos genéricos de estacionamento/vidro.
 - **Prompt deduplicado:** removidas repetições de contexto, lotes vazios e foco.
