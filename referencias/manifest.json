@@ -1,5 +1,5 @@
 {
-  "versao": 6,
+  "versao": 7,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -37,7 +37,8 @@
       "largura": 2508,
       "altura": 1664,
       "bytes": 2251199,
-      "existe": true
+      "existe": true,
+      "categoria": "masterplan"
     },
     {
       "arquivo": "masterplan_obliquo.jpg",
@@ -49,7 +50,8 @@
       "largura": 4096,
       "altura": 2286,
       "bytes": 4318448,
-      "existe": true
+      "existe": true,
+      "categoria": "masterplan"
     },
     {
       "arquivo": "loteamento_linhas.jpg",
@@ -214,6 +216,48 @@
       "largura": 2400,
       "altura": 1697,
       "bytes": 1549164,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_implantacao_casas.jpg",
+      "preset": "Masterplan — implantação com casas",
+      "tipo": "referencia_masterplan",
+      "categoria": "masterplan",
+      "origem": "acervo do escritório / VERIFICAR_RENDERS",
+      "status": "approved",
+      "nota": "Referência de masterplan com casas, clube, quadras, lotes e lago. Boa para visão geral de condomínio horizontal.",
+      "licenca": "ativo interno",
+      "largura": 2368,
+      "altura": 1566,
+      "bytes": 1364858,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_visao_geral.jpg",
+      "preset": "Masterplan — visão geral",
+      "tipo": "referencia_masterplan",
+      "categoria": "masterplan",
+      "origem": "acervo do escritório / VERIFICAR_RENDERS",
+      "status": "approved",
+      "nota": "Visão geral limpa de masterplan com malha viária, lotes arborizados e lagos.",
+      "licenca": "ativo interno",
+      "largura": 2752,
+      "altura": 1566,
+      "bytes": 2127022,
+      "existe": true
+    },
+    {
+      "arquivo": "masterplan_malha_lotes.jpg",
+      "preset": "Masterplan — malha de lotes",
+      "tipo": "referencia_masterplan",
+      "categoria": "masterplan",
+      "origem": "acervo do escritório / VERIFICAR_RENDERS",
+      "status": "approved",
+      "nota": "Detalhe de quadras e divisas de lotes. Útil como referência de estrutura e ritmo da malha.",
+      "licenca": "ativo interno",
+      "largura": 1888,
+      "altura": 2230,
+      "bytes": 2017244,
       "existe": true
     }
   ]
