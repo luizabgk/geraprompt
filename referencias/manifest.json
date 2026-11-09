@@ -1,5 +1,5 @@
 {
-  "versao": 8,
+  "versao": 9,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -235,12 +235,12 @@
     },
     {
       "arquivo": "masterplan_visao_geral.jpg",
-      "preset": "Masterplan — visão geral",
+      "preset": "Masterplan — visão geral top-down (Seedream)",
       "tipo": "referencia_masterplan",
       "categoria": "masterplan",
       "origem": "acervo do escritório / VERIFICAR_RENDERS",
       "status": "approved",
-      "nota": "Visão geral limpa de masterplan com malha viária, lotes arborizados e lagos.",
+      "nota": "Visão geral top-down limpa, com malha viária, lotes arborizados e lagos. Use como referência principal no Seedream 5 Pro Edit; o prompt deve travar a câmera em 90°.",
       "licenca": "ativo interno",
       "largura": 2752,
       "altura": 1566,

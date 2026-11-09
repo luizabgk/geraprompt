@@ -13,9 +13,9 @@ Roda 100% no navegador, sem instalar nada: <https://luizabgk.github.io/gerapromp
 3. Ajuste lotes, divisas, vias, água, acabamentos e luz.
 4. Copie o prompt e cole no Magnific com a imagem da prancha.
 
-## Novidades da versão 2.16
+## Novidades da versão 2.17
 
-- **Masterplan top-down — Seedream:** novo preset com prompt enxuto para lotes vazios, gramado uniforme e divisas brancas finas. Use com o motor Seedream 5 Pro Edit e a referência de malha de lotes.
+- **Masterplan top-down — Seedream:** o preset agora usa a referência top-down `masterplan_visao_geral.jpg` e trava a câmera em 90°. Use com Seedream 5 Pro Edit; o prompt pede lotes vazios, gramado uniforme e divisas brancas finas.
 - **Playground com brinquedos:** o prompt agora pede explicitamente balanços e gangorra, além da estrutura principal.
 - **Entrada padrão Alphaville:** referência trocada por portaria real de loteamento horizontal com pórtico, guarita e rotatória.
 - **Playground com contexto + brinquedos:** referência virou um moodboard real com visão geral, balanços e gangorra.
