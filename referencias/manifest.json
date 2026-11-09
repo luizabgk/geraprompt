@@ -1,5 +1,5 @@
 {
-  "versao": 9,
+  "versao": 10,
   "atualizado": "2026-11-09",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
@@ -259,6 +259,20 @@
       "largura": 1888,
       "altura": 2230,
       "bytes": 2017244,
+      "existe": true
+    },
+    {
+      "arquivo": "base_tecnica_magnific.jpg",
+      "preset": "Base técnica — render de masterplan",
+      "tipo": "base_tecnica",
+      "categoria": "masterplan",
+      "origem": "acervo do escritório / MOSTRAR",
+      "status": "approved",
+      "nota": "Planta técnica com linhas vermelhas e legendas. Use com Seedream 5 Pro Edit e o preset Masterplan — base técnica.",
+      "licenca": "ativo interno",
+      "largura": 1036,
+      "altura": 583,
+      "bytes": 423722,
       "existe": true
     }
   ]
