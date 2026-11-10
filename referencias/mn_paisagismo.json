@@ -1,0 +1,220 @@
+{
+  "projeto": "Quinta da Primavera — Fase 1",
+  "fonte": "Pranchas FZP1-PSG-AP-MAST-IMP-001 a 004 R06 + base IA + lista de espécies do projeto",
+  "data_simulacao": "12/10",
+  "estacao": "primavera",
+  "regras": {
+    "floracao": "somente espécies compatíveis com outubro; demais verdes",
+    "plantio": "em maciços e faixas, apenas nas áreas indicadas",
+    "copas": "naturais, sem formato de buquê",
+    "existente": "preservar integralmente a vegetação existente",
+    "reflorestamento": "preservar integralmente as áreas de reflorestamento"
+  },
+  "especies": [
+    {
+      "nome_popular": "Palmeira-azul",
+      "nome_cientifico": "Bismarckia nobilis",
+      "grupo": "palmeira",
+      "floresce_outubro": false,
+      "cor_flor": null,
+      "meses_floracao": [],
+      "observacao": "folhagem azul-prateada; sem floração ornamental relevante"
+    },
+    {
+      "nome_popular": "Ipê-roxo",
+      "nome_cientifico": "Handroanthus heptaphylla",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": "roxa",
+      "meses_floracao": [
+        "jun",
+        "jul",
+        "ago"
+      ],
+      "observacao": "floração de inverno"
+    },
+    {
+      "nome_popular": "Quaresmeira",
+      "nome_cientifico": "Tibouchina grandiflora",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": "roxa",
+      "meses_floracao": [
+        "mai",
+        "jun",
+        "jul",
+        "ago"
+      ],
+      "observacao": "floração de outono/inverno"
+    },
+    {
+      "nome_popular": "Ipê-amarelo",
+      "nome_cientifico": "Tabebuia chrysotricha",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": "amarela",
+      "meses_floracao": [
+        "ago",
+        "set"
+      ],
+      "observacao": "floração de fim de inverno"
+    },
+    {
+      "nome_popular": "Pau-ferro",
+      "nome_cientifico": "Caesalpinia leiostachya",
+      "grupo": "arvore",
+      "floresce_outubro": true,
+      "cor_flor": "amarela",
+      "meses_floracao": [
+        "set",
+        "out",
+        "nov"
+      ],
+      "observacao": "floração de primavera"
+    },
+    {
+      "nome_popular": "Flamboyant",
+      "nome_cientifico": "Delonix regia",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": "vermelha",
+      "meses_floracao": [
+        "nov",
+        "dez",
+        "jan",
+        "fev"
+      ],
+      "observacao": "floração de verão"
+    },
+    {
+      "nome_popular": "Liquidambar",
+      "nome_cientifico": "Liquidambar sp.",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": null,
+      "meses_floracao": [],
+      "observacao": "folhagem; sem floração ornamental relevante"
+    },
+    {
+      "nome_popular": "Palmeira-imperial",
+      "nome_cientifico": "Roystonea oleracea",
+      "grupo": "palmeira",
+      "floresce_outubro": false,
+      "cor_flor": null,
+      "meses_floracao": [],
+      "observacao": "palmeira; floração não é elemento de composição"
+    },
+    {
+      "nome_popular": "Pata-de-vaca",
+      "nome_cientifico": "Bauhinia blakeana",
+      "grupo": "arvore",
+      "floresce_outubro": false,
+      "cor_flor": "rosa",
+      "meses_floracao": [
+        "mai",
+        "jun",
+        "jul",
+        "ago"
+      ],
+      "observacao": "floração de outono/inverno"
+    },
+    {
+      "nome_popular": "Sapucaia",
+      "nome_cientifico": "Lecythis pisonis",
+      "grupo": "arvore",
+      "floresce_outubro": true,
+      "cor_flor": "creme/rosa",
+      "meses_floracao": [
+        "ago",
+        "set",
+        "out",
+        "nov"
+      ],
+      "observacao": "floração de fim de inverno/primavera"
+    },
+    {
+      "nome_popular": "Agapanto-azul",
+      "nome_cientifico": "Agapanthus africanus",
+      "grupo": "arbusto",
+      "floresce_outubro": true,
+      "cor_flor": "azul",
+      "meses_floracao": [
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev"
+      ],
+      "observacao": "floração de primavera/verão"
+    },
+    {
+      "nome_popular": "Grama-amendoim",
+      "nome_cientifico": "Arachis repens",
+      "grupo": "forracao",
+      "floresce_outubro": true,
+      "cor_flor": "amarela",
+      "meses_floracao": [
+        "set",
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev"
+      ],
+      "observacao": "floração discreta; usar como forração"
+    },
+    {
+      "nome_popular": "Primavera",
+      "nome_cientifico": "Bougainvillea spectabilis",
+      "grupo": "arbusto",
+      "floresce_outubro": true,
+      "cor_flor": "magenta",
+      "meses_floracao": [
+        "set",
+        "out",
+        "nov",
+        "dez",
+        "jan",
+        "fev"
+      ],
+      "observacao": "floração de primavera/verão"
+    },
+    {
+      "nome_popular": "Capim-dos-texas-verde",
+      "nome_cientifico": "Pennisetum setaceum",
+      "grupo": "forracao",
+      "floresce_outubro": true,
+      "cor_flor": "pluma",
+      "meses_floracao": [
+        "set",
+        "out",
+        "nov",
+        "dez"
+      ],
+      "observacao": "pluma ornamental; textura, não flor"
+    },
+    {
+      "nome_popular": "Capim-dos-pampas",
+      "nome_cientifico": "Cortaderia selloana",
+      "grupo": "forracao",
+      "floresce_outubro": true,
+      "cor_flor": "creme",
+      "meses_floracao": [
+        "set",
+        "out",
+        "nov",
+        "dez"
+      ],
+      "observacao": "pluma ornamental; textura, não flor"
+    },
+    {
+      "nome_popular": "Grama-esmeralda",
+      "nome_cientifico": "Zoysia japonica",
+      "grupo": "forracao",
+      "floresce_outubro": false,
+      "cor_flor": null,
+      "meses_floracao": [],
+      "observacao": "gramado"
+    }
+  ]
+}
