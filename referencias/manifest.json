@@ -1,6 +1,6 @@
 {
-  "versao": 10,
-  "atualizado": "2026-11-09",
+  "versao": 11,
+  "atualizado": "2026-11-10",
   "criterio": "Referência canônica: render/foto do escritório ou referência aprovada pela Luiza, nítida, sem texto, lado menor >= 1024 px. Imagem de IA só entra como conceito e deve ser substituída. Para masterplan, usar a referência visual aprovada + a planta de divisas como estrutura.",
   "itens": [
     {
@@ -273,6 +273,20 @@
       "largura": 1036,
       "altura": 583,
       "bytes": 423722,
+      "existe": true
+    },
+    {
+      "arquivo": "quinta_primavera_base.jpg",
+      "preset": "Quinta da Primavera — base de projeto",
+      "tipo": "estrutura",
+      "categoria": "masterplan",
+      "origem": "TREINAMENTO-P_MN / bases IA",
+      "status": "approved",
+      "nota": "Base de implantação da Quinta da Primavera com vegetação existente, reflorestamento e áreas de projeto. Usar como estrutura, não como estilo.",
+      "licenca": "ativo interno",
+      "largura": 2482,
+      "altura": 1755,
+      "bytes": 3666597,
       "existe": true
     }
   ]
